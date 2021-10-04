@@ -28,3 +28,8 @@ export const logIn = async (_email,_password) => {
     return userCredential.user
   })
 }
+
+//유저 로그아웃
+export const emailLogOut = () => {
+  return auth.signOut();
+}

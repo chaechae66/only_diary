@@ -1,0 +1,83 @@
+.bannerWrap{
+    height: 40rem;
+    overflow: hidden;
+    position: relative;
+    max-width: 100%;
+}
+
+.bannerDots{
+    position: absolute;
+    z-index: 5;
+    bottom: 0.1rem;
+    left: 50%;
+    transform: translateY(-50%);
+    width: 10rem;
+    height: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: content-box;
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+}
+
+.prev{
+    border-width: 3px 0 0 3px;
+    border-style: solid;
+    border-color: rgba(255,255,255,0.9);
+    width: 1rem;
+    height: 1rem;
+    transform: rotate(-45deg);
+}
+
+.dot{
+    width: 1rem;
+    height: 1rem;
+    background-color: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.activeDot{
+    background-color: rgb(250, 140, 107);
+}
+
+.stop{
+    width: 1rem;
+    height: 1rem;
+    background-color: rgba(255,255,255,0.9);
+}
+
+.start{
+    width: 1rem;
+    height: 1rem;
+    border-width: 6px 0 6px 8px;
+    border-color: transparent transparent transparent rgba(255,255,255,0.9);
+    border-style: solid;
+}
+
+.next{
+    border-width: 3px 3px 0 0;
+    border-style: solid;
+    border-color: rgba(255,255,255,0.9);
+    width: 1rem;
+    height: 1rem;
+    transform: rotate(45deg);
+}
+
+.stop:active{
+    background-color: rgb(250, 140, 107);
+}
+
+.prev:active,.next:active{
+    border-color: rgb(250, 140, 107);
+}
+
+.start:active{
+    border-color: transparent transparent transparent rgb(250, 140, 107);
+}
+
+.bannerList{
+    width: 300vw;
+    position: absolute;
+}

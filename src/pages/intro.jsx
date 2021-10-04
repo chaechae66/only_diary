@@ -1,10 +1,15 @@
 import React from 'react';
+import SlideBanner from '../components/slideBanner/slideBanner';
+import styles from './styles/intro.module.css'
 
 const Intro = () => {
     return (
-        <section className="bodyWrap">
-            intro
-        </section>
+        <div className={styles.wrap}>
+            <SlideBanner />
+            <section>
+                intro
+            </section>
+        </div>
     )
 }
 

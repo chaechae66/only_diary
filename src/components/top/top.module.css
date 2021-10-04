@@ -1,0 +1,48 @@
+.wrap {
+    height: 13vh;
+    width: 100%;
+    border-bottom: 2px solid #f1f1f1;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 10;
+}
+
+.header {
+    padding: 0 2.5rem;
+    width: 120rem;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+  
+.logoTxt {
+    font-weight: 400;
+    font-size: 2.2rem;
+    margin-left: 1.5rem;
+}
+
+.user {
+    font-size: 1.5rem;
+    font-weight: 300;
+    cursor: pointer;
+    display: flex;
+}
+
+.login {
+    padding: 0.9rem 1.5rem;
+    background-color: rgb(250, 140, 107);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-left: 2rem;
+}

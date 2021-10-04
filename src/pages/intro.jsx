@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 
 const Intro = () => {
     return (
-        <div>
+        <section className="bodyWrap">
             intro
-        </div>
+        </section>
     )
 }
 

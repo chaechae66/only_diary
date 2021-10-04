@@ -60,7 +60,7 @@ const SlideBanner = () => {
                     <div
                     key={elem}
                     className={
-                        index == idx
+                        index === idx
                         ? `${styles.activeDot} ${styles.dot}`
                         : `${styles.dot}`
                     }

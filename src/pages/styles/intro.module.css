@@ -2,3 +2,10 @@
     min-height: 75vh;
     width: 100%;
 }
+
+.diaryWrap{
+    width: 120rem;
+    margin: 0 auto;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+}

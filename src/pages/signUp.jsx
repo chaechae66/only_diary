@@ -67,6 +67,7 @@ const SignUp = () => {
                 <input
                     {...register("name", {
                     required: true,
+                    maxLength: 5,
                     pattern: { value: /^[가-힣]+$/ },
                     })}
                     type="text"
@@ -80,6 +81,9 @@ const SignUp = () => {
                     <span className={styles.error}>
                     이름은 자음,모음만을 제외한 한글로만 입력할 수 있습니다
                     </span>
+                )}
+                {errors.name && errors.name.type === "maxLength" && (
+                    <span className={styles.error}>최대 5글자 입력 가능합니다.</span>
                 )}
                 <input
                     {...register("password", {

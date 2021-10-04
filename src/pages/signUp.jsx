@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
+import { useHistory } from 'react-router';
 import styles from '../pages/styles/signUp.module.css'
+import { writeUserData } from '../service/firebase/database';
+import { createdUser, updateUserInfo } from '../service/firebase/emailLogin';
+import { getImgURL } from '../service/firebase/storage';
 
 const SignUp = () => {
+    const history = useHistory();
+
     const [loading, setLoading] = useState(false);
 
     const {
@@ -15,11 +21,25 @@ const SignUp = () => {
     const passwordValue = watch("password");
 
     const onSubmit = async (data) => {
-        console.log('signUpData',data)
+        try {
+            setLoading(true)
+            const user = await createdUser(data.email, data.password);
+            const defaultUrl = await getImgURL("defaultImg/diary_default_img.png");
+            await updateUserInfo(data.name, defaultUrl);
+            writeUserData(
+              user.user.uid,
+              user.user.displayName,
+              user.user.photoURL
+            );
+            history.push('/login')
+            setLoading(false)
+        } catch (err) {
+            alert(`${err}`);
+        }
     };
 
     return (
-        <section className="bodyWrap">
+        <section className={`bodyWrap ${styles.wrap}`}>
             <div className={styles.signUp}>
                 <h2 className={styles.title}>회원가입</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>

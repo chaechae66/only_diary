@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import styles from '../pages/styles/signUp.module.css'
 import { writeUserData } from '../service/firebase/database';
 import { createdUser, updateUserInfo } from '../service/firebase/emailLogin';
@@ -125,9 +126,11 @@ const SignUp = () => {
                     회원가입
                 </button>
                 </form>
-                <p className={styles.login}>
-                아이디가 있다면...
-                </p>
+                <Link to="/login">
+                    <p className={styles.login}>
+                        아이디가 있다면...
+                    </p>
+                </Link>
             </div>
         </section>
     )

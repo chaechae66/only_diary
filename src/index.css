@@ -41,9 +41,15 @@ button{
   border:0px;
 }
 
+.sectionWrap{
+  width: 120rem;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
 .bodyWrap{
   width: 120rem;
   margin: 0 auto;
   min-height: 75vh;
-  padding: 0 2.5rem;
+  padding: 5rem 2.5rem;
 }

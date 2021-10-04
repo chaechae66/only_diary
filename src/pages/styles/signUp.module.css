@@ -1,0 +1,51 @@
+.signUp {
+    width: 38rem;
+    font-size: 1.6rem;
+    margin: 0 auto;
+    padding-top: 3rem;
+}
+
+.title {
+    font-size: 3.2rem;
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.input {
+    display: block;
+    border: 1px solid #bbb;
+    width: 100%;
+    padding: 1.2rem 1rem;
+    border-radius: 5px;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.input:focus {
+    border: 1px solid #888;
+}
+
+.error {
+    font-size: 1.2rem;
+    color: rgb(255, 142, 142);
+    display: block;
+    margin-bottom: 2rem;
+}
+  
+.loginBtn {
+    width: 100%;
+    background-color: rgb(250, 140, 107);
+    border-radius: 5px;
+    padding: 1rem 0;
+    color: #fff;
+    margin-top: 3rem;
+    display: block;
+    font-weight: 600;
+    font-size: 1.6rem;
+}
+  
+.login {
+    margin-top: 1rem;
+    color: #777;
+    cursor: pointer;
+}

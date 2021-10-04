@@ -1,10 +1,115 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { useForm } from "react-hook-form";
+import styles from '../pages/styles/signUp.module.css'
 
 const SignUp = () => {
+    const [loading, setLoading] = useState(false);
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm();
+
+    const passwordValue = watch("password");
+
+    const onSubmit = async (data) => {
+        console.log('signUpData',data)
+    };
+
     return (
-        <div>
-            SignUp
-        </div>
+        <section className="bodyWrap">
+            <div className={styles.signUp}>
+                <h2 className={styles.title}>회원가입</h2>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                <input
+                    {...register("email", {
+                    required: true,
+                    pattern: {
+                        value:
+                        /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
+                    },
+                    })}
+                    type="text"
+                    className={styles.input}
+                    placeholder="이메일"
+                />
+                {errors.email && errors.email.type === "required" && (
+                    <span className={styles.error}>기재해주세요</span>
+                )}
+                {errors.email && errors.email.type === "pattern" && (
+                    <span className={styles.error}>
+                    이메일 양식에 맞게 작성해주세요
+                    </span>
+                )}
+                <input
+                    {...register("name", {
+                    required: true,
+                    pattern: { value: /^[가-힣]+$/ },
+                    })}
+                    type="text"
+                    className={styles.input}
+                    placeholder="이름"
+                />
+                {errors.name && errors.name.type === "required" && (
+                    <span className={styles.error}>기재해주세요</span>
+                )}
+                {errors.name && errors.name.type === "pattern" && (
+                    <span className={styles.error}>
+                    이름은 자음,모음만을 제외한 한글로만 입력할 수 있습니다
+                    </span>
+                )}
+                <input
+                    {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    pattern: {
+                        value:
+                        /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+])/,
+                    },
+                    })}
+                    type="password"
+                    className={`${styles.input}`}
+                    placeholder="비밀번호"
+                />
+                {errors.password && errors.password.type === "required" && (
+                    <span className={styles.error}>기재해주세요</span>
+                )}
+                {errors.password && errors.password.type === "minLength" && (
+                    <span className={styles.error}>6글자 이상 입력하세요</span>
+                )}
+                {errors.password && errors.password.type === "pattern" && (
+                    <span className={styles.error}>
+                    비밀번호는 숫자/대문자/소문자/특수문자를 모두 포함해야 합니다.
+                    </span>
+                )}
+                <input
+                    {...register("password_confirm", {
+                    required: true,
+                    validate: (value) => value === passwordValue,
+                    })}
+                    type="password"
+                    className={styles.input}
+                    placeholder="비밀번호 확인"
+                />
+                {errors.password_confirm &&
+                    errors.password_confirm.type === "required" && (
+                    <span className={styles.error}>기재해주세요</span>
+                    )}
+                {errors.password_confirm &&
+                    errors.password_confirm.type === "validate" && (
+                    <span className={styles.error}>비밀번호와 일치하지 않습니다</span>
+                    )}
+                <button type="submit" className={styles.loginBtn} disabled={loading}>
+                    회원가입
+                </button>
+                </form>
+                <p className={styles.login}>
+                아이디가 있다면...
+                </p>
+            </div>
+        </section>
     )
 }
 

@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from "./top.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import LoginBefore from '../loginBefore/loginBefore';
+import LoginAfter from '../loginAfter/loginAfter';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from '../../service/firebase/emailLogin';
+import { useDispatch } from 'react-redux';
+import { userLogIn } from '../../redux/actions/user_action'
+import { useSelector } from 'react-redux';
 
 const Top = () => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.user.currentUser);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        dispatch(userLogIn(user));
+      } else {
+        return;
+      }
+    });
+  }, [currentUser,dispatch]);
+
   return (
       <div className={styles.wrap}>
       <header className={styles.header}>
@@ -14,18 +34,12 @@ const Top = () => {
             <div className={styles.logoTxt}>Only Diary</div>
           </h1>
         </Link>
-          <div className={styles.user}>
-            <Link to="/signUp">
-              <span className={styles.signIn}>
-                회원가입
-              </span>
-            </Link>
-            <Link to="/login">
-              <span className={styles.login}>
-                로그인
-              </span>
-            </Link>
-          </div>
+        {
+          currentUser?
+          <LoginAfter/>
+          :
+          <LoginBefore />
+        }
       </header>
     </div>
   )

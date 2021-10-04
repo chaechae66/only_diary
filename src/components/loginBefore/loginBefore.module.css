@@ -1,0 +1,16 @@
+.user {
+    font-size: 1.5rem;
+    font-weight: 300;
+    cursor: pointer;
+    display: flex;
+}
+
+.login {
+    padding: 0.9rem 1.5rem;
+    background-color: rgb(250, 140, 107);
+    color: #fff;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-left: 2rem;
+}

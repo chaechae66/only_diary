@@ -31,7 +31,7 @@ const Intro = () => {
                 <section className={styles.diaryWrap}>로딩중...</section>
               ) : (
                 <section className={styles.diaryWrap}>
-                  <DiaryList diaryList={diaryList} />
+                  <DiaryList myDiary={false} diaryList={diaryList} />
                 </section>
               )
             }

@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './diaryList.module.css';
 import DiaryCard from '../diaryCard/diaryCard';
 
-const DiaryList = ({diaryList}) => {
+const DiaryList = ({myDiary,diaryList}) => {
     return (
         <ul className={styles.diaryList}>
             {diaryList?.map(diary=>{
-                return <DiaryCard key={diary.id} diary={diary} />
+                return <DiaryCard myDiary={myDiary} key={diary.id} diary={diary} />
             })}
         </ul>
     )

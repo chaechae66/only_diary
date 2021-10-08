@@ -42,7 +42,7 @@ const MyDiary = () => {
                     diary?.length === 0 ? (
                         <NoDiary />
                     ) : (
-                        <DiaryList diaryList={diary}/>
+                        <DiaryList myDiary={true} diaryList={diary}/>
                     )
                 }
             </div>

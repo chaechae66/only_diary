@@ -1,4 +1,5 @@
 import { Route, Switch } from 'react-router-dom'
+import CreateDiary from './pages/createDiary'
 import Intro from './pages/intro'
 import Login from './pages/login'
 import SignUp from './pages/signUp'
@@ -7,6 +8,7 @@ export const PATHS = {
   intro: '/',
   login: '/login',
   signUp: '/signUp',
+  createDiary : '/createDiary',
 }
 
 export default function Routes() {
@@ -15,6 +17,7 @@ export default function Routes() {
       <Route exact path={PATHS.intro} component={Intro} />
       <Route path={PATHS.login} component={Login} />
       <Route path={PATHS.signUp} component={SignUp} />
+      <Route path={PATHS.createDiary} component={CreateDiary} />
     </Switch>
   )
 }

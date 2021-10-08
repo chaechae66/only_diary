@@ -63,7 +63,7 @@ const LoginAfter = () => {
                   <Link to="/">
                     <li>나의 일기</li>
                   </Link>
-                  <Link to="/">
+                  <Link to="/createDiary">
                     <li>일기 추가</li>
                   </Link>
                   <li>이벤트</li>

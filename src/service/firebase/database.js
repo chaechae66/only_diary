@@ -1,5 +1,5 @@
 import app from "./firebaseApp";
-import { getDatabase, ref, set, onValue } from "firebase/database";
+import { getDatabase, ref, set, onValue, push , child } from "firebase/database";
 
 const db = getDatabase(app);
 
@@ -22,3 +22,15 @@ export const getValues = (_ref, ..._uid) => {
     });
   });
 };
+
+export function getKey(_ref) {
+  return push(child(ref(db), "public")).key
+}
+
+export function publicSet(_data,_key) {
+  return set(ref(db, "public/" + _key ), _data);
+}
+
+export function diarySet(_uid, _data,_key) {
+  return set(ref(db, "diary/" + _uid + "/"+ _key), _data);
+}

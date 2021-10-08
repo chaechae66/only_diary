@@ -1,5 +1,5 @@
 import app from "./firebaseApp";
-import { getDatabase, ref, set, onValue, push , child } from "firebase/database";
+import { getDatabase, ref, set, onValue, push , child, get } from "firebase/database";
 
 const db = getDatabase(app);
 
@@ -22,6 +22,17 @@ export const getValues = (_ref, ..._uid) => {
     });
   });
 };
+
+export const getOnePublicValue = (_id) => {
+  return new Promise((res,rej)=>{
+    const dbRef = ref(db);
+    get(child(dbRef, `public/${_id}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        return res(snapshot.val())
+      }
+    })
+  })
+}
 
 export function getKey(_ref) {
   return push(child(ref(db), "public")).key

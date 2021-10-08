@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Banner from '../banner/banner';
 import styles from './slideBanner.module.css';
+import bannerImg01 from '../../images/main_banner_01.png';
+import bannerImg02 from '../../images/main_banner_02.png';
 
 const SlideBanner = () => {
     const slideIndexAry = [0, 1, 2];
@@ -82,9 +84,30 @@ const SlideBanner = () => {
                     transition: "1s",
                 }}
                 >
-                    <Banner />
-                    <Banner />
-                    <Banner />
+                    <Banner 
+                      color={"rgb(255, 238, 239)"} 
+                      title1="나만의 소중한 공간," 
+                      title2="로그인하여 함께해요" 
+                      des1="나만의 소중한 공간, Only Diary에서 제공하는 예쁜 기본 이미지부터"
+                      des2="커스텀 이미지까지 나의 특별한 일상을 공유하고, 소중히 간직해보아요"
+                      bannerImg={bannerImg01}
+                    />
+                    <Banner 
+                      color={"rgb(226, 241, 243)"} 
+                      title1="나의 일기장 비공개모드로," 
+                      title2="안전하게 나만의 일기장을 보관해요" 
+                      des1="일기를 생성 시, 공개모드와 비공개모드로 설정할 수 있어"
+                      des2="더욱 더 안전하게 보관할 수 있어요"
+                      bannerImg={bannerImg02}
+                    />
+                    <Banner 
+                      color={"rgb(255, 238, 239)"} 
+                      title1="나만의 소중한 공간," 
+                      title2="로그인하여 함께해요" 
+                      des1="나만의 소중한 공간, Only Diary에서 제공하는 예쁜 기본 이미지부터"
+                      des2="커스텀 이미지까지 나의 특별한 일상을 공유하고, 소중히 간직해보아요"
+                      bannerImg={bannerImg01}
+                    />
                 </div>  
         </section>
     )

@@ -1,26 +1,23 @@
 import React from 'react';
 import styles from './banner.module.css';
-import bannerImg from '../../images/main_banner_01.png';
 
-const Banner = () => {
+const Banner = ({ color, title1, title2, des1, des2, bannerImg }) => {
     return (
-        <div className={styles.banner}>
+        <div style={{backgroundColor : color}} className={styles.banner}>
         <div className={styles.wrap}>
         <div className={styles.txt}>
             <h2>
-            나만의 소중한 공간,
+            {title1}
             <br />
-            로그인하여 함께해요1111
+            {title2}
             </h2>
             <p>
-            나만의 소중한 공간, Only Diary에서 제공하는 예쁜 기본 이미지
-            부터
+            {des1}
             <br />
-            커스텀 이미지까지 나의 특별한 일상을 공유하고, 소중히
-            간직해보아요
+            {des2}
             </p>
         </div>
-        <img src={bannerImg} alt="메인배너 이미지" style={{width:'50rem',height:'50rem'}}/>
+        <img src={bannerImg} alt="메인배너 이미지" style={{width:'50rem',height:'50rem',marginRight:'2.5rem'}}/>
         </div>
     </div>
     )

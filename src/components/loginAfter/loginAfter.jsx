@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import { userLogOut } from '../../redux/actions/user_action';
 import { emailLogOut } from '../../service/firebase/emailLogin';
 
@@ -11,6 +12,7 @@ const LoginAfter = () => {
 
     const currentUser = useSelector(state => state.user.currentUser)
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [isShow, setIsShow] = useState("none");
     const [diaryShow, setDiaryShow] = useState("none");
@@ -18,6 +20,7 @@ const LoginAfter = () => {
     const logOut = () => {
         emailLogOut();
         dispatch(userLogOut())
+        history.push('/')
     }
 
     return (
@@ -60,7 +63,7 @@ const LoginAfter = () => {
                 <FontAwesomeIcon icon={faBars} size="2x" color="#fc8b79"/>
               </div>
               <ul className={styles.diarymenu} style={{display:diaryShow}}>
-                  <Link to="/">
+                  <Link to="/myDiary">
                     <li>나의 일기</li>
                   </Link>
                   <Link to="/createDiary">

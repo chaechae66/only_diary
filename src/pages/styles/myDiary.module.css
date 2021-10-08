@@ -1,0 +1,22 @@
+.userInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0 8rem;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.userURL{
+    width: 7rem;
+    height: 7rem;
+}
+
+.nameGroup{
+    margin-top: 1.7rem;
+    text-align: center;
+    font-size: 2.4rem;
+}
+
+.diarys{
+    margin: 10rem -2.5rem 3rem;
+}

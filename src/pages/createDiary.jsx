@@ -5,6 +5,8 @@ import default_01 from '../../src/images/diary_default_01.jpg';
 import default_02 from '../../src/images/diary_default_02.jpg';
 import default_03 from '../../src/images/diary_default_03.jpg';
 import default_04 from '../../src/images/diary_default_04.jpg';
+import Img from '../components/img/img';
+import ShowDate from '../components/showDate/showDate';
 import { diarySet, getKey, publicSet } from '../service/firebase/database';
 import { getImgURL, getOtherImgUrl } from '../service/firebase/storage';
 import styles from './styles/createDiary.module.css';
@@ -12,15 +14,14 @@ import styles from './styles/createDiary.module.css';
 const CreateDiary = () => {
     const currentUser = useSelector(state => state.user.currentUser);
     const history = useHistory();
-
+    
     const [baseUrl, setBaseUrl] = useState(default_01);
-    const [txt, setTxt] = useState('');
     const [today,] = useState(new Date());
     const [isprivate,setIsprivate] = useState(false);
     const [fileInfo , setFileInfo] = useState(null);
 
     const inputFileRef = useRef(null);
-    const txtRef = useRef(null);
+    const txtRef = useRef('일기를 쓴다. 일기를 쓴다. sfdffffffff sdfsdf  sdfd fs');
 
     useEffect(()=>{
         if(!currentUser){
@@ -51,7 +52,7 @@ const CreateDiary = () => {
     const changeTxt = (e) => {
         e.preventDefault();
         let currentTxt = e.target.value; 
-        setTxt(currentTxt);
+        txtRef.current.value = currentTxt;
     }
 
     const changePrivate = (e) => {
@@ -63,7 +64,7 @@ const CreateDiary = () => {
         if (txtRef === null || txtRef.current === null) {
           return;
         }
-        txtRef.current.style.height = 'auto';
+        txtRef.current.style.height = '64px';
         txtRef.current.style.height = txtRef.current.scrollHeight + 'px';
       }, [txtRef]);
 
@@ -75,7 +76,7 @@ const CreateDiary = () => {
                 isprivate,
                 date : getDate(),
                 img,
-                txt,
+                txt : txtRef.current.value,
                 id : getKey(isPrivatePath()),
                 createUser : {
                     uid : currentUser.uid,
@@ -121,12 +122,9 @@ const CreateDiary = () => {
                 let initStr = `default_0${num}`
                 initUrlArr.push(initStr); 
             })
-            console.log('trueOrFalse',initUrlArr.includes(baseUrl));
-            console.log('initUrlArr',initUrlArr)
             let sliceBaseUrl = baseUrl.slice(20,30)
             if(initUrlArr.includes(sliceBaseUrl)){
                 let serverUrl = `diary_${sliceBaseUrl}.jpg`
-                console.log('serverUrl',serverUrl)
                 let result = await baseGetImg(serverUrl)
                 return result 
             }else{
@@ -181,9 +179,9 @@ const CreateDiary = () => {
                 onChange={changeImg}
                 />
             </div>   
-            <div style={{backgroundImage:`url(${baseUrl})`}} className={styles.diaryImg}></div>
+            <Img baseUrl={baseUrl} />
             <div className={styles.option}>
-                <span>{getDate()}</span>
+                <ShowDate date={getDate()} />
                 <div onClick={changePrivate} className={styles.publicOption}>
                     <span>
                         {
@@ -196,7 +194,16 @@ const CreateDiary = () => {
             </div>
             <form onSubmit={submitDiary}>
                 <div className={styles.txt}>
-                    <textarea placeholder="당신의 이야기를 적어주세요" onChange={changeTxt} className={styles.inputTxt} ref={txtRef} onInput={handleResizeHeight}/>
+                    <textarea 
+                        placeholder="당신의 이야기를 적어주세요" 
+                        onChange={
+                            (e)=>{
+                                changeTxt(e)
+                            }} 
+                        onChange={handleResizeHeight}
+                        className={styles.inputTxt}
+                        ref={txtRef} 
+                    ></textarea>
                 </div>
                 <button className={styles.upload} type="submit">일기업로드</button>
             </form>

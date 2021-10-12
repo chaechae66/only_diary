@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import { userLogOut } from '../../redux/actions/user_action';
 import { emailLogOut } from '../../service/firebase/emailLogin';
+import basephotoURL from '../../images/diary_default_img.png'
 
 const LoginAfter = () => {
 
@@ -35,13 +36,13 @@ const LoginAfter = () => {
             >
               <img
                 className={styles.photoURL}
-                src={currentUser.photoURL}
+                src={currentUser.photoURL || basephotoURL}
                 alt="프로필사진"
               />
               <ul className={styles.submenu} style={{display:isShow}}>
                 <li className={styles.profileList}>
                   <div className={styles.profile}>
-                    <img src={currentUser.photoURL} alt={currentUser.displayName}/>
+                    <img src={currentUser.photoURL || basephotoURL} alt={currentUser.displayName}/>
                     <div>
                       <span className={styles.name}>{currentUser.displayName}님</span>
                       <p>{currentUser.email}</p>

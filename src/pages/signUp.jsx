@@ -32,8 +32,8 @@ const SignUp = () => {
               user.user.displayName,
               user.user.photoURL
             );
-            history.push('/login')
-            setLoading(false)
+            history.push('/');
+            setLoading(false);
         } catch (err) {
             alert(`${err}`);
         }

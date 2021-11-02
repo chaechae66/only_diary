@@ -5,6 +5,7 @@ import default_01 from '../../src/images/diary_default_01.jpg';
 import default_02 from '../../src/images/diary_default_02.jpg';
 import default_03 from '../../src/images/diary_default_03.jpg';
 import default_04 from '../../src/images/diary_default_04.jpg';
+import DiaryTextarea from '../components/diaryTextarea/diaryTextarea';
 import Img from '../components/img/img';
 import ShowDate from '../components/showDate/showDate';
 import { diarySet, getKey, publicSet } from '../service/firebase/database';
@@ -21,7 +22,7 @@ const CreateDiary = () => {
     const [fileInfo , setFileInfo] = useState(null);
 
     const inputFileRef = useRef(null);
-    const txtRef = useRef('일기를 쓴다. 일기를 쓴다. sfdffffffff sdfsdf  sdfd fs');
+    const txtRef = useRef(null);
 
     useEffect(()=>{
         if(!currentUser){
@@ -49,24 +50,10 @@ const CreateDiary = () => {
           }
     }
 
-    const changeTxt = (e) => {
-        e.preventDefault();
-        let currentTxt = e.target.value; 
-        txtRef.current.value = currentTxt;
-    }
-
     const changePrivate = (e) => {
         e.preventDefault();
         setIsprivate(!isprivate)
     }
-
-    const handleResizeHeight = useCallback(() => {
-        if (txtRef === null || txtRef.current === null) {
-          return;
-        }
-        txtRef.current.style.height = '64px';
-        txtRef.current.style.height = txtRef.current.scrollHeight + 'px';
-      }, [txtRef]);
 
     const submitDiary = async (e) => {
         e.preventDefault();
@@ -90,6 +77,7 @@ const CreateDiary = () => {
                 history.push('/');
             }else{
                 await diarySet(currentUser.uid, diary, diary.id);
+                history.push('/myDiary');
             }
         }catch(e){
             console.error(e)
@@ -97,6 +85,23 @@ const CreateDiary = () => {
             setBaseUrl('default_01')
         }
     }
+
+    useEffect(()=>{
+        handleResizeHeight()
+    },[])
+
+    const handleResizeHeight = useCallback(() => {
+        if (txtRef === null || txtRef.current === null) {
+          return;
+        }
+        txtRef.current.style.height = '64px';
+        txtRef.current.style.height = txtRef.current.scrollHeight + 'px';
+      }, [txtRef]);
+
+    const changeTxt = (_changingTxt) => {
+        txtRef.current.value = _changingTxt;   
+    }
+
 
     const getPath = () => {
         if (isprivate) {
@@ -194,16 +199,12 @@ const CreateDiary = () => {
             </div>
             <form onSubmit={submitDiary}>
                 <div className={styles.txt}>
-                    <textarea 
-                        placeholder="당신의 이야기를 적어주세요" 
-                        onChange={
-                            (e)=>{
-                                changeTxt(e)
-                            }} 
-                        onChange={handleResizeHeight}
-                        className={styles.inputTxt}
-                        ref={txtRef} 
-                    ></textarea>
+                    <DiaryTextarea 
+                        defaultValue={null} 
+                        changeTxt={changeTxt}
+                        handleResizeHeight={handleResizeHeight}
+                        ref={txtRef}
+                    />
                 </div>
                 <button className={styles.upload} type="submit">일기업로드</button>
             </form>

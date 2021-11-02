@@ -95,20 +95,6 @@
     margin-top: 3rem;
 }
 
-.inputTxt{
-    width: 100%;
-    font-size: 1.6rem;
-    resize : none;
-    outline: none;
-    overflow: hidden;
-    line-height: 2.4rem;
-    border: 1px solid #f1f1f1;
-    padding: 2rem;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: 300;
-    height: 64px;
-}
-
 .upload{
     padding: 0.9rem 1.5rem;
     border-radius: 10px;

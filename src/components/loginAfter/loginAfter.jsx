@@ -8,6 +8,7 @@ import { useHistory } from 'react-router';
 import { userLogOut } from '../../redux/actions/user_action';
 import { emailLogOut } from '../../service/firebase/emailLogin';
 import basephotoURL from '../../images/diary_default_img.png'
+import { swalAlert } from '../../service/sweetAlert/alret';
 
 const LoginAfter = () => {
 
@@ -19,6 +20,7 @@ const LoginAfter = () => {
     const [diaryShow, setDiaryShow] = useState("none");
 
     const logOut = () => {
+        swalAlert('success','로그아웃 완료','로그아웃 되었습니다. 다음에 또 뵙겠습니다.');
         emailLogOut();
         dispatch(userLogOut())
         history.push('/')

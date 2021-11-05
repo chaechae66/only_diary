@@ -6,6 +6,7 @@ import styles from '../pages/styles/signUp.module.css'
 import { writeUserData } from '../service/firebase/database';
 import { createdUser, updateUserInfo } from '../service/firebase/emailLogin';
 import { getImgURL } from '../service/firebase/storage';
+import { swalAlert } from '../service/sweetAlert/alret';
 
 const SignUp = () => {
     const history = useHistory();
@@ -32,6 +33,7 @@ const SignUp = () => {
               user.user.displayName,
               user.user.photoURL
             );
+            swalAlert('success','회원가입 완료','Only Diary의 가족이 된 걸 축하드립니다.로그인 되었습니다.');
             history.push('/');
             setLoading(false);
         } catch (err) {

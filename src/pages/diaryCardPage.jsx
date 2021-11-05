@@ -22,8 +22,6 @@ const DiaryCardPage = () => {
         }
     })
 
-    console.log('diary',diary);
-
     const handlePrivateDiary = async () => {
         const diaryInfo = await getOnePrivateValue(currentUser?.uid,id);
         setDiary(diaryInfo)

@@ -34,6 +34,17 @@ export const getOnePublicValue = (_id) => {
   })
 }
 
+export const getOnePrivateValue = (_uid,_id) => {
+  return new Promise((res,rej)=>{
+    const dbRef = ref(db);
+    get(child(dbRef, `diary/${_uid}/${_id}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        return res(snapshot.val())
+      }
+    })
+  })
+}
+
 export function getKey(_ref) {
   return push(child(ref(db), "public")).key
 }

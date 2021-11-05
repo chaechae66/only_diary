@@ -1,20 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { useParams } from 'react-router';
+import { useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router';
+import Diary from '../components/diary/diary';
+import { getOnePrivateValue } from '../service/firebase/database';
 
 const DiaryCardPage = () => {
 
     const {id} = useParams();
+    const [diary, setDiary] = useState(null);
+    const currentUser = useSelector(state => state.user.currentUser);
+    const history = useHistory();
 
     useEffect(()=>{
         handlePrivateDiary();
     },[])
 
-    const handlePrivateDiary = () => {}
+    useEffect(()=>{
+        if(!currentUser){
+            history.push('/login');
+        }
+    })
+
+    console.log('diary',diary);
+
+    const handlePrivateDiary = async () => {
+        const diaryInfo = await getOnePrivateValue(currentUser?.uid,id);
+        setDiary(diaryInfo)
+    }
 
     return (
         <div>
-            diaryCardPage
+            <Diary diary={diary}/>
         </div>
     )
 }

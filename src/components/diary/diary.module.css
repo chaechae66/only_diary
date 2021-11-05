@@ -72,3 +72,14 @@
     font-size: 1.6rem;
     margin-left: .8rem;
 }
+
+.BackBtn{
+    padding: 0.7rem 1.2rem;
+    background-color: rgb(250, 140, 107);
+    color:#fff;
+    margin: auto;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-top: 6rem;
+}

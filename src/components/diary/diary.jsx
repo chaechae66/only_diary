@@ -6,9 +6,16 @@ import Txt from '../txt/txt';
 import styles from './diary.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { useHistory } from 'react-router';
 
 const Diary = ({diary}) => {
     const currentUser = useSelector(state => state.user.currentUser);
+    const history = useHistory();
+
+    const goToBack = (e) => {
+        e.preventDefault();
+        history.goBack(1);
+    }
 
     return (
         <section className={styles.wrap}>
@@ -44,6 +51,10 @@ const Diary = ({diary}) => {
                     <FontAwesomeIcon icon={faHeart} style={{width:'2.7rem',height:'2.7rem'}} color="#333"/>
                     <span className={styles.like}>1개</span>
             </div>
+            <button
+                onClick={goToBack}
+                className={styles.BackBtn}
+            >이전으로</button>
         </section>
     )
 }

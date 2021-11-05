@@ -1,0 +1,74 @@
+.wrap{
+    width: 80rem;
+    min-height: 72vh;
+    margin: 6rem auto 12rem;
+}
+
+.userWrap{
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user{
+    font-size: 1.9rem;
+    font-weight: 600;
+}
+
+.btnGroup{
+    display: flex;
+    width: 12.5rem;
+    justify-content: space-between;
+}
+
+.editBtn{
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: rgb(250, 140, 107);
+    border : 1px solid rgb(250, 140, 107);
+}
+
+.editBtn:hover{
+    background-color: rgb(250, 140, 107);
+    color:#fff;
+}
+
+.delBtn{
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #ccc;
+    border : 1px solid #ccc;
+}
+
+.delBtn:hover{
+    background-color: #ccc;
+    color:#fff;
+}
+
+.option{
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    color:#777;
+}
+
+.txt{
+    margin-top: 3rem;
+}
+
+.likeArea{
+    display: flex;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.like{
+    font-size: 1.6rem;
+    margin-left: .8rem;
+}

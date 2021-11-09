@@ -20,6 +20,7 @@ const CreateDiary = () => {
     const [today,] = useState(new Date());
     const [isprivate,setIsprivate] = useState(false);
     const [fileInfo , setFileInfo] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const inputFileRef = useRef(null);
     const txtRef = useRef(null);
@@ -57,6 +58,7 @@ const CreateDiary = () => {
 
     const submitDiary = async (e) => {
         e.preventDefault();
+        setLoading(true);
         let img = await getImg();
         try{
             let diary = {
@@ -82,7 +84,8 @@ const CreateDiary = () => {
         }catch(e){
             console.error(e)
         }finally{
-            setBaseUrl('default_01')
+            setBaseUrl('default_01');
+            setLoading(false);
         }
     }
 
@@ -206,7 +209,18 @@ const CreateDiary = () => {
                         ref={txtRef}
                     />
                 </div>
-                <button className={styles.upload} type="submit">일기업로드</button>
+                {
+                    !loading ?
+                    <button className={styles.upload} type="submit">일기업로드</button>
+                    :
+                    <button 
+                        className={styles.upload}
+                        disabled={true}
+                    >
+                        <span className={styles.spinner}></span>
+                        <span className={styles.spinnerTxt}>로딩중</span>
+                    </button>
+                }
             </form>
         </section>
     )

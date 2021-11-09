@@ -1,3 +1,22 @@
+/*animate*/
+@keyframes Spinner {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes BlinkTxt {
+    0%{
+        opacity: .2;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
 .wrap{
     width: 80rem;
     min-height: 72vh;
@@ -104,4 +123,20 @@
     color:#fff;
     margin: auto;
     margin-top: 5rem;
+}
+
+.spinner{
+    width: 1.6rem;
+    height: 1.6rem;
+    border-color:#fff;
+    border-style: solid;
+    border-width: 0px 2px 2px 2px;
+    display: inline-block;
+    margin-right: 0.8rem;
+    border-radius: 50%;
+    animation: Spinner 2s ease-in-out infinite;
+}
+
+.spinnerTxt{
+    animation: BlinkTxt 1s ease-in-out infinite alternate;
 }

@@ -6,7 +6,6 @@ import Diary from '../components/diary/diary';
 import { getOnePrivateValue } from '../service/firebase/database';
 
 const DiaryCardPage = () => {
-
     const {id} = useParams();
     const [diary, setDiary] = useState(null);
     const currentUser = useSelector(state => state.user.currentUser);

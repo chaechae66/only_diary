@@ -3,11 +3,10 @@ import styles from './txt.module.css';
 
 const Txt = ({defaultValue}) => {
     return (
-        <textarea 
-            className={styles.inputTxt}
-            defaultValue={defaultValue}
-            disabled={true}
-        />
+        <pre
+            className={styles.inputTxt}>
+        {`${defaultValue}`}
+        </pre>
     )
 }
 

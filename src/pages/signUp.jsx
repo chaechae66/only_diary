@@ -33,7 +33,7 @@ const SignUp = () => {
               user.user.displayName,
               user.user.photoURL
             );
-            swalAlert('success','회원가입 완료','Only Diary의 가족이 된 걸 축하드립니다.로그인 되었습니다.');
+            swalAlert('success','회원가입 완료','Only Diary의 가족이 된 걸 환영합니다. 로그인 되었습니다.');
             history.push('/');
             setLoading(false);
         } catch (err) {

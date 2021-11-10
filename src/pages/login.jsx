@@ -16,9 +16,10 @@ const Login = () => {
             setLoading(true)                 
             await logIn(data.email, data.password)
             history.push('/')
-            setLoading(false)
         }catch(err){
             alert(err)
+        }finally{
+            setLoading(false)
         }
     }
 

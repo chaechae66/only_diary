@@ -46,7 +46,7 @@ export const getOnePrivateValue = (_uid,_id) => {
 }
 
 export function getKey(_ref) {
-  return push(child(ref(db), "public")).key
+  return push(child(ref(db), _ref)).key
 }
 
 export function publicSet(_data,_key) {

@@ -82,7 +82,8 @@ const CreateDiary = () => {
                 history.push('/myDiary');
             }
         }catch(e){
-            console.error(e)
+            console.error(e);
+            alert(e);
         }finally{
             setBaseUrl('default_01');
             setLoading(false);
@@ -92,6 +93,10 @@ const CreateDiary = () => {
     useEffect(()=>{
         handleResizeHeight()
     },[])
+
+    useEffect(()=>{
+        return () => setLoading(false);
+    })
 
     const handleResizeHeight = useCallback(() => {
         if (txtRef === null || txtRef.current === null) {

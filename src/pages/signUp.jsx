@@ -26,7 +26,7 @@ const SignUp = () => {
         try {
             setLoading(true)
             const user = await createdUser(data.email, data.password);
-            const defaultUrl = await getImgURL("defaultImg/diary_default_img.png");
+            const defaultUrl = await getImgURL("defaultImg/diary_default_baseURL.png");
             await updateUserInfo(data.name, defaultUrl);
             writeUserData(
               user.user.uid,
@@ -35,9 +35,10 @@ const SignUp = () => {
             );
             swalAlert('success','회원가입 완료','Only Diary의 가족이 된 걸 환영합니다. 로그인 되었습니다.');
             history.push('/');
-            setLoading(false);
         } catch (err) {
             alert(`${err}`);
+        } finally {
+            setLoading(false);
         }
     };
 

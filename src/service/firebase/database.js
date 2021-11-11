@@ -1,5 +1,5 @@
 import app from "./firebaseApp";
-import { getDatabase, ref, set, onValue, push , child, get } from "firebase/database";
+import { getDatabase, ref, set, onValue, push , child, get, remove } from "firebase/database";
 
 const db = getDatabase(app);
 
@@ -55,4 +55,44 @@ export function publicSet(_data,_key) {
 
 export function diarySet(_uid, _data,_key) {
   return set(ref(db, "diary/" + _uid + "/"+ _key), _data);
+}
+
+export function writeLikey(_diaryId, _likeyUserUid, _data) {
+  return set(ref(db,"likey/" + _diaryId +"/"+ _likeyUserUid),_data);
+}
+
+export function updateUserLikey(_userUid, _diaryId){
+  const postListRef = ref(db, `users/${_userUid}/likeyDiary/${_diaryId}`);
+  return set(postListRef,{
+    diaryId : _diaryId
+  });
+}
+
+export function removeLikey(_diaryId, _likeyUserUid){
+  const likeyRef = ref(db,"likey/" + _diaryId +"/"+ _likeyUserUid);
+  return remove(likeyRef);
+}
+
+export function removeUserLikey(_diaryId, _likeyUserUid){
+  const likeyRef = ref(db, `users/${_likeyUserUid}/likeyDiary/${_diaryId}`);
+  return remove(likeyRef);
+}
+
+export const getLikeyValues = (_userUid) => {
+  return new Promise((resolve, reject) => {
+    onValue(ref(db, "/users/" + _userUid + "/likeyDiary"), (snapshot) => {
+      const data = snapshot.val();
+      if(data){
+        resolve(Object.keys(data));
+      }
+    });
+  });
+};
+
+export const getLikeyLength = (_diaryId) => {
+  return new Promise((resolve, reject) => {
+    onValue(ref(db, "/likey/" +_diaryId), (snapshot) => {
+      resolve(snapshot.size);
+    });
+  });
 }

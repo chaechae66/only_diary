@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './diaryCard.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 const DiaryCard = ({myDiary, diary}) => {
+    const [isLikey, setIsLikey] = useState(false);
+
+    const isLikeyBtn = (e) => {
+        e.preventDefault();
+        setIsLikey(!isLikey);
+    }
+    
     const url = () => {
         if(myDiary){
             return `/diaryCardPage/${diary.id}` 
@@ -12,6 +20,7 @@ const DiaryCard = ({myDiary, diary}) => {
             return `/publicCardPage/${diary.id}`
         }
     }
+
     return (
         <li className={styles.diary}>
             <Link to={{
@@ -24,7 +33,14 @@ const DiaryCard = ({myDiary, diary}) => {
             </Link>
             <div className={styles.info}>
                 <div className={styles.likeArea}>
-                    <FontAwesomeIcon icon={faHeart} style={{width:'2rem',height:'2rem'}} color="#333"/>
+                    <div onClick={isLikeyBtn}>
+                        {
+                            isLikey ?
+                            <FontAwesomeIcon icon={solidHeart} style={{width:'1.9rem',height:'1.9rem'}} color="rgb(250, 140, 107)"/>
+                            :
+                            <FontAwesomeIcon icon={faHeart} style={{width:'1.9rem',height:'1.9rem'}} color="#777"/>
+                        }
+                    </div>
                     <span className={styles.like}>1개</span>
                 </div>
                 <div className={styles.userArea}>

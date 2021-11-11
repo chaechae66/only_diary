@@ -58,6 +58,15 @@
     color:#777;
 }
 
+.optionInfo{
+    display: flex;
+    align-items: center;
+}
+
+.isPrivate{
+    margin-left: 1.4rem;
+}
+
 .txt{
     margin-top: 3rem;
 }
@@ -65,7 +74,7 @@
 .likeArea{
     display: flex;
     align-items: center;
-    margin-top: 2rem;
+    /* margin-left: 1.8rem; */
 }
 
 .like{

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const ShowDate = ({date}) => {
-    return (<span>{date}</span>)
+    return (<span style={{fontSize:'1.8rem',}}>{date}</span>)
 }
 
 export default ShowDate

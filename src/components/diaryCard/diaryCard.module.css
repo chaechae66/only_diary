@@ -18,11 +18,6 @@
     padding: 2rem 2.5rem;
 }
 
-.likeArea{
-    display: flex;
-    align-items: center;
-}
-
 .like{
     font-size: 1.6rem;
     margin-left: 0.5rem;

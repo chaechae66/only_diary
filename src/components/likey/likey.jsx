@@ -8,15 +8,22 @@ import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';
 import LikeyNum from '../likeyNum/likeyNum';
 
-const Likey = ({ diaryId, madeUserID }) => {
+const Likey = ({ likeyBol, handleDelLikey, handleUpdateLikey, diaryId, madeUserID }) => {
     const [isLikey, setIsLikey] = useState(false);
 
     const history = useHistory();
     const currentUser = useSelector(state => state.user.currentUser);
 
     useEffect(()=>{
-        currentUser && handleLikey(currentUser.uid);
-    },[diaryId]);
+        if(currentUser){
+            handleLikey(currentUser.uid);
+        }else{
+            setIsLikey(false);
+        }
+        console.log('over');
+    },[diaryId,currentUser]);
+
+    console.log('likeyOver');
 
     const handleLikey = async (_userUid) => {
         let likey = await getLikeyValues(_userUid);
@@ -30,46 +37,55 @@ const Likey = ({ diaryId, madeUserID }) => {
             history.push('/login');
         }else{
             setIsLikey(!isLikey);
-            let likeyData = {
-                likeyUser : {
-                    uid : currentUser.uid,
-                    name : currentUser.displayName,
-                    photoURL : currentUser.photoURL,
-                },
-                madeUser : {
-                    uid : madeUserID,
-                }
-            }
-            if(!isLikey){
-                writeLikeyFuc(diaryId,currentUser.uid,likeyData);
-            }else{
-                delLikeyFuc(diaryId,currentUser.uid);
-            }
+            // let likeyData = {
+            //     likeyUser : {
+            //         uid : currentUser.uid,
+            //         name : currentUser.displayName,
+            //         photoURL : currentUser.photoURL,
+            //     },
+            //     madeUser : {
+            //         uid : madeUserID,
+            //     }
+            // }
+            // if(!isLikey){
+            //     writeLikeyFuc(diaryId,currentUser.uid,likeyData);
+            // }else{
+            //     delLikeyFuc(diaryId,currentUser.uid);
+            // }
+            likeyBtnFuc(diaryId, madeUserID);
         }
     }
 
-    const writeLikeyFuc = async (_diaryId, _currentUserUid, _data) => {
-        await writeLikey(_diaryId, _currentUserUid, _data);
-        await updateUserLikey(_currentUserUid,_diaryId);
+    const likeyBtnFuc = (diaryId, madeUserID) => {
+        if(!isLikey){
+            handleUpdateLikey(diaryId, madeUserID);
+        }else{
+            handleDelLikey(diaryId);
+        }
     }
 
-    const delLikeyFuc = async (_diaryId, _currentUserUid) => {
-        await removeLikey(_diaryId, _currentUserUid);
-        await removeUserLikey(_diaryId, _currentUserUid);
-    }
+    // const writeLikeyFuc = async (_diaryId, _currentUserUid, _data) => {
+    //     await writeLikey(_diaryId, _currentUserUid, _data);
+    //     await updateUserLikey(_currentUserUid,_diaryId);
+    // }
+
+    // const delLikeyFuc = async (_diaryId, _currentUserUid) => {
+    //     await removeLikey(_diaryId, _currentUserUid);
+    //     await removeUserLikey(_diaryId, _currentUserUid);
+    // }
 
     return (
-        <>
+        <div style={{display:'flex',}}>
             <div onClick={isLikeyBtn}>
                 {
                     isLikey ?
-                    <FontAwesomeIcon icon={solidHeart} style={{width:'2.7rem',height:'2.7rem'}} color="rgb(250, 140, 107)"/>
+                    <FontAwesomeIcon icon={solidHeart} style={{width:'2rem',height:'2rem',marginTop:'.2rem'}} color="rgb(250, 140, 107)"/>
                     :
-                    <FontAwesomeIcon icon={faHeart} style={{width:'2.7rem',height:'2.7rem'}} color="#777"/>
+                    <FontAwesomeIcon icon={faHeart} style={{width:'2rem',height:'2rem',marginTop:'.2rem'}} color="#777"/>
                 }
             </div>
             <LikeyNum diaryId={diaryId} isLikey={isLikey} />
-        </>
+        </div>
     )
 }
 

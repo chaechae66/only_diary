@@ -1,18 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './diaryCard.module.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import Likey from '../likey/likey';
 
-const DiaryCard = ({myDiary, diary}) => {
-    const [isLikey, setIsLikey] = useState(false);
-
-    const isLikeyBtn = (e) => {
-        e.preventDefault();
-        setIsLikey(!isLikey);
-    }
-    
+const DiaryCard = ({handleDelLikey, handleUpdateLikey, myDiary, diary}) => {    
     const url = () => {
         if(myDiary){
             return `/diaryCardPage/${diary.id}` 
@@ -32,17 +23,7 @@ const DiaryCard = ({myDiary, diary}) => {
                 </div>
             </Link>
             <div className={styles.info}>
-                <div className={styles.likeArea}>
-                    <div onClick={isLikeyBtn}>
-                        {
-                            isLikey ?
-                            <FontAwesomeIcon icon={solidHeart} style={{width:'1.9rem',height:'1.9rem'}} color="rgb(250, 140, 107)"/>
-                            :
-                            <FontAwesomeIcon icon={faHeart} style={{width:'1.9rem',height:'1.9rem'}} color="#777"/>
-                        }
-                    </div>
-                    <span className={styles.like}>1개</span>
-                </div>
+                <Likey diaryId={diary?.id} madeUserID={diary?.createUser.uid} handleUpdateLikey={handleUpdateLikey} handleDelLikey={handleDelLikey}/>
                 <div className={styles.userArea}>
                     <strong>{diary.createUser.name}님</strong>
                     <span className={styles.date}>{diary.date}</span>

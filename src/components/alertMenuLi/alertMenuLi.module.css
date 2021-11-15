@@ -1,0 +1,17 @@
+.eventLi{
+    width: 42rem;
+    height: 8rem;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eventLi:hover{
+    background-color: #f9f9f9;
+}
+
+.timeStamp{
+    color:#ccc;
+    font-size: 1.4rem;
+}

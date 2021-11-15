@@ -1,0 +1,42 @@
+.diary:hover{
+    background-color: #f6f6f6;
+}
+
+.diaryWrap{
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+  
+.diary{
+    width: 5rem;
+    height: 5rem;
+    padding: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 0.7rem;
+}
+  
+.diarymenu{
+    position: absolute;
+    top: calc( 13vh - 2px );
+    right: 0;
+    background-color: #fff;
+    width: 20rem;
+    text-align: center;
+    box-shadow: 0px 2px 5px #00000010;
+    border: 0.25px solid #f9f9f950;
+}
+  
+.diarymenu li {
+    font-size: 1.6rem;
+    padding: 1.75rem 0;
+}
+  
+.diarymenu li:hover{
+    background-color: #f9f9f9;
+}

@@ -1,5 +1,5 @@
 import app from "./firebaseApp";
-import { getDatabase, ref, set, onValue, push , child, get, remove } from "firebase/database";
+import { getDatabase, ref, set, onValue, push , child, get, remove, serverTimestamp } from "firebase/database";
 
 const db = getDatabase(app);
 
@@ -68,6 +68,15 @@ export function updateUserLikey(_userUid, _diaryId){
   });
 }
 
+export function writeLikeyEvent(_madeUser, _diaryId, _data) {
+  return set(ref(db,"event/" + _madeUser +'/'+ _diaryId),_data);
+}
+
+export function removeLikeyEvent(_madeUser, _diaryId){
+  const eventRef = ref(db,"event/" + _madeUser +"/"+ _diaryId);
+  return remove(eventRef);
+}
+
 export function removeLikey(_diaryId, _likeyUserUid){
   const likeyRef = ref(db,"likey/" + _diaryId +"/"+ _likeyUserUid);
   return remove(likeyRef);
@@ -96,3 +105,5 @@ export const getLikeyLength = (_diaryId) => {
     });
   });
 }
+
+export const timeStamp = serverTimestamp(db);

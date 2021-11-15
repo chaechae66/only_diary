@@ -36,7 +36,7 @@ const Top = () => {
         </Link>
         {
           currentUser?
-          <LoginAfter/>
+          <LoginAfter />
           :
           <LoginBefore />
         }

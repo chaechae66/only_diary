@@ -6,7 +6,7 @@ import Routes from './routes';
 function App() {
   return (
     <BrowserRouter>
-      <Top />
+      <Top/>
         <Routes />
       <Footer />
     </BrowserRouter>

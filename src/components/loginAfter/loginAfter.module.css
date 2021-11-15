@@ -1,6 +1,14 @@
 .loginUser {
     display: flex;
     align-items: center;
+    height: 100%;
+}
+
+/* .alertWrap{
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .alert{
@@ -12,12 +20,25 @@
     justify-content: center;
     border-radius: 50%;
     cursor: pointer;
+    margin-left: 0.7rem;
 }
+
+.alertMenu{
+    position: absolute;
+    top: calc( 13vh - 2px );
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0px 2px 5px #00000010;
+    border: 0.25px solid #f9f9f950;
+    width: 32rem;
+    height: 10rem;
+} */
   
-.menu {
+/* .menu {
     position: relative;
-    padding-top: calc(7.5vh - 2.5rem);
-    padding-bottom: calc(7.5vh - 2.5rem);
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .photoURL {
@@ -27,16 +48,17 @@
     display: inline-block;
     border-radius: 50%;
     margin-left: 0.5rem;
-}
+} */
 
-.photoURL:hover,.alert:hover,.diary:hover{
+/* .photoURL:hover,.alert:hover,.diary:hover{
     background-color: #f6f6f6;
-}
+} */
 
-.diaryWrap{
+/* .diaryWrap{
     position: relative;
-    padding-top: calc(7.5vh - 2.5rem);
-    padding-bottom: calc(7.5vh - 2.5rem);
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
   
 .diary{
@@ -53,7 +75,7 @@
   
 .diarymenu{
     position: absolute;
-    top: 13vh;
+    top: calc( 13vh - 2px );
     right: 0;
     background-color: #fff;
     width: 20rem;
@@ -69,11 +91,11 @@
   
 .diarymenu li:hover{
     background-color: #f9f9f9;
-}
+} */
 
-.submenu {
+/* .submenu {
     position: absolute;
-    top: 13vh;
+    top: calc( 13vh - 2px );
     right: 0;
     background-color: #fff;
     width: 32rem;
@@ -137,5 +159,5 @@
 .logOutBtn:hover{
     background-color: #ccc;
     color:#fff;
-}
+} */
   

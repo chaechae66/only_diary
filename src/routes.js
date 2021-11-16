@@ -25,8 +25,10 @@ export default function Routes() {
       <Route exact path={PATHS.signUp} component={SignUp} />
       <Route exact path={PATHS.createDiary} component={CreateDiary} />
       <Route exact path={PATHS.myDiary} component={MyDiary} />
-      <Route exact path={PATHS.diaryCardPage} component={DiaryCardPage} />
-      <Route exact path={PATHS.publicCardPage} component={PublicCardPage} />
+      <Route exact path='/diaryCardPage' component={DiaryCardPage} />
+      <Route path={PATHS.diaryCardPage} component={DiaryCardPage} />
+      <Route exact path='/publicCardPage' component={PublicCardPage} />
+      <Route path={PATHS.publicCardPage} component={PublicCardPage} />
     </Switch>
   )
 }

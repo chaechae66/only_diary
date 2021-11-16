@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './diaryCard.module.css';
 import { Link } from 'react-router-dom';
-import Likey from '../likey/likey';
 
 const DiaryCard = ({myDiary, diary}) => {    
     const url = () => {
@@ -23,7 +22,6 @@ const DiaryCard = ({myDiary, diary}) => {
                 </div>
             </Link>
             <div className={styles.info}>
-                {/* <Likey diaryId={diary?.id} madeUserID={diary?.createUser.uid} handleUpdateLikey={handleUpdateLikey} handleDelLikey={handleDelLikey}/> */}
                 <div className={styles.userArea}>
                     <strong>{diary.createUser.name}님</strong>
                     <span className={styles.date}>{diary.date}</span>

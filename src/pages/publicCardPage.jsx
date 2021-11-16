@@ -9,7 +9,7 @@ const PublicCardPage = () => {
 
     useEffect(()=>{
         handlePrivateDiary();
-    },[])
+    },[id])
 
     const handlePrivateDiary = async () => {
         const diaryInfo = await getOnePublicValue(id);

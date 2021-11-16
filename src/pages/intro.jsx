@@ -10,6 +10,9 @@ const Intro = () => {
 
     useEffect(()=>{
       onhandlePublicDiary();
+      return ()=>{
+        setLoading(false);
+      }
     },[])
   
     const onhandlePublicDiary = async () => {

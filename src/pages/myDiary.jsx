@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import DiaryList from '../components/diaryList/diaryList';
@@ -10,23 +10,24 @@ const MyDiary = () => {
     const currentUser = useSelector(state => state.user.currentUser);
     const history = useHistory();
 
-    const [diary, setDiary] = useState(null)
+    const [diary, setDiary] = useState(null);
+
+    const onhandleUserDiary = useCallback(async () => {
+        const diary = await getValues("diary",currentUser.uid)
+        setDiary(diary)
+    },[currentUser]);
 
     useEffect(()=>{
         onhandleUserDiary();
-    },[])
+    },[onhandleUserDiary])
 
     useState(()=>{
         if(!currentUser){
             history.push('/login');
         }    
     },[])
-
-    const onhandleUserDiary = async () => {
-        const diary = await getValues("diary",currentUser.uid)
-        setDiary(diary)
-    }
     
+    console.log('1');
 
     return (
         <section className="bodyWrap">

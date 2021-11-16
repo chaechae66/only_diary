@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
@@ -11,20 +11,20 @@ const DiaryCardPage = () => {
     const currentUser = useSelector(state => state.user.currentUser);
     const history = useHistory();
 
+    const handlePrivateDiary = useCallback(async () => {
+        const diaryInfo = await getOnePrivateValue(currentUser?.uid,id);
+        setDiary(diaryInfo)
+    },[currentUser,id]);
+
     useEffect(()=>{
         handlePrivateDiary();
-    },[])
+    },[handlePrivateDiary]);
 
     useEffect(()=>{
         if(!currentUser){
             history.push('/login');
         }
-    })
-
-    const handlePrivateDiary = async () => {
-        const diaryInfo = await getOnePrivateValue(currentUser?.uid,id);
-        setDiary(diaryInfo)
-    }
+    },[currentUser,history]);
 
     return (
         <div>

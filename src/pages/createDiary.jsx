@@ -29,7 +29,7 @@ const CreateDiary = () => {
         if(!currentUser){
             history.push('/login')
         }    
-    },[])
+    },[currentUser,history]);
 
     const handleImg = (e) => {
         e.preventDefault();
@@ -90,14 +90,6 @@ const CreateDiary = () => {
         }
     }
 
-    useEffect(()=>{
-        handleResizeHeight()
-    },[])
-
-    useEffect(()=>{
-        return () => setLoading(false);
-    })
-
     const handleResizeHeight = useCallback(() => {
         if (txtRef === null || txtRef.current === null) {
           return;
@@ -105,6 +97,14 @@ const CreateDiary = () => {
         txtRef.current.style.height = '64px';
         txtRef.current.style.height = txtRef.current.scrollHeight + 'px';
       }, [txtRef]);
+
+    useEffect(()=>{
+        handleResizeHeight();
+    },[handleResizeHeight]);
+
+    useEffect(()=>{
+        return () => setLoading(false);
+    })
 
     const changeTxt = (_changingTxt) => {
         txtRef.current.value = _changingTxt;   

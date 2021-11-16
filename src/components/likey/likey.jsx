@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
@@ -14,19 +14,19 @@ const Likey = ({ diaryId, madeUserID }) => {
     const history = useHistory();
     const currentUser = useSelector(state => state.user.currentUser);
 
+    const handleLikey = useCallback(async (_userUid) => {
+        let likey = await getLikeyValues(_userUid);
+        likey.some((idElem) => idElem === diaryId ) && setIsLikey(true);
+    },[diaryId]);
+
     useEffect(()=>{
         if(currentUser && diaryId){
             handleLikey(currentUser.uid);
         }else{
             setIsLikey(false);
         }
-    },[currentUser,diaryId]);
+    },[currentUser,diaryId,handleLikey]);
 
-    const handleLikey = async (_userUid) => {
-        let likey = await getLikeyValues(_userUid);
-        likey.some((idElem) => idElem === diaryId ) && setIsLikey(true);
-    }
-    
     const isLikeyBtn = (e) => {
         e.preventDefault();
         if(!currentUser){

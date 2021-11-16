@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getValues, removeLikeyEvent } from '../../service/firebase/database';
 import moment from 'moment';
@@ -10,14 +10,16 @@ const AlertMenuLi = React.memo(() => {
 
     const [events, setEvents] = useState(null);
 
-    useEffect(() => {
-        currentUser && handleEvent();
-    }, []);
-
-    const handleEvent = async () => {
+    const handleEvent = useCallback(async () => {
         const event = await getValues('event',currentUser.uid);
         setEvents(event);
-    }
+    },[currentUser])
+
+    useEffect(() => {
+        currentUser && handleEvent();
+    }, [currentUser,handleEvent]);
+
+    console.log('1');
 
     const removeEvent = async (e,_event) => {
         e.preventDefault();
@@ -25,8 +27,6 @@ const AlertMenuLi = React.memo(() => {
         const event = await getValues('event',currentUser.uid);
         setEvents(event);
     }
-
-    console.log('1');
 
     return (
         <>

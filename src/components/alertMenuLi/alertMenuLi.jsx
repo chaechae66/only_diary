@@ -19,8 +19,6 @@ const AlertMenuLi = React.memo(() => {
         currentUser && handleEvent();
     }, [currentUser,handleEvent]);
 
-    console.log('1');
-
     const removeEvent = async (e,_event) => {
         e.preventDefault();
         await removeLikeyEvent(currentUser.uid,_event.diaryId);

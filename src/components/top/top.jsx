@@ -27,21 +27,21 @@ const Top = () => {
 
   return (
       <div className={styles.wrap}>
-      <header className={styles.header}>
-        <Link to="/">
-          <h1 className={styles.logo}>
-            <FontAwesomeIcon icon={faPaintBrush} size="sm" color="#fc8b79" />
-            <div className={styles.logoTxt}>Only Diary</div>
-          </h1>
-        </Link>
-        {
-          currentUser?
-          <LoginAfter />
-          :
-          <LoginBefore />
-        }
-      </header>
-    </div>
+        <header className={styles.header}>
+          <Link to="/">
+            <h1 className={styles.logo}>
+              <FontAwesomeIcon icon={faPaintBrush} size="sm" color="#fc8b79" />
+              <div className={styles.logoTxt}>Only Diary</div>
+            </h1>
+          </Link>
+          {
+            currentUser?
+            <LoginAfter />
+            :
+            <LoginBefore />
+          }
+        </header>
+      </div>
   )
 }
 

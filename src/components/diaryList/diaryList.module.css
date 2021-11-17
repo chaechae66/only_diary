@@ -3,3 +3,10 @@
     justify-content: flex-start;
     flex-wrap: wrap;
 }
+
+
+@media (max-width:1200px) {
+    .diaryList{
+        width: 80rem;
+    }
+}

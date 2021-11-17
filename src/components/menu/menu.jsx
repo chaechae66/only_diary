@@ -23,7 +23,6 @@ const Menu = () => {
                 <Link to="/createDiary">
                 <li>일기 추가</li>
                 </Link>
-                <li>이벤트</li>
             </ul>
         </div>
     )

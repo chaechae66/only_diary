@@ -9,12 +9,3 @@ export const swalAlert = (_icon,_tit,_des) => {
         timerProgressBar: true,
     })
 }
-
-// export const loadingAlert = (_icon,_tit,_des) => {
-//     Swal.fire({
-//         position: 'top-end',
-//         icon: _icon,
-//         title: _tit,
-//         text : _des,
-//       })
-// }

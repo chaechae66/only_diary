@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
-import { swalAlert } from '../../service/sweetAlert/alret';
+import { swalAlert } from '../../service/sweetAlert/alert';
 import { getLikeyValues, removeLikey, removeLikeyEvent, removeUserLikey, timeStamp, updateUserLikey, writeLikey, writeLikeyEvent } from '../../service/firebase/database';
 import { useHistory } from 'react-router';
 import { useSelector } from 'react-redux';

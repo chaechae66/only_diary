@@ -1,0 +1,48 @@
+.wrap{
+    min-height: 75vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon{
+    display: flex;
+    align-items: center;
+}
+
+.iconTxt{
+    font-size: 6rem;
+    color : rgb(250, 140, 107);
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+.tit{
+    font-size: 3.2rem;
+    margin-top: 1.5rem;
+}
+
+.txt{
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.btnGroup{
+    margin-top: 5.5rem;
+    display: flex;
+}
+
+.btnGroup > button {
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    font-size: 1.4rem;
+}
+
+.btnGroup > .goToHomeBtn{
+    background-color: rgb(250, 140, 107);
+    color:#fff;
+    margin-right: 2rem;
+}

@@ -6,6 +6,7 @@ import MyDiary from './pages/myDiary';
 import DiaryCardPage from './pages/diaryCardPage';
 import SignUp from './pages/signUp';
 import PublicCardPage from './pages/publicCardPage';
+import Page404 from './pages/page404';
 
 export const PATHS = {
   intro: '/',
@@ -29,6 +30,7 @@ export default function Routes() {
       <Route path={PATHS.diaryCardPage} component={DiaryCardPage} />
       <Route exact path='/publicCardPage' component={PublicCardPage} />
       <Route path={PATHS.publicCardPage} component={PublicCardPage} />
+      <Route component={Page404} />
     </Switch>
   )
 }

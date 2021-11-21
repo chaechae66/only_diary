@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { userLogOut } from '../../redux/actions/user_action';
 import { emailLogOut } from '../../service/firebase/emailLogin';
-import { swalAlert } from '../../service/sweetAlert/alret';
+import { swalAlert } from '../../service/sweetAlert/alert';
 import styles from './userMenu.module.css';
 import basephotoURL from '../../images/diary_default_img.png';
 

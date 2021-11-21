@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector , shallowEqual } from 'react-redux';
 import { useHistory } from 'react-router';
 import default_01 from '../../src/images/diary_default_01.jpg';
 import default_02 from '../../src/images/diary_default_02.jpg';
@@ -8,12 +8,18 @@ import default_04 from '../../src/images/diary_default_04.jpg';
 import DiaryTextarea from '../components/diaryTextarea/diaryTextarea';
 import Img from '../components/img/img';
 import ShowDate from '../components/showDate/showDate';
+import { userLogIn } from '../redux/actions/user_action';
 import { diarySet, getKey, publicSet } from '../service/firebase/database';
+import { auth } from '../service/firebase/emailLogin';
 import { getImgURL, getOtherImgUrl } from '../service/firebase/storage';
+import { swalAlert } from '../service/sweetAlert/alert';
 import styles from './styles/createDiary.module.css';
+import { onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from 'react-redux';
 
 const CreateDiary = () => {
-    const currentUser = useSelector(state => state.user.currentUser);
+    const currentUser = useSelector(state => state.user.currentUser, shallowEqual);
+    const dispatch = useDispatch();
     const history = useHistory();
     
     const [baseUrl, setBaseUrl] = useState(default_01);
@@ -27,9 +33,15 @@ const CreateDiary = () => {
 
     useEffect(()=>{
         if(!currentUser){
-            history.push('/login')
+            onAuthStateChanged(auth, (onlyUser) => {
+                if (onlyUser) {
+                  dispatch(userLogIn(onlyUser));
+                } else {
+                  history.push('/login');
+                }
+            });
         }    
-    },[currentUser,history]);
+    },[currentUser]);
 
     const handleImg = (e) => {
         e.preventDefault();
@@ -73,6 +85,10 @@ const CreateDiary = () => {
                     photoURL : currentUser.photoURL,
                 }
             }
+            if(!txtRef.current.value){
+                swalAlert('error','일기전송 오류','일기 본문을 채워주세요.')
+                throw new Error();
+            }
             if(!isprivate){
                 await publicSet(diary, diary.id);
                 await diarySet(currentUser.uid, diary, diary.id);
@@ -82,10 +98,8 @@ const CreateDiary = () => {
                 history.push('/myDiary');
             }
         }catch(e){
-            console.error(e);
-            alert(e);
+            console.log(e);
         }finally{
-            setBaseUrl('default_01');
             setLoading(false);
         }
     }

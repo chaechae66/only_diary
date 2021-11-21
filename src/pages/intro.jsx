@@ -20,9 +20,10 @@ const Intro = () => {
         setLoading(true);
         const diary = await getValues("public");
         setDiaryList(diary);
-        setLoading(false);
       }catch(e){
           alert(e);
+      }finally{
+          setLoading(false);
       }
     }
 

@@ -4,22 +4,26 @@ import { useForm } from "react-hook-form";
 import { useHistory } from 'react-router';
 import { logIn } from '../service/firebase/emailLogin';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userLogIn } from '../redux/actions/user_action';
 
 const Login = () => {
     const [loading,setLoading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const onSubmit = async (data) => { 
         try{
-            setLoading(true)                 
-            await logIn(data.email, data.password)
+            setLoading(true);
+            const user = await logIn(data.email, data.password);
+            dispatch(userLogIn(user));
             history.push('/')
         }catch(err){
-            alert(err)
+            console.log('err',err);
         }finally{
-            setLoading(false)
+            setLoading(false);
         }
     }
 

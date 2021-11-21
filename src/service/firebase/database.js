@@ -49,12 +49,8 @@ export function getKey(_ref) {
   return push(child(ref(db), _ref)).key
 }
 
-export function publicSet(_data,_key) {
-  return set(ref(db, "public/" + _key ), _data);
-}
-
-export function diarySet(_uid, _data,_key) {
-  return set(ref(db, "diary/" + _uid + "/"+ _key), _data);
+export function dataSet(_ref,_data, _keyLink){
+  return set(ref(db, _ref +"/" + _keyLink ), _data);
 }
 
 export function writeLikey(_diaryId, _likeyUserUid, _data) {

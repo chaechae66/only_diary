@@ -41,7 +41,7 @@ const MyDiary = () => {
         return () => {
             isComponentMounted = false;
         }
-    },[user,loading]);
+    },[user]);
 
     useEffect(()=>{
         onhandleUserDiary();

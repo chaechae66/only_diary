@@ -8,8 +8,12 @@ const PublicCardPage = () => {
     const [diary, setDiary] = useState(null);
 
     const handlePrivateDiary = useCallback(async () => {
-        const diaryInfo = await getOnePublicValue(id);
-        setDiary(diaryInfo);
+        try{
+            const diaryInfo = await getOnePublicValue(id);
+            setDiary(diaryInfo);
+        }catch(err){
+            console.log('err',err);
+        }
     },[id])
 
     useEffect(()=>{

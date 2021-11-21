@@ -12,8 +12,12 @@ const DiaryCardPage = () => {
     const history = useHistory();
 
     const handlePrivateDiary = useCallback(async () => {
-        const diaryInfo = await getOnePrivateValue(currentUser?.uid,id);
-        setDiary(diaryInfo)
+        try{
+            const diaryInfo = await getOnePrivateValue(currentUser?.uid,id);
+            setDiary(diaryInfo);
+        }catch(err){
+            console.log('err',err);
+        }
     },[currentUser,id]);
 
     useEffect(()=>{

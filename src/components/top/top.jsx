@@ -10,20 +10,22 @@ import { auth } from '../../service/firebase/emailLogin';
 import { useDispatch } from 'react-redux';
 import { userLogIn } from '../../redux/actions/user_action'
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 
 const Top = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.user.currentUser);
+  const history = useHistory();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(userLogIn(user));
       } else {
-        return;
+        history.push('/');
       }
     });
-  }, [currentUser,dispatch]);
+  }, [currentUser,dispatch,history]);
 
   return (
       <div className={styles.wrap}>

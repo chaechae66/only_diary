@@ -20,7 +20,7 @@ const UserMenu = () => {
         swalAlert('success','로그아웃 완료','로그아웃 되었습니다. 다음에 또 뵙겠습니다.');
         emailLogOut();
         dispatch(userLogOut());
-        history.push('/');
+        history.push('/signUp');
     }
 
     return (

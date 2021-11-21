@@ -1,0 +1,24 @@
+{
+  "rules": {
+    "diary":{
+      ".read": "auth != null", 
+      ".write": "auth != null"
+    },
+    "public":{
+      ".read": true,
+      ".write": "auth != null"
+    },
+    "users":{
+      ".read" : true,
+      ".write" : "auth != null"
+    },
+    "likey": {
+      ".read" : true,
+      ".write" : "auth != null"
+    },
+    "event":{
+      ".read": "auth != null", 
+      ".write": "auth != null"
+    },
+  }
+}

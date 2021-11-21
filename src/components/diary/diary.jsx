@@ -6,6 +6,7 @@ import Txt from '../txt/txt';
 import styles from './diary.module.css'
 import { useHistory } from 'react-router';
 import Likey from '../likey/likey';
+import { swalAlert } from '../../service/sweetAlert/alert';
 
 const Diary = ({ diary }) => {
     const currentUser = useSelector(state => state.user.currentUser);
@@ -16,6 +17,11 @@ const Diary = ({ diary }) => {
     const goToBack = (e) => {
         e.preventDefault();
         history.goBack(1);
+    }
+
+    const alertBtn = (e) => {
+        e.preventDefault();
+        swalAlert('info','안내','준비 중입니다. 좀 더 멋진 모습으로 뵙겠습니다.');
     }
 
     useEffect(()=>{
@@ -33,8 +39,14 @@ const Diary = ({ diary }) => {
                                 currentUser ?  (
                                     currentUser.uid === diary?.createUser.uid ? (
                                     <div className={styles.btnGroup}>
-                                        <button className={styles.editBtn}>수정</button>
-                                        <button className={styles.delBtn}>삭제</button>
+                                        <button 
+                                            className={styles.editBtn}
+                                            onClick={alertBtn}
+                                        >수정</button>
+                                        <button 
+                                            className={styles.delBtn}
+                                            onClick={alertBtn}
+                                        >삭제</button>
                                     </div>
                                 )
                                 : <></>

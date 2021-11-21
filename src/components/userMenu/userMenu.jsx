@@ -16,11 +16,17 @@ const UserMenu = () => {
 
     const [isShow, setIsShow] = useState("none");
 
-    const logOut = () => {
+    const logOut = (e) => {
+        e.preventDefault();
         swalAlert('success','로그아웃 완료','로그아웃 되었습니다. 다음에 또 뵙겠습니다.');
         emailLogOut();
         dispatch(userLogOut());
         history.push('/signUp');
+    }
+
+    const userInfo = (e) => {
+        e.preventDefault();
+        swalAlert('info','안내','준비 중입니다. 좀 더 멋진 모습으로 뵙겠습니다.');
     }
 
     return (
@@ -44,7 +50,7 @@ const UserMenu = () => {
                 </div>
                 </div>
                 <div className={styles.btnGroup}>
-                <button className={styles.infoBtn}>정보수정</button>
+                <button className={styles.infoBtn} onClick={userInfo}>정보수정</button>
                 <button className={styles.logOutBtn} onClick={logOut}>로그아웃</button>
                 </div>
             </li>

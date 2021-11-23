@@ -19,7 +19,7 @@ const Page404 = () => {
     }
 
     return (
-        <section className={styles.wrap}>
+        <section className={`bodyWrap ${styles.wrap}`}>
             <div className={styles.icon}>
                 <FontAwesomeIcon 
                     icon={faExclamationCircle} 

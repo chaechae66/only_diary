@@ -67,7 +67,7 @@ const MyDiary = () => {
                                 <DiaryList myDiary={true} diaryList={diary}/>
                             )
                         }
-            </div>
+                    </div>
                 </>
             ) :
             <div>로딩중...</div>

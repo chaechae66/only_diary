@@ -21,7 +21,7 @@
 
 .submenu {
     position: absolute;
-    top: calc( 13vh - 2px );
+    top: calc( 12rem - 2px );
     right: 0;
     background-color: #fff;
     width: 32rem;

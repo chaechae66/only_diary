@@ -10,10 +10,14 @@
     margin-bottom: 10rem;
 }
 
-@media (max-width:1200px) {
+@media (max-width:918px) {
     .diaryWrap{
-        display: flex;
-        justify-content: center;
+        width: 80rem;
+    }
+}
+
+@media (max-width:618px) {
+    .diaryWrap{
         width: 100%;
     }
 }

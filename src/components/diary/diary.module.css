@@ -1,7 +1,7 @@
 .wrap{
     width: 80rem;
     min-height: 72vh;
-    margin: 6rem auto 12rem;
+    margin: 6rem auto;
 }
 
 .userWrap{
@@ -85,4 +85,12 @@
     font-size: 1.4rem;
     font-weight: 500;
     margin-top: 6rem;
+}
+
+/* 반응형 */
+@media (max-width:665px) {
+    .wrap{
+        width: 100%;
+        padding: 0 2.5rem;
+    }
 }

@@ -48,3 +48,13 @@
     -webkit-box-orient:vertical;
     margin-bottom: 2rem;
 }
+
+/* 반응형 */
+@media (max-width:618px) {
+    .diary{
+        width: 42rem;
+    }
+    .image{
+        height: 42rem;
+    }
+}

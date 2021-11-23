@@ -8,9 +8,11 @@
 .bannerDots{
     position: absolute;
     z-index: 5;
-    bottom: 0.1rem;
-    left: 50%;
-    transform: translateY(-50%);
+    /* bottom: 0.1rem;
+    left: 50%; */
+    left: 45%;
+    bottom: 2rem;
+    /* transform: translateX(-50%); */
     width: 10rem;
     height: 1.5rem;
     display: flex;
@@ -80,4 +82,12 @@
 .bannerList{
     width: 300vw;
     position: absolute;
+    height: 100%;
+}
+
+/* 반응형 */
+@media (max-width : 628px) {
+    .bannerWrap{
+        height: 50rem;
+    }
 }

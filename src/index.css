@@ -50,10 +50,17 @@ button{
 .bodyWrap{
   width: 120rem;
   margin: 0 auto;
-  min-height: 75vh;
+  min-height: 79.92vh;
   padding: 5rem 2.5rem;
 }
 
 .swal2-popup{
   font-size: 1.5rem !important;
+}
+
+/* 반응형 */
+@media (max-width:918px) {
+  .bodyWrap{
+    width: 100%;
+  }
 }

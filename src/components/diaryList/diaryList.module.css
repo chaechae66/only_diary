@@ -4,9 +4,9 @@
     flex-wrap: wrap;
 }
 
-
-@media (max-width:1200px) {
+/* 반응형 */
+@media (max-width:618px) {
     .diaryList{
-        width: 80rem;
+        justify-content: center;
     }
 }

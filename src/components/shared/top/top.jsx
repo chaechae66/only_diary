@@ -3,12 +3,12 @@ import styles from "./top.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import LoginBefore from '../loginBefore/loginBefore';
-import LoginAfter from '../loginAfter/loginAfter';
+import LoginBefore from '../../loginBefore/loginBefore';
+import LoginAfter from '../../loginAfter/loginAfter';
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from '../../service/firebase/emailLogin';
+import { auth } from '../../../service/firebase/emailLogin';
 import { useDispatch } from 'react-redux';
-import { userLogIn } from '../../redux/actions/user_action'
+import { userLogIn } from '../../../redux/actions/user_action'
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 

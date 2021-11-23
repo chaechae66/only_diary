@@ -3,6 +3,7 @@ import Banner from '../banner/banner';
 import styles from './slideBanner.module.css';
 import bannerImg01 from '../../images/main_banner_01.png';
 import bannerImg02 from '../../images/main_banner_02.png';
+import bannerImg03 from '../../images/main_banner_03.png';
 
 const SlideBanner = () => {
     const slideIndexAry = [0, 1, 2];
@@ -101,12 +102,12 @@ const SlideBanner = () => {
                       bannerImg={bannerImg02}
                     />
                     <Banner 
-                      color={"rgb(255, 238, 239)"} 
-                      title1="나만의 소중한 공간," 
-                      title2="로그인하여 함께해요" 
-                      des1="나만의 소중한 공간, Only Diary에서 제공하는 예쁜 기본 이미지부터"
-                      des2="커스텀 이미지까지 나의 특별한 일상을 공유하고, 소중히 간직해보아요"
-                      bannerImg={bannerImg01}
+                      color={"rgb(226, 241, 243)"} 
+                      title1="나의 행복한 일상을" 
+                      title2="일기장 공개모드로 공유해요" 
+                      des1="일기를 생성 시, 공개모드로 설정하여 행복한 일상들을"
+                      des2="즐겁게 공유해보아요"
+                      bannerImg={bannerImg03}
                     />
                 </div>  
         </section>

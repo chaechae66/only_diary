@@ -102,7 +102,7 @@ const SlideBanner = () => {
                       bannerImg={bannerImg02}
                     />
                     <Banner 
-                      color={"rgb(226, 241, 243)"} 
+                      color={"rgb(225, 240, 210)"} 
                       title1="나의 행복한 일상을" 
                       title2="일기장 공개모드로 공유해요" 
                       des1="일기를 생성 시, 공개모드로 설정하여 행복한 일상들을"

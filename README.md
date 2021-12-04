@@ -1,7 +1,7 @@
 ## Only Diary
 ### 목차
 ---
-* [Only Diary](#Only-Diary)
+* [Only-Diary](#Only-Diary)
    * 소개말
    * 배포 링크
    * 특징
@@ -19,13 +19,12 @@
    * 스택
    * 사용 이유
 * [개선사항](#개선사항)
-   * 2021.09.09 ~ 2021.11.23
-     1. 111
-     2. 좋아요 기능과 알람 기능
-     3. 새로고침 후 데이터 유지
-     4. 앞으로의 개선 사항
-   
-### Only Diary
+   * 로그인
+   * 다이어리 등록 기능
+   * 좋아요 기능과 알람 기능
+   * 새로고침 후 데이터 유지
+     
+### Only-Diary
 ---
 #### 소개말
 <img src="https://user-images.githubusercontent.com/80934175/143998142-7b66bde1-3a59-48c5-a820-c3ed0dd5d855.png" width="150px" height="150px" alt="logo"/>
@@ -104,7 +103,7 @@ yarn start
 #### 환경변수
 ```
 
-/*root 디렉토리에 .env 파일 추가 후*/
+/* root 디렉토리에 .env 파일 추가 후 */
 
 REACT_APP_FIREBASE_APIKEY = 파이어베이스 앱키
 REACT_APP_FIREBASE_AUTHDOMAIN = 파이어베이스 도메인 주소
@@ -138,3 +137,7 @@ REACT_APP_FIREBASE_MEASUREMENTID = 파이어베이스 MEASUREMENT 아이디
 ### 개선사항
 ---
 
+#### 로그인
+#### 다이어리 등록 기능
+#### 좋아요 기능과 알람 기능
+#### 새로고침 후 데이터 유지

@@ -43,7 +43,7 @@ Only Diary는 유저가 이미지와 함께 다이어리를 게시할 수 있는
 
 <br />
 
-## :page_with_curl: 페이지 구성
+## 📃 페이지 구성
 
 <br />
 
@@ -112,7 +112,7 @@ Only Diary는 유저가 이미지와 함께 다이어리를 게시할 수 있는
 
 <br />
 
-## :earth_asia: 환경 구성
+## 🌏 환경 구성
 ### yarn
 ```
 
@@ -139,7 +139,7 @@ REACT_APP_FIREBASE_MEASUREMENTID = 파이어베이스 MEASUREMENT 아이디
 
 <br />
 
-## :hammer: 기술 스택
+## 🛠 기술 스택
 ### 스택
 1. 리액트
 2. 리덕스
@@ -159,7 +159,7 @@ REACT_APP_FIREBASE_MEASUREMENTID = 파이어베이스 MEASUREMENT 아이디
 
 <br />
 
-## :pill: 개선사항
+## 💊 개선사항
 ### 페이지 이탈 후에도 유저가 누른 좋아요 상태 유지
 #### :alarm_clock: 기간
 2021.11.14

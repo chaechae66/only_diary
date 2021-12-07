@@ -1,5 +1,5 @@
 ##  :pushpin: 목차
-* [소개](#:love_letter:-소개)
+* [소개](#💌-소개)
    * 소개말
    * 배포 링크
    * 특징
@@ -21,7 +21,7 @@
    * 새로고침 후 데이터 유지
    * 다이어리 등록 시 이미지 이름 중복 없애기
 
-## :love_letter: 소개
+## 💌 소개
 ### 소개말
 <img src="https://user-images.githubusercontent.com/80934175/143998142-7b66bde1-3a59-48c5-a820-c3ed0dd5d855.png" width="150px" height="150px" alt="logo"/>
 

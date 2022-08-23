@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import Diary from '../components/diary/diary';
 import { getOnePrivateValue } from '../service/firebase/database';
 
@@ -9,7 +9,7 @@ const DiaryCardPage = () => {
     const {id} = useParams();
     const [diary, setDiary] = useState(null);
     const currentUser = useSelector(state => state.user.currentUser);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handlePrivateDiary = useCallback(async () => {
         try{
@@ -26,9 +26,9 @@ const DiaryCardPage = () => {
 
     useEffect(()=>{
         if(!currentUser){
-            history.push('/login');
+            navigate('/login');
         }
-    },[currentUser,history]);
+    },[currentUser,navigate]);
 
     return (
         <div>

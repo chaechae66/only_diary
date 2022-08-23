@@ -4,14 +4,14 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
 import { swalAlert } from '../../service/sweetAlert/alert';
 import { getLikeyValues, removeLikey, removeLikeyEvent, removeUserLikey, timeStamp, updateUserLikey, writeLikey, writeLikeyEvent } from '../../service/firebase/database';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import LikeyNum from '../likeyNum/likeyNum';
 
 const Likey = ({ diaryId, madeUserID }) => {
     const [isLikey, setIsLikey] = useState(false);
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const currentUser = useSelector(state => state.user.currentUser);
 
     const handleLikey = useCallback(async (_userUid) => {
@@ -31,7 +31,7 @@ const Likey = ({ diaryId, madeUserID }) => {
         e.preventDefault();
         if(!currentUser){
             swalAlert('warning','로그인 필요','좋아요 기능은 로그인 후 이용 바랍니다.');
-            history.push('/login');
+            navigate('/login');
         }else{
             setIsLikey(!isLikey);
             let likeyData = {

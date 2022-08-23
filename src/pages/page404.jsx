@@ -2,20 +2,20 @@ import React from 'react';
 import styles from './styles/page404.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 const Page404 = () => {
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const goToHome = (e) => {
         e.preventDefault();
-        history.push('/');
+        navigate('/');
     }
 
     const goToBack = (e) => {
         e.preventDefault();
-        history.goBack(1);
+        navigate(-1);
     }
 
     return (

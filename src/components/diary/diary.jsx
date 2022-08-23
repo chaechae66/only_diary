@@ -4,19 +4,19 @@ import Img from '../img/img';
 import ShowDate from '../showDate/showDate';
 import Txt from '../txt/txt';
 import styles from './diary.module.css'
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import Likey from '../likey/likey';
 import { swalAlert } from '../../service/sweetAlert/alert';
 
 const Diary = ({ diary }) => {
     const currentUser = useSelector(state => state.user.currentUser);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
 
     const goToBack = (e) => {
         e.preventDefault();
-        history.goBack(1);
+        navigate(-1);
     }
 
     const alertBtn = (e) => {

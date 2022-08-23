@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { userLogOut } from '../../redux/actions/user_action';
 import { emailLogOut } from '../../service/firebase/emailLogin';
 import { swalAlert } from '../../service/sweetAlert/alert';
 import styles from './userMenu.module.css';
-import basephotoURL from '../../images/diary_default_img.png';
+import basephotoURL from '../../asset/images/diary_default_img.png';
 
 const UserMenu = () => {
 
     const currentUser = useSelector(state => state.user.currentUser);
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [isShow, setIsShow] = useState("none");
 
@@ -21,7 +21,7 @@ const UserMenu = () => {
         swalAlert('success','로그아웃 완료','로그아웃 되었습니다. 다음에 또 뵙겠습니다.');
         emailLogOut();
         dispatch(userLogOut());
-        history.push('/signUp');
+        navigate('/signUp');
     }
 
     const userInfo = (e) => {

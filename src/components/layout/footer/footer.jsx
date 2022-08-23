@@ -3,9 +3,9 @@ import styles from './footer.module.css'
 
 const Footer = () => {
     return(
-        <footer className={styles.footer}>
+        <div className={styles.footer}>
             &copy; 2021. ChaeYeon All rights reserved. 
-        </footer>
+        </div>
     )
 };
 

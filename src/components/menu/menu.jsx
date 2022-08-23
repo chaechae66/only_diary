@@ -17,10 +17,10 @@ const Menu = () => {
             <FontAwesomeIcon icon={faBars} size="2x" color="#fc8b79"/>
             </div>
             <ul className={styles.diarymenu} style={{display:diaryShow}}>
-                <Link to="/myDiary">
+                <Link to="/mydiary">
                 <li>나의 일기</li>
                 </Link>
-                <Link to="/createDiary">
+                <Link to="/creatediary">
                 <li>일기 추가</li>
                 </Link>
             </ul>

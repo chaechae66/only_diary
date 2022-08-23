@@ -7,29 +7,28 @@ import LoginBefore from '../../loginBefore/loginBefore';
 import LoginAfter from '../../loginAfter/loginAfter';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../../service/firebase/emailLogin';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { userLogIn } from '../../../redux/actions/user_action'
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 const Top = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.user.currentUser);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(userLogIn(user));
       } else {
-        history.push('/');
+        // navigate('/');
       }
     });
-  }, [currentUser,dispatch,history]);
+  }, [currentUser,dispatch,navigate]);
 
   return (
       <div className={styles.wrap}>
-        <header className={styles.header}>
+        <div className={styles.header}>
           <Link to="/">
             <h1 className={styles.logo}>
               <FontAwesomeIcon icon={faPaintBrush} size="sm" color="#fc8b79" />
@@ -42,7 +41,7 @@ const Top = () => {
             :
             <LoginBefore />
           }
-        </header>
+        </div>
       </div>
   )
 }

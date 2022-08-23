@@ -37,7 +37,7 @@ const AlertMenuLi = React.memo(() => {
                             onClick={(e)=>{removeEvent(e,event)}}
                         >
                             <Link 
-                                to={{ pathname : `/publicCardPage/${event.diaryId}`}}>
+                                to={{ pathname : `/public/${event.diaryId}`}}>
                                 <div>
                                     {event.likeyUser.name}님이 회원님의 다이어리에 좋아요를 눌렀습니다!<br />
                                     <span className={styles.timeStamp}>{moment(event.timeStamp).fromNow()}</span>

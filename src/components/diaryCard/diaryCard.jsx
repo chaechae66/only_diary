@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 const DiaryCard = ({myDiary, diary}) => {    
     const url = () => {
         if(myDiary){
-            return `/diaryCardPage/${diary.id}` 
+            return `/diarycardpage/${diary.id}` 
         }else{
-            return `/publicCardPage/${diary.id}`
+            return `/public/${diary.id}`
         }
     }
 

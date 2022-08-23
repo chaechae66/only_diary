@@ -1,13 +1,13 @@
 import React from 'react'
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import styles from './noDiary.module.css'
 
 const NoDiary = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
     
     const goToCreateDiary = (e) => {
         e.preventDefault();
-        history.push('/createDiary');
+        navigate('/creatediary');
     }
     return (
         <div className={styles.wrap}>

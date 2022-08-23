@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import styles from '../pages/styles/signUp.module.css'
 import { writeUserData } from '../service/firebase/database';
@@ -9,7 +9,7 @@ import { getImgURL } from '../service/firebase/storage';
 import { swalAlert } from '../service/sweetAlert/alert';
 
 const SignUp = () => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
 
@@ -29,12 +29,12 @@ const SignUp = () => {
             const defaultUrl = await getImgURL("defaultImg/diary_default_baseURL.png");
             await updateUserInfo(data.name, defaultUrl);
             writeUserData(
-              user.user.uid,
-              user.user.displayName,
-              user.user.photoURL
+                user.user.uid,
+                user.user.displayName,
+                user.user.photoURL
             );
             swalAlert('success','회원가입 완료','Only Diary의 가족이 된 걸 환영합니다. 로그인 되었습니다.');
-            history.push('/');
+            navigate('/');
         } catch (err) {
             console.log('err',err);
         } finally {

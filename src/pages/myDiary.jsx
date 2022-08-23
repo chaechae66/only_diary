@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector , useDispatch, shallowEqual } from 'react-redux';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import DiaryList from '../components/diaryList/diaryList';
 import NoDiary from '../components/noDiary/noDiary';
 import { getValues } from '../service/firebase/database';
@@ -12,7 +12,7 @@ import { userLogIn } from '../redux/actions/user_action';
 const MyDiary = () => {
     const user = useSelector(state => state.user.currentUser,shallowEqual);
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [diary, setDiary] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -20,16 +20,16 @@ const MyDiary = () => {
     useEffect(() => {
         if(!user){
             onAuthStateChanged(auth, (onlyUser) => {
-                 if (onlyUser) {
-                   dispatch(userLogIn(onlyUser));
-                 } else {
-                   history.push('/login');
-                 }
-             });
+                if (onlyUser) {
+                    dispatch(userLogIn(onlyUser));
+                } else {
+                    navigate('/login');
+                }
+                });
         }else{
             return;
         }
-    }, [user,dispatch,history]);
+    }, [user,dispatch,navigate]);
 
     const onhandleUserDiary = useCallback(async () => {
         let isComponentMounted = true

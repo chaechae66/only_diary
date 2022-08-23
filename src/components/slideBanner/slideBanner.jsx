@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Banner from '../banner/banner';
 import styles from './slideBanner.module.css';
-import bannerImg01 from '../../images/main_banner_01.png';
-import bannerImg02 from '../../images/main_banner_02.png';
-import bannerImg03 from '../../images/main_banner_03.png';
+import bannerImg01 from '../../asset/images/main_banner_01.png';
+import bannerImg02 from '../../asset/images/main_banner_02.png';
+import bannerImg03 from '../../asset/images/main_banner_03.png';
 
 const SlideBanner = () => {
     const slideIndexAry = [0, 1, 2];

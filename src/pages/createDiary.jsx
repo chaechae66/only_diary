@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector , shallowEqual } from 'react-redux';
-import { useHistory } from 'react-router';
-import default_01 from '../../src/images/diary_default_01.jpg';
-import default_02 from '../../src/images/diary_default_02.jpg';
-import default_03 from '../../src/images/diary_default_03.jpg';
-import default_04 from '../../src/images/diary_default_04.jpg';
+import { useNavigate } from 'react-router';
+import default_01 from '../../src/asset/images/diary_default_01.jpg';
+import default_02 from '../../src/asset/images/diary_default_02.jpg';
+import default_03 from '../../src/asset/images/diary_default_03.jpg';
+import default_04 from '../../src/asset/images/diary_default_04.jpg';
 import DiaryTextarea from '../components/diaryTextarea/diaryTextarea';
 import Img from '../components/img/img';
 import ShowDate from '../components/showDate/showDate';
@@ -19,7 +19,7 @@ import { getDate, submitDiary } from '../hooks/submitDiary';
 const CreateDiary = () => {
     const currentUser = useSelector(state => state.user.currentUser, shallowEqual);
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
     
     const [baseUrl, setBaseUrl] = useState(default_01);
     const [isprivate,setIsprivate] = useState(false);
@@ -33,13 +33,13 @@ const CreateDiary = () => {
         if(!currentUser){
             onAuthStateChanged(auth, (onlyUser) => {
                 if (onlyUser) {
-                  dispatch(userLogIn(onlyUser));
+                    dispatch(userLogIn(onlyUser));
                 } else {
-                  history.push('/login');
+                    navigate.push('/login');
                 }
             });
         }    
-    },[currentUser,dispatch,history]);
+    },[currentUser,dispatch,navigate]);
 
     const handleImg = (e) => {
         e.preventDefault();
@@ -69,7 +69,7 @@ const CreateDiary = () => {
     const submit = async (e) => {
         e.preventDefault();
         let img = await createGetImg(isprivate, fileInfo, baseUrl);
-        await submitDiary(setLoading,isprivate,img,txtRef,currentUser,history);
+        await submitDiary(setLoading,isprivate,img,txtRef,currentUser,navigate);
     }
 
     const handleResizeHeight = useCallback(() => {

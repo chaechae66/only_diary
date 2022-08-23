@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from '../pages/styles/login.module.css';
 import { useForm } from "react-hook-form";
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { logIn } from '../service/firebase/emailLogin';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -11,7 +11,7 @@ const Login = () => {
     const [loading,setLoading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const onSubmit = async (data) => { 
@@ -19,7 +19,7 @@ const Login = () => {
             setLoading(true);
             const user = await logIn(data.email, data.password);
             dispatch(userLogIn(user));
-            history.push('/')
+            navigate('/')
         }catch(err){
             console.log('err',err);
         }finally{
@@ -53,7 +53,7 @@ const Login = () => {
                         로그인
                     </button>
                 </form>
-                <Link to="/signUp">
+                <Link to="/signup">
                     <p className={styles.signUp}>
                         아이디가 없다면...
                     </p>

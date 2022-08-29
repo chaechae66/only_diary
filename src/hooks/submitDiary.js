@@ -16,7 +16,7 @@ export const getDate = () => {
     return dateString
 }
 
-export const submitDiary = async (_setLoading,_isprivate,_img,_txtRef,_currentUser,_history) => {
+export const submitDiary = async (_setLoading,_isprivate,_img,_txtRef,_currentUser,_navigate) => {
     const isPrivatePath = () => {
         if (_isprivate){
             return 'diary'
@@ -49,11 +49,11 @@ export const submitDiary = async (_setLoading,_isprivate,_img,_txtRef,_currentUs
             await dataSet('public', diary, diary.id);
             await dataSet(keyLink, diary, diary.id);
             _setLoading(false);
-            _history.push('/');
+            _navigate('/');
         }else{
             await dataSet(keyLink, diary, diary.id);
             _setLoading(false);
-            _history.push('/myDiary');
+            _navigate('/myDiary');
         }
     }catch(err){
         console.log('err',err);

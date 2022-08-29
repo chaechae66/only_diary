@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import CreateDiary from './pages/createDiary';
 import Intro from './pages/intro';
 import Login from './pages/login';

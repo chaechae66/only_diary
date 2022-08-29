@@ -7,7 +7,6 @@ import { getValues } from '../service/firebase/database';
 import styles from './styles/myDiary.module.css';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../service/firebase/emailLogin';
-import { userLogIn } from '../redux/actions/user_action';
 
 const MyDiary = () => {
     const user = useSelector(state => state.user.currentUser,shallowEqual);
@@ -20,16 +19,14 @@ const MyDiary = () => {
     useEffect(() => {
         if(!user){
             onAuthStateChanged(auth, (onlyUser) => {
-                if (onlyUser) {
-                    dispatch(userLogIn(onlyUser));
-                } else {
+                if (!onlyUser) {
                     navigate('/login');
                 }
                 });
         }else{
             return;
         }
-    }, [user,dispatch,navigate]);
+    }, [user,navigate]);
 
     const onhandleUserDiary = useCallback(async () => {
         let isComponentMounted = true

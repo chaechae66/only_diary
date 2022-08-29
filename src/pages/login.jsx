@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router';
 import { logIn } from '../service/firebase/emailLogin';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { userLogIn } from '../redux/actions/user_action';
+import { user_login } from '../store/userSlice';
 
 const Login = () => {
     const [loading,setLoading] = useState(false);
@@ -18,7 +18,7 @@ const Login = () => {
         try{
             setLoading(true);
             const user = await logIn(data.email, data.password);
-            dispatch(userLogIn(user));
+            dispatch(user_login(user));
             navigate('/')
         }catch(err){
             console.log('err',err);

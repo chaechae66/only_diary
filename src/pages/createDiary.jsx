@@ -8,7 +8,6 @@ import default_04 from '../../src/asset/images/diary_default_04.jpg';
 import DiaryTextarea from '../components/diaryTextarea/diaryTextarea';
 import Img from '../components/img/img';
 import ShowDate from '../components/showDate/showDate';
-import { userLogIn } from '../redux/actions/user_action';
 import { auth } from '../service/firebase/emailLogin';
 import styles from './styles/createDiary.module.css';
 import { onAuthStateChanged } from "firebase/auth";
@@ -17,7 +16,7 @@ import createGetImg from '../hooks/createGetImg';
 import { getDate, submitDiary } from '../hooks/submitDiary';
 
 const CreateDiary = () => {
-    const currentUser = useSelector(state => state.user.currentUser, shallowEqual);
+    const currentUser = useSelector(state => state.user.currentUser );
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
@@ -32,14 +31,12 @@ const CreateDiary = () => {
     useEffect(()=>{
         if(!currentUser){
             onAuthStateChanged(auth, (onlyUser) => {
-                if (onlyUser) {
-                    dispatch(userLogIn(onlyUser));
-                } else {
+                if (!onlyUser) {
                     navigate.push('/login');
                 }
             });
         }    
-    },[currentUser,dispatch,navigate]);
+    },[currentUser,navigate]);
 
     const handleImg = (e) => {
         e.preventDefault();

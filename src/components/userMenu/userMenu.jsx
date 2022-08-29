@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { userLogOut } from '../../redux/actions/user_action';
 import { emailLogOut } from '../../service/firebase/emailLogin';
 import { swalAlert } from '../../service/sweetAlert/alert';
 import styles from './userMenu.module.css';
 import basephotoURL from '../../asset/images/diary_default_img.png';
+import { user_logout } from '../../store/userSlice';
 
 const UserMenu = () => {
 
@@ -20,8 +20,8 @@ const UserMenu = () => {
         e.preventDefault();
         swalAlert('success','로그아웃 완료','로그아웃 되었습니다. 다음에 또 뵙겠습니다.');
         emailLogOut();
-        dispatch(userLogOut());
-        navigate('/signUp');
+        dispatch(user_logout());
+        navigate('/');
     }
 
     const userInfo = (e) => {

@@ -5,26 +5,22 @@ import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import LoginBefore from '../../loginBefore/loginBefore';
 import LoginAfter from '../../loginAfter/loginAfter';
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from '../../../service/firebase/emailLogin';
-import { useDispatch, useSelector} from 'react-redux';
-import { userLogIn } from '../../../redux/actions/user_action'
-import { useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
 
 const Top = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const currentUser = useSelector(state => state.user.currentUser);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(userLogIn(user));
-      } else {
-        // navigate('/');
-      }
-    });
-  }, [currentUser,dispatch,navigate]);
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       dispatch(userLogIn(user));
+  //     } else {
+  //       // navigate('/');
+  //     }
+  //   });
+  // }, [currentUser,dispatch,navigate]);
 
   return (
       <div className={styles.wrap}>

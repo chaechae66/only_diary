@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import styles from '../pages/styles/login.module.css';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
-import { logIn } from '../service/firebase/emailLogin';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../service/firebase/emailLogin';
 import { user_login } from '../store/userSlice';
+import { swalAlert } from '../service/sweetAlert/alert';
+import { loginErrorCode } from '../service/sweetAlert/loginErrorCode';
 
 const Login = () => {
     const [loading,setLoading] = useState(false);
@@ -15,16 +18,18 @@ const Login = () => {
     const dispatch = useDispatch();
 
     const onSubmit = async (data) => { 
-        try{
+        signInWithEmailAndPassword(auth,data.email,data.password)
+        .then((userCredential)=>{
             setLoading(true);
-            const user = await logIn(data.email, data.password);
-            dispatch(user_login(user));
-            navigate('/')
-        }catch(err){
-            console.log('err',err);
-        }finally{
+            dispatch(user_login(userCredential.user));
+            navigate('/');
             setLoading(false);
-        }
+        }).catch((e)=>{
+            setLoading(true);
+            const msg = loginErrorCode(e.code);
+            swalAlert('warning','로그인 일치 안함',msg)
+            setLoading(false);
+        })
     }
 
     return (

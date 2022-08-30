@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import styles from '../pages/styles/signUp.module.css'
 import { writeUserData } from '../service/firebase/database';
-import { createdUser, updateUserInfo } from '../service/firebase/emailLogin';
+import { auth, createUserWithEmailAndPassword, updateProfile } from '../service/firebase/emailLogin';
 import { getImgURL } from '../service/firebase/storage';
 import { swalAlert } from '../service/sweetAlert/alert';
+import { signUpErrorCode } from '../service/sweetAlert/signUpErrorCode';
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ const SignUp = () => {
         register,
         handleSubmit,
         watch,
+        reset,
         formState: { errors },
     } = useForm();
 
@@ -25,9 +27,9 @@ const SignUp = () => {
     const onSubmit = async (data) => {
         try {
             setLoading(true)
-            const user = await createdUser(data.email, data.password);
+            const user = await createUserWithEmailAndPassword(auth, data.email, data.password);
             const defaultUrl = await getImgURL("defaultImg/diary_default_baseURL.png");
-            await updateUserInfo(data.name, defaultUrl);
+            await updateProfile(auth.currentUser, data.name, defaultUrl);
             writeUserData(
                 user.user.uid,
                 user.user.displayName,
@@ -36,7 +38,8 @@ const SignUp = () => {
             swalAlert('success','회원가입 완료','Only Diary의 가족이 된 걸 환영합니다. 로그인 되었습니다.');
             navigate('/');
         } catch (err) {
-            console.log('err',err);
+            const msg = signUpErrorCode(err.code);
+            swalAlert('warning','이미 존재함',msg);
         } finally {
             setLoading(false);
         }

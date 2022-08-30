@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { emailLogOut } from '../../service/firebase/emailLogin';
+import { auth } from '../../service/firebase/emailLogin';
 import { swalAlert } from '../../service/sweetAlert/alert';
 import styles from './userMenu.module.css';
 import basephotoURL from '../../asset/images/diary_default_img.png';
@@ -19,7 +19,7 @@ const UserMenu = () => {
     const logOut = (e) => {
         e.preventDefault();
         swalAlert('success','로그아웃 완료','로그아웃 되었습니다. 다음에 또 뵙겠습니다.');
-        emailLogOut();
+        auth.signOut();
         dispatch(user_logout());
         navigate('/');
     }

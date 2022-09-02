@@ -3,20 +3,23 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import Diary from '../components/diary/diary';
-import { getOnePrivateValue } from '../service/firebase/database';
+import { getOneVal } from '../service/firebase/database';
+import Page404 from './page404';
 
 const DiaryCardPage = () => {
     const {id} = useParams();
     const [diary, setDiary] = useState(null);
+    const [error, setError ] = useState(false);
     const currentUser = useSelector(state => state.user.currentUser);
     const navigate = useNavigate();
 
     const handlePrivateDiary = useCallback(async () => {
         try{
-            const diaryInfo = await getOnePrivateValue(currentUser?.uid,id);
+            const diaryInfo = await getOneVal(`diary/${currentUser?.uid}/${id}`);
             setDiary(diaryInfo);
         }catch(err){
             console.log('err',err);
+            err && setError(true);
         }
     },[currentUser,id]);
 
@@ -32,7 +35,10 @@ const DiaryCardPage = () => {
 
     return (
         <div>
-            <Diary diary={diary}/>
+            {
+                error ? <Page404 />   
+                :   <Diary diary={diary}/>
+            }
         </div>
     )
 }

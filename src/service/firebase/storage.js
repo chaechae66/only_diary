@@ -1,7 +1,12 @@
 import app from "./firebaseApp";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 
-const storage = getStorage(app);
+export const storage = getStorage(app);
+
+export {
+  getDownloadURL,
+  ref,
+}
 
 export const getImgURL = (_link) => {
   return new Promise((res,rej) => {

@@ -1,18 +1,21 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import Diary from '../components/diary/diary';
-import { getOnePublicValue } from '../service/firebase/database';
+import { getOneVal } from '../service/firebase/database';
+import Page404 from './page404';
 
 const PublicCardPage = () => {
     const {id} = useParams();
     const [diary, setDiary] = useState(null);
+    const [error,setError] = useState(false);
 
     const handlePrivateDiary = useCallback(async () => {
         try{
-            const diaryInfo = await getOnePublicValue(id);
+            const diaryInfo = await getOneVal(`public/${id}`);
             setDiary(diaryInfo);
         }catch(err){
             console.log('err',err);
+            err && setError(true);
         }
     },[id])
 
@@ -22,7 +25,10 @@ const PublicCardPage = () => {
 
     return (
         <>
-            <Diary diary={diary}/>
+            {
+                error ? <Page404 />
+                : <Diary diary={diary}/>
+            }
         </>
     )
 }

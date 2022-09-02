@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import styles from '../pages/styles/signUp.module.css'
-import { writeUserData } from '../service/firebase/database';
+import { set, ref, db } from '../service/firebase/database';
 import { auth, createUserWithEmailAndPassword, updateProfile } from '../service/firebase/emailLogin';
 import { getImgURL } from '../service/firebase/storage';
 import { swalAlert } from '../service/sweetAlert/alert';
@@ -18,7 +18,6 @@ const SignUp = () => {
         register,
         handleSubmit,
         watch,
-        reset,
         formState: { errors },
     } = useForm();
 
@@ -27,15 +26,17 @@ const SignUp = () => {
     const onSubmit = async (data) => {
         try {
             setLoading(true)
-            const user = await createUserWithEmailAndPassword(auth, data.email, data.password);
+            const { user } = await createUserWithEmailAndPassword(auth, data.email, data.password);
             const defaultUrl = await getImgURL("defaultImg/diary_default_baseURL.png");
-            await updateProfile(auth.currentUser, data.name, defaultUrl);
-            writeUserData(
-                user.user.uid,
-                user.user.displayName,
-                user.user.photoURL
-            );
-            swalAlert('success','회원가입 완료','Only Diary의 가족이 된 걸 환영합니다. 로그인 되었습니다.');
+            await updateProfile(auth.currentUser, {
+                displayName : data.name, 
+                photoURL : defaultUrl,
+            });
+            await set(ref(db, "users/" + user.uid), {
+                name: data.name,
+                photoURL: defaultUrl,
+            });
+            swalAlert('success','회원가입 완료','Only Diary의 가족이 된 걸 환영합니다. 로그인을 해주세요.');
             navigate('/');
         } catch (err) {
             const msg = signUpErrorCode(err.code);

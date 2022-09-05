@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector , shallowEqual } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import default_01 from '../../src/asset/images/diary_default_01.jpg';
 import default_02 from '../../src/asset/images/diary_default_02.jpg';
@@ -8,16 +8,12 @@ import default_04 from '../../src/asset/images/diary_default_04.jpg';
 import DiaryTextarea from '../components/diaryTextarea/diaryTextarea';
 import Img from '../components/img/img';
 import ShowDate from '../components/showDate/showDate';
-import { auth } from '../service/firebase/emailLogin';
 import styles from './styles/createDiary.module.css';
-import { onAuthStateChanged } from "firebase/auth";
-import { useDispatch } from 'react-redux';
 import createGetImg from '../hooks/createGetImg';
 import { getDate, submitDiary } from '../hooks/submitDiary';
 
 const CreateDiary = () => {
     const currentUser = useSelector(state => state.user.currentUser );
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     
     const [baseUrl, setBaseUrl] = useState(default_01);
@@ -28,15 +24,21 @@ const CreateDiary = () => {
     const inputFileRef = useRef(null);
     const txtRef = useRef(null);
 
+    // useEffect(()=>{
+    //     if(!currentUser){
+    //         onAuthStateChanged(auth, (onlyUser) => {
+    //             if (!onlyUser) {
+    //                 navigate.push('/login');
+    //             }
+    //         });
+    //     }    
+    // },[currentUser,navigate]);
+    
     useEffect(()=>{
-        if(!currentUser){
-            onAuthStateChanged(auth, (onlyUser) => {
-                if (!onlyUser) {
-                    navigate.push('/login');
-                }
-            });
-        }    
-    },[currentUser,navigate]);
+        return ()=>{
+            setLoading(false);
+        }
+    },[])
 
     const handleImg = (e) => {
         e.preventDefault();
@@ -55,27 +57,28 @@ const CreateDiary = () => {
         fileReader.readAsDataURL(e.target.files[0]);
         fileReader.onload = function(e) { 
             setBaseUrl(e.target.result);
-          }
+        }
     }
 
     const changePrivate = (e) => {
         e.preventDefault();
-        setIsprivate(!isprivate)
+        setIsprivate(prev => !prev);
     }
 
     const submit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         let img = await createGetImg(isprivate, fileInfo, baseUrl);
-        await submitDiary(setLoading,isprivate,img,txtRef,currentUser,navigate);
+        await submitDiary(isprivate,img,txtRef,currentUser,navigate);
     }
 
     const handleResizeHeight = useCallback(() => {
         if (txtRef === null || txtRef.current === null) {
-          return;
+            return;
         }
         txtRef.current.style.height = '64px';
         txtRef.current.style.height = txtRef.current.scrollHeight + 'px';
-      }, [txtRef]);
+    }, [txtRef]);
 
     useEffect(()=>{
         handleResizeHeight();

@@ -37,38 +37,13 @@ export function getKey(_ref) {
   return push(child(ref(db), _ref)).key
 }
 
-export function dataSet(_ref,_data, _keyLink){
-  return set(ref(db, _ref +"/" + _keyLink ), _data);
+export function saveDB(_ref,_data){
+  return set(ref(db, _ref), _data);
 }
 
-export function writeLikey(_diaryId, _likeyUserUid, _data) {
-  return set(ref(db,"likey/" + _diaryId +"/"+ _likeyUserUid),_data);
-}
-
-export function updateUserLikey(_userUid, _diaryId){
-  const postListRef = ref(db, `users/${_userUid}/likeyDiary/${_diaryId}`);
-  return set(postListRef,{
-    diaryId : _diaryId
-  });
-}
-
-export function writeLikeyEvent(_madeUser, _diaryId, _data) {
-  return set(ref(db,"event/" + _madeUser +'/'+ _diaryId),_data);
-}
-
-export function removeLikeyEvent(_madeUser, _diaryId){
-  const eventRef = ref(db,"event/" + _madeUser +"/"+ _diaryId);
-  return remove(eventRef);
-}
-
-export function removeLikey(_diaryId, _likeyUserUid){
-  const likeyRef = ref(db,"likey/" + _diaryId +"/"+ _likeyUserUid);
-  return remove(likeyRef);
-}
-
-export function removeUserLikey(_diaryId, _likeyUserUid){
-  const likeyRef = ref(db, `users/${_likeyUserUid}/likeyDiary/${_diaryId}`);
-  return remove(likeyRef);
+export function removeDB(_ref){
+  const currentRef = ref(db,_ref);
+  return remove(currentRef);
 }
 
 export const getLikeyValues = (_userUid) => {

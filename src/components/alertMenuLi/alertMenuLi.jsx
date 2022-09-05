@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getValues, removeLikeyEvent } from '../../service/firebase/database';
+import { getValues, removeDB } from '../../service/firebase/database';
 import moment from 'moment';
 import styles from './alertMenuLi.module.css';
 import { Link } from 'react-router-dom';
@@ -21,7 +21,8 @@ const AlertMenuLi = React.memo(() => {
 
     const removeEvent = async (e,_event) => {
         e.preventDefault();
-        await removeLikeyEvent(currentUser.uid,_event.diaryId);
+        await removeDB(`event/${currentUser.uid}/${_event.diaryId}`)
+        // await removeLikeyEvent(currentUser.uid,_event.diaryId);
         const event = await getValues('event',currentUser.uid);
         setEvents(event);
     }

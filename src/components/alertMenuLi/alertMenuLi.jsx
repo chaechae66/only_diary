@@ -22,7 +22,6 @@ const AlertMenuLi = React.memo(() => {
     const removeEvent = async (e,_event) => {
         e.preventDefault();
         await removeDB(`event/${currentUser.uid}/${_event.diaryId}`)
-        // await removeLikeyEvent(currentUser.uid,_event.diaryId);
         const event = await getValues('event',currentUser.uid);
         setEvents(event);
     }

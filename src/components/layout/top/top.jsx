@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from "./top.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
@@ -8,19 +8,7 @@ import LoginAfter from '../../loginAfter/loginAfter';
 import { useSelector } from 'react-redux';
 
 const Top = () => {
-  // const dispatch = useDispatch();
   const currentUser = useSelector(state => state.user.currentUser);
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       dispatch(userLogIn(user));
-  //     } else {
-  //       // navigate('/');
-  //     }
-  //   });
-  // }, [currentUser,dispatch,navigate]);
 
   return (
       <div className={styles.wrap}>

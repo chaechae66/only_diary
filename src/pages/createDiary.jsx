@@ -23,16 +23,6 @@ const CreateDiary = () => {
 
     const inputFileRef = useRef(null);
     const txtRef = useRef(null);
-
-    // useEffect(()=>{
-    //     if(!currentUser){
-    //         onAuthStateChanged(auth, (onlyUser) => {
-    //             if (!onlyUser) {
-    //                 navigate.push('/login');
-    //             }
-    //         });
-    //     }    
-    // },[currentUser,navigate]);
     
     useEffect(()=>{
         return ()=>{

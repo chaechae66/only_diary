@@ -6,7 +6,7 @@ import Txt from '../txt/txt';
 import styles from './diary.module.css'
 import { useNavigate } from 'react-router';
 import Likey from '../likey/likey';
-import { swalAlert } from '../../service/sweetAlert/alert';
+import { swalAlert } from '../../lib/service/sweetAlert/alert';
 
 const Diary = ({ diary }) => {
     const currentUser = useSelector(state => state.user.currentUser);

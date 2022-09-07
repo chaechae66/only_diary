@@ -2,7 +2,7 @@ import React from 'react';
 import SlideBanner from '../components/slideBanner/slideBanner';
 import styles from './styles/intro.module.css'
 import DiaryList from '../components/diaryList/diaryList'
-import useFetch from '../hooks/useFetch';
+import useFetch from '../lib/hooks/useFetch';
 
 const Intro = () => {
     const diaryList = useFetch("public");

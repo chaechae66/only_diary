@@ -5,8 +5,8 @@ import DiaryList from '../components/diaryList/diaryList';
 import NoDiary from '../components/noDiary/noDiary';
 import styles from './styles/myDiary.module.css';
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from '../service/firebase/emailLogin';
-import useFetch from '../hooks/useFetch';
+import { auth } from '../lib/service/firebase/emailLogin';
+import useFetch from '../lib/hooks/useFetch';
 
 const MyDiary = () => {
     const user = useSelector(state => state.user.currentUser,shallowEqual);

@@ -9,8 +9,8 @@ import DiaryTextarea from '../components/diaryTextarea/diaryTextarea';
 import Img from '../components/img/img';
 import ShowDate from '../components/showDate/showDate';
 import styles from './styles/createDiary.module.css';
-import createGetImg from '../hooks/createGetImg';
-import { getDate, submitDiary } from '../hooks/submitDiary';
+import createGetImg from '../lib/api/createGetImg';
+import { getDate, submitDiary } from '../lib/api/submitDiary';
 
 const CreateDiary = () => {
     const currentUser = useSelector(state => state.user.currentUser );

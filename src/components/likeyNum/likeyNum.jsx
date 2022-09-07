@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getLikeyLength } from '../../service/firebase/database';
+import { getLikeyLength } from '../../lib/service/firebase/database';
 
 const LikeyNum = ({ diaryId, isLikey }) => {
     const [likeyNum, setLikeyNum] = useState(0);

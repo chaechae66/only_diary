@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import Diary from '../components/diary/diary';
-import { getOneVal } from '../service/firebase/database';
+import { getOneVal } from '../lib/service/firebase/database';
 import Page404 from './page404';
 
 const DiaryCardPage = () => {

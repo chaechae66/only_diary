@@ -3,11 +3,11 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import styles from '../pages/styles/signUp.module.css'
-import { set, ref, db } from '../service/firebase/database';
-import { auth, createUserWithEmailAndPassword, updateProfile } from '../service/firebase/emailLogin';
-import { getImgURL } from '../service/firebase/storage';
-import { swalAlert } from '../service/sweetAlert/alert';
-import { signUpErrorCode } from '../service/sweetAlert/signUpErrorCode';
+import { set, ref, db } from '../lib/service/firebase/database';
+import { auth, createUserWithEmailAndPassword, updateProfile } from '../lib/service/firebase/emailLogin';
+import { getImgURL } from '../lib/service/firebase/storage';
+import { swalAlert } from '../lib/service/sweetAlert/alert';
+import { signUpErrorCode } from '../lib/service/sweetAlert/signUpErrorCode';
 
 const SignUp = () => {
     const navigate = useNavigate();

@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../service/firebase/emailLogin';
+import { auth } from '../lib/service/firebase/emailLogin';
 import { user_login } from '../store/userSlice';
-import { swalAlert } from '../service/sweetAlert/alert';
-import { loginErrorCode } from '../service/sweetAlert/loginErrorCode';
+import { swalAlert } from '../lib/service/sweetAlert/alert';
+import { loginErrorCode } from '../lib/service/sweetAlert/loginErrorCode';
 
 const Login = () => {
     const [loading,setLoading] = useState(false);

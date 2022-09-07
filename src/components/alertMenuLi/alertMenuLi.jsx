@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getValues, removeDB } from '../../service/firebase/database';
 import moment from 'moment';
 import styles from './alertMenuLi.module.css';
 import { Link } from 'react-router-dom';
+import { getValues, removeDB } from '../../lib/service/firebase/database';
 
 const AlertMenuLi = React.memo(() => {
     const currentUser = useSelector(state => state.user.currentUser);

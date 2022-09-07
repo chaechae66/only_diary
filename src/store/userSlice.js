@@ -17,9 +17,13 @@ export const userSlice = createSlice({
         state.currentUser = null;
         state.isLoading = true;
     },
+        update_photo: (state,action) => {
+        state.currentUser.photoURL = action.payload;
+        state.isLoading = true;
+        }
     },
 })
 
-export const { user_login, user_logout } = userSlice.actions
+export const { user_login, user_logout, update_photo } = userSlice.actions
 
 export default userSlice.reducer

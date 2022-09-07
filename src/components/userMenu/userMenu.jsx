@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { auth } from '../../lib/service/firebase/emailLogin';
+import { auth, updateProfile } from '../../lib/service/firebase/emailLogin';
 import { swalAlert } from '../../lib/service/sweetAlert/alert';
 import styles from './userMenu.module.css';
 import basephotoURL from '../../asset/images/diary_default_img.png';
-import { user_logout } from '../../store/userSlice';
+import { update_photo, user_logout } from '../../store/userSlice';
+import { v4 } from 'uuid';
+import { getOtherImgUrl } from '../../lib/service/firebase/storage';
+import { saveDB } from '../../lib/service/firebase/database';
 
 const UserMenu = () => {
 
     const currentUser = useSelector(state => state.user.currentUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const inputFileRef = useRef(null);
 
     const [isShow, setIsShow] = useState("none");
 
@@ -26,7 +30,25 @@ const UserMenu = () => {
 
     const userInfo = (e) => {
         e.preventDefault();
-        swalAlert('info','안내','준비 중입니다. 좀 더 멋진 모습으로 뵙겠습니다.');
+        inputFileRef.current.click();
+    }
+
+    const updateImg = async (_file,_type) => {
+        let filePath = `photoURL/${currentUser.uid}/${v4()}.${_type}`
+        const url = await getOtherImgUrl(filePath,_file);
+        return url
+    }
+
+    const changeImg = async (e) => {
+        e.preventDefault();
+        const file = e.target.files[0];
+        let fileType = file.type.slice(6);
+        const url = await updateImg(file,fileType);
+        await updateProfile(auth.currentUser, {
+            photoURL : url,
+        })
+        dispatch(update_photo(url));
+        await saveDB(`users/${currentUser.uid}/photoURL`,url);
     }
 
     return (
@@ -40,6 +62,13 @@ const UserMenu = () => {
             src={currentUser.photoURL || basephotoURL}
             alt="프로필사진"
             />
+            <input 
+                ref={inputFileRef} 
+                type="file" 
+                accept="image/jpeg, image/png" 
+                style={{display:'none'}}
+                onChange={changeImg}
+            />
             <ul className={styles.submenu} style={{display:isShow}}>
             <li className={styles.profileList}>
                 <div className={styles.profile}>
@@ -50,7 +79,7 @@ const UserMenu = () => {
                 </div>
                 </div>
                 <div className={styles.btnGroup}>
-                <button className={styles.infoBtn} onClick={userInfo}>정보수정</button>
+                <button className={styles.infoBtn} onClick={userInfo}>프로필수정</button>
                 <button className={styles.logOutBtn} onClick={logOut}>로그아웃</button>
                 </div>
             </li>

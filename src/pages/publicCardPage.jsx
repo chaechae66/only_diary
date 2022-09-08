@@ -23,6 +23,8 @@ const PublicCardPage = () => {
         handlePrivateDiary();
     },[id,handlePrivateDiary])
 
+    console.log('diary',diary);
+
     return (
         <>
             {

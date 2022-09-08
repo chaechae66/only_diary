@@ -20,8 +20,11 @@ function UpdateDiary() {
     const currentUser = useSelector(state => state.user.currentUser );
     const navigate = useNavigate();
 
+    console.log("img",diary.img);
+    console.log("id",diary.id);
+
     const [imgURL, setImgURL] = useState(diary.img);
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState(diary.img);
     const [loading, setLoading] = useState(false);
 
     const txtRef = useRef(null);
@@ -46,7 +49,8 @@ function UpdateDiary() {
     const submit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        let img = await createGetImg(diary.isprivate, file, imgURL);
+        const isGet = imgURL.includes('https://firebasestorage.googleapis.com');
+        let img = !isGet? await createGetImg(diary.isprivate, file, imgURL) : imgURL;
         await submitDiary(diary.isprivate,img,txtRef,currentUser,navigate,diary.id);
     }
 

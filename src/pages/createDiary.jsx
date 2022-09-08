@@ -22,6 +22,8 @@ const CreateDiary = () => {
     const [fileInfo , setFileInfo] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    console.log('baseURL',baseUrl);
+
     const txtRef = useRef(null);
     
     useEffect(()=>{
@@ -48,6 +50,7 @@ const CreateDiary = () => {
     }
 
     const getImg = (img) =>{
+        console.log('img',img);
         setBaseUrl(img);
     }
 

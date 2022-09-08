@@ -16,21 +16,27 @@ export const getDate = () => {
     return dateString
 }
 
-export const submitDiary = async (_isprivate,_img,_txtRef,_currentUser,_navigate) => {
+export const submitDiary = async (_isprivate,_img,_txtRef,_currentUser,_navigate, ..._diaryID) => {
+
+    const isUpdate = () => {
+        const isprivate = _isprivate? 'diary' : 'public'
+        return !_diaryID? getKey(isprivate) : _diaryID;
+    } 
+
     let diary = {
         isprivate : _isprivate,
         date : getDate(),
         img : _img,
         txt : _txtRef.current.value,
-        id : getKey(
-            _isprivate? 'diary' : 'public'
-        ),
+        id : isUpdate(),
         createUser : {
             uid : _currentUser.uid,
             name : _currentUser.displayName,
             photoURL : _currentUser.photoURL,
         }
     }
+    console.log('diary',diary);
+
     try{
         if(!_txtRef.current.value){
             swalAlert('error','일기전송 오류','일기 본문을 채워주세요.');
@@ -39,7 +45,7 @@ export const submitDiary = async (_isprivate,_img,_txtRef,_currentUser,_navigate
         let keyLink = `diary/${_currentUser.uid}`
         if(!_isprivate){
             await saveDB(`public/${diary.id}`,diary);
-            await saveDB(`${keyLink}/${diary.id}`,diary);
+            await saveDB(`${keyLink}/${diary.id}/`,diary);
             _navigate('/');
         }else{
             await saveDB(`${keyLink}/${diary.id}`,diary);

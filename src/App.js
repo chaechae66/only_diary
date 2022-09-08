@@ -8,6 +8,7 @@ import SignUp from './pages/signUp';
 import PublicCardPage from './pages/publicCardPage';
 import Page404 from './pages/page404';
 import Layout from './components/layout/Layout';
+import UpdateDiary from './pages/updateDiary';
 
 export const PATHS = {
   intro: '/',
@@ -17,6 +18,7 @@ export const PATHS = {
   myDiary : '/mydiary',
   diaryCardPage : '/diarycardpage',
   publicCardPage : '/public',
+  updateDiary : 'update',
 }
 
 function App() {
@@ -33,6 +35,9 @@ function App() {
           </Route>
           <Route path={PATHS.publicCardPage}>
             <Route path={`${PATHS.publicCardPage}/:id`}  element={<PublicCardPage />} />
+          </Route>
+          <Route path={PATHS.updateDiary}>
+            <Route path=':id' element={<UpdateDiary />} />
           </Route>
         <Route path='*' element={<Page404 />} />
       </Route>

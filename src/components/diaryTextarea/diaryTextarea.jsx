@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import styles from './diaryTextarea.module.css';
 
-const DiaryTextarea = ({defaultValue,changeTxt, handleResizeHeight}, txtRef) => {
+const DiaryTextarea = ({defaultValue,changeTxt}, txtRef) => {
 
     const handleTxt = (e) => {
         e.preventDefault();
@@ -9,21 +9,27 @@ const DiaryTextarea = ({defaultValue,changeTxt, handleResizeHeight}, txtRef) => 
         changeTxt(currentTxt);
     }
 
-    const handleHeight = () => {
-        handleResizeHeight();
-    }
+    const handleResizeHeight = useCallback(() => {
+        if (txtRef === null || txtRef.current === null) {
+            return;
+        }
+        txtRef.current.style.height = '64px';
+        txtRef.current.style.height = txtRef.current.scrollHeight + 'px';
+    }, [txtRef]);
 
     return (
-        <textarea 
+        <div>
+            <textarea 
             placeholder="당신의 이야기를 적어주세요" 
             onChange={(e)=>{
                 handleTxt(e)
-                handleHeight()
+                handleResizeHeight()
             }} 
             className={styles.inputTxt}
             ref={txtRef}
             defaultValue={defaultValue}
         />
+        </div>
     )
 }
 

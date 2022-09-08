@@ -7,6 +7,7 @@ import styles from './diary.module.css'
 import { useNavigate } from 'react-router';
 import Likey from '../likey/likey';
 import { swalAlert } from '../../lib/service/sweetAlert/alert';
+import { Link } from 'react-router-dom';
 
 const Diary = ({ diary }) => {
     const currentUser = useSelector(state => state.user.currentUser);
@@ -17,6 +18,17 @@ const Diary = ({ diary }) => {
     const goToBack = (e) => {
         e.preventDefault();
         navigate(-1);
+    }
+
+    const goToUpdate = (e) => {
+        e.preventDefault();
+        navigate(`/update/${diary.id}`,  
+            {
+                state : {
+                    diary : diary,
+                }
+            }
+        )
     }
 
     const alertBtn = (e) => {
@@ -41,7 +53,7 @@ const Diary = ({ diary }) => {
                                     <div className={styles.btnGroup}>
                                         <button 
                                             className={styles.editBtn}
-                                            onClick={alertBtn}
+                                            onClick={goToUpdate}
                                         >수정</button>
                                         <button 
                                             className={styles.delBtn}

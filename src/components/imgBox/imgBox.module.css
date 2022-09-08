@@ -1,0 +1,27 @@
+.imgBox{
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.defaultImgBox{
+    display: flex;
+    width: 28rem;
+    justify-content: space-between;
+}
+
+.defaultImg{
+    width: 6rem;
+    height: 6rem;
+    border-radius: 10px;
+}
+
+.ImgBtn{
+    padding: 0.9rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    background-color: rgb(250, 140, 107);
+    color:#fff;
+}

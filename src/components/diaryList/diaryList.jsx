@@ -3,7 +3,6 @@ import styles from './diaryList.module.css';
 import DiaryCard from '../diaryCard/diaryCard';
 
 const DiaryList = ({myDiary, diaryList}) => {
-    console.log('diaryList',diaryList);
     return (
         <ul className={styles.diaryList}>
             {diaryList?.map(diary=>{

@@ -18,7 +18,7 @@ export const PATHS = {
   myDiary : '/mydiary',
   diaryCardPage : '/diarycardpage',
   publicCardPage : '/public',
-  updateDiary : 'update',
+  updateDiary : '/update',
 }
 
 function App() {

@@ -7,7 +7,7 @@ import styles from './diary.module.css'
 import { useNavigate } from 'react-router';
 import Likey from '../likey/likey';
 import { swalAlert } from '../../lib/service/sweetAlert/alert';
-import { Link } from 'react-router-dom';
+import { removeDB } from '../../lib/service/firebase/database';
 
 const Diary = ({ diary }) => {
     const currentUser = useSelector(state => state.user.currentUser);
@@ -31,9 +31,19 @@ const Diary = ({ diary }) => {
         )
     }
 
-    const alertBtn = (e) => {
+    const alertBtn = async (e) => {
         e.preventDefault();
-        swalAlert('info','안내','준비 중입니다. 좀 더 멋진 모습으로 뵙겠습니다.');
+        console.log('isPrivate',diary.isprivate);
+        if(diary.isPrivate) {
+            console.log('bol',diary.isPrivate);
+            await removeDB(`diary/${currentUser.uid}/${diary.id}`);
+            navigate('/myDiary');
+        }else{ 
+            await removeDB(`diary/${currentUser.uid}/${diary.id}`);
+            await removeDB(`public/${diary.id}`);
+            navigate('/');
+        }
+        swalAlert('success','삭제완료','다이어리 삭제가 완료되었습니다.')
     }
 
     useEffect(()=>{

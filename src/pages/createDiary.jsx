@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import default_01 from '../../src/asset/images/diary_default_01.jpg';
@@ -22,8 +22,6 @@ const CreateDiary = () => {
     const [fileInfo , setFileInfo] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    console.log('baseURL',baseUrl);
-
     const txtRef = useRef(null);
     
     useEffect(()=>{
@@ -42,7 +40,6 @@ const CreateDiary = () => {
         setLoading(true);
         let img = await createGetImg(isprivate, fileInfo, baseUrl);
         await submitDiary(isprivate,img,txtRef,currentUser,navigate);
-        console.log('all', isprivate,img,txtRef,currentUser);
     }
 
     const changeTxt = (_changingTxt) => {
@@ -50,7 +47,6 @@ const CreateDiary = () => {
     }
 
     const getImg = (img) =>{
-        console.log('img',img);
         setBaseUrl(img);
     }
 

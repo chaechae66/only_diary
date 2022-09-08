@@ -20,9 +20,10 @@ export const submitDiary = async (_isprivate,_img,_txtRef,_currentUser,_navigate
 
     const isUpdate = () => {
         const isprivate = _isprivate? 'diary' : 'public'
-        console.log('diaryID',_diaryID);
         return Array.isArray(_diaryID) && _diaryID.length === 0? getKey(isprivate) : _diaryID;
     } 
+
+    console.log("key",isUpdate());
 
     let diary = {
         isprivate : _isprivate,
@@ -36,7 +37,6 @@ export const submitDiary = async (_isprivate,_img,_txtRef,_currentUser,_navigate
             photoURL : _currentUser.photoURL,
         }
     }
-    console.log('diary',diary);
 
     try{
         if(!_txtRef.current.value){

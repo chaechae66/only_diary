@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 const LoginBefore = () => {
     return (
         <div className={styles.user}>
-            <Link to="/signUp">
+            <Link to="signup">
               <span className={styles.signIn}>
                 회원가입
               </span>
             </Link>
-            <Link to="/login">
+            <Link to="login">
               <span className={styles.login}>
                 로그인
               </span>

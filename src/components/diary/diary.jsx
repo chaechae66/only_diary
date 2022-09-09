@@ -4,24 +4,44 @@ import Img from '../img/img';
 import ShowDate from '../showDate/showDate';
 import Txt from '../txt/txt';
 import styles from './diary.module.css'
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import Likey from '../likey/likey';
-import { swalAlert } from '../../service/sweetAlert/alert';
+import { swalAlert } from '../../lib/service/sweetAlert/alert';
+import { removeDB } from '../../lib/service/firebase/database';
 
 const Diary = ({ diary }) => {
     const currentUser = useSelector(state => state.user.currentUser);
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
 
     const goToBack = (e) => {
         e.preventDefault();
-        history.goBack(1);
+        navigate(-1);
     }
 
-    const alertBtn = (e) => {
+    const goToUpdate = (e) => {
         e.preventDefault();
-        swalAlert('info','안내','준비 중입니다. 좀 더 멋진 모습으로 뵙겠습니다.');
+        navigate(`/update/${diary.id}`,  
+            {
+                state : {
+                    diary : diary,
+                }
+            }
+        )
+    }
+
+    const alertBtn = async (e) => {
+        e.preventDefault();
+        if(diary.isPrivate) {
+            await removeDB(`diary/${currentUser.uid}/${diary.id}`);
+            navigate(`/${currentUser.uid}`);
+        }else{ 
+            await removeDB(`diary/${currentUser.uid}/${diary.id}`);
+            await removeDB(`public/${diary.id}`);
+            navigate('/');
+        }
+        swalAlert('success','삭제완료','다이어리 삭제가 완료되었습니다.')
     }
 
     useEffect(()=>{
@@ -41,7 +61,7 @@ const Diary = ({ diary }) => {
                                     <div className={styles.btnGroup}>
                                         <button 
                                             className={styles.editBtn}
-                                            onClick={alertBtn}
+                                            onClick={goToUpdate}
                                         >수정</button>
                                         <button 
                                             className={styles.delBtn}

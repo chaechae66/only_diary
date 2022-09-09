@@ -1,35 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from "./top.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import LoginBefore from '../../loginBefore/loginBefore';
 import LoginAfter from '../../loginAfter/loginAfter';
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from '../../../service/firebase/emailLogin';
-import { useDispatch } from 'react-redux';
-import { userLogIn } from '../../../redux/actions/user_action'
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router';
 
 const Top = () => {
-  const dispatch = useDispatch();
   const currentUser = useSelector(state => state.user.currentUser);
-  const history = useHistory();
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(userLogIn(user));
-      } else {
-        history.push('/');
-      }
-    });
-  }, [currentUser,dispatch,history]);
 
   return (
       <div className={styles.wrap}>
-        <header className={styles.header}>
+        <div className={styles.header}>
           <Link to="/">
             <h1 className={styles.logo}>
               <FontAwesomeIcon icon={faPaintBrush} size="sm" color="#fc8b79" />
@@ -42,7 +25,7 @@ const Top = () => {
             :
             <LoginBefore />
           }
-        </header>
+        </div>
       </div>
   )
 }

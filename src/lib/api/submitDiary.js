@@ -1,4 +1,4 @@
-import { dataSet, getKey } from "../service/firebase/database";
+import { getKey, saveDB } from "../service/firebase/database";
 import { swalAlert } from "../service/sweetAlert/alert";
 
 export const getDate = () => {
@@ -16,44 +16,39 @@ export const getDate = () => {
     return dateString
 }
 
-export const submitDiary = async (_setLoading,_isprivate,_img,_txtRef,_currentUser,_history) => {
-    const isPrivatePath = () => {
-        if (_isprivate){
-            return 'diary'
-        }else {
-            return 'public'
-        }
-    }
+export const submitDiary = async (_isprivate,_img,_txtRef,_currentUser,_navigate, ..._diaryID) => {
 
-    _setLoading(true);
+    const isUpdate = () => {
+        const isprivate = _isprivate? 'diary' : 'public'
+        return !_diaryID[0]? getKey(isprivate) : _diaryID[0];
+    } 
+    
     let diary = {
         isprivate : _isprivate,
         date : getDate(),
         img : _img,
         txt : _txtRef.current.value,
-        id : getKey(isPrivatePath()),
+        id : isUpdate(),
         createUser : {
             uid : _currentUser.uid,
             name : _currentUser.displayName,
             photoURL : _currentUser.photoURL,
         }
     }
+
     try{
         if(!_txtRef.current.value){
             swalAlert('error','일기전송 오류','일기 본문을 채워주세요.');
-            _setLoading(false);
             throw new Error();
         }
         let keyLink = `diary/${_currentUser.uid}`
         if(!_isprivate){
-            await dataSet('public', diary, diary.id);
-            await dataSet(keyLink, diary, diary.id);
-            _setLoading(false);
-            _history.push('/');
+            await saveDB(`public/${diary.id}`,diary);
+            await saveDB(`${keyLink}/${diary.id}/`,diary);
+            _navigate('/');
         }else{
-            await dataSet(keyLink, diary, diary.id);
-            _setLoading(false);
-            _history.push('/myDiary');
+            await saveDB(`${keyLink}/${diary.id}`,diary);
+            _navigate(`/${_currentUser.uid}`);
         }
     }catch(err){
         console.log('err',err);

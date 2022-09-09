@@ -23,40 +23,13 @@
     margin: 6rem auto 9rem;
 }
 
-.imgBox{
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.defaultImgBox{
-    display: flex;
-    width: 28rem;
-    justify-content: space-between;
-}
-
-.defaultImg{
-    width: 6rem;
-    height: 6rem;
-    border-radius: 10px;
-}
-
-.ImgBtn{
-    padding: 0.9rem 1.5rem;
-    border-radius: 10px;
-    font-size: 1.6rem;
-    font-weight: 600;
-    background-color: rgb(250, 140, 107);
-    color:#fff;
-}
-
 .option{
     font-size: 1.5rem;
     display: flex;
     justify-content: space-between;
     margin-top: 3rem;
     color:#777;
+    margin-bottom: 3rem;
 }
 
 .publicOption{
@@ -108,10 +81,6 @@
     background-color: #fff;
     border-radius: 50%;
     border: 1px solid #f1f1f1;
-}
-
-.txt{
-    margin-top: 3rem;
 }
 
 .upload{

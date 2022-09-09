@@ -2,16 +2,16 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons';
-import { swalAlert } from '../../service/sweetAlert/alert';
-import { getLikeyValues, removeLikey, removeLikeyEvent, removeUserLikey, timeStamp, updateUserLikey, writeLikey, writeLikeyEvent } from '../../service/firebase/database';
-import { useHistory } from 'react-router';
+import { swalAlert } from '../../lib/service/sweetAlert/alert';
+import { getLikeyValues, removeDB, saveDB, timeStamp } from '../../lib/service/firebase/database';
+import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import LikeyNum from '../likeyNum/likeyNum';
 
 const Likey = ({ diaryId, madeUserID }) => {
     const [isLikey, setIsLikey] = useState(false);
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const currentUser = useSelector(state => state.user.currentUser);
 
     const handleLikey = useCallback(async (_userUid) => {
@@ -25,13 +25,16 @@ const Likey = ({ diaryId, madeUserID }) => {
         }else{
             setIsLikey(false);
         }
+        return () => {
+            setIsLikey(false);
+        }
     },[currentUser,diaryId,handleLikey]);
 
-    const isLikeyBtn = (e) => {
+    const isLikeyBtn = async (e) => {
         e.preventDefault();
         if(!currentUser){
             swalAlert('warning','로그인 필요','좋아요 기능은 로그인 후 이용 바랍니다.');
-            history.push('/login');
+            navigate('/login');
         }else{
             setIsLikey(!isLikey);
             let likeyData = {
@@ -54,38 +57,21 @@ const Likey = ({ diaryId, madeUserID }) => {
                 timeStamp : timeStamp,
             }
             if(!isLikey){
-                writeLikeyFuc(diaryId,currentUser.uid,likeyData);
-                wrtieLikeyEventFuc(madeUserID,diaryId,likeyEventData);
+                let IDdata = {
+                    diaryId,
+                }
+                await saveDB(`likey/${diaryId}/${currentUser.uid}`,likeyData);
+                await saveDB(`users/${currentUser.uid}/likeyDiary/${diaryId}`,IDdata);
+                if(currentUser.uid !== madeUserID){
+                    await saveDB(`event/${madeUserID}/${diaryId}`,likeyEventData)
+                }
             }else{
-                delLikeyFuc(diaryId,currentUser.uid);
-                delLikeyEventFuc(madeUserID, diaryId);
+                await removeDB(`likey/${diaryId}/${madeUserID}`)
+                await removeDB(`users/${currentUser.uid}/likeyDiary/${diaryId}`)
+                if(currentUser.uid !== madeUserID){
+                    await removeDB(`event/${madeUserID}/${diaryId}`)
+                }
             }
-        }
-    }
-
-    const writeLikeyFuc = async (_diaryId, _currentUserUid, _data) => {
-        await writeLikey(_diaryId, _currentUserUid, _data);
-        await updateUserLikey(_currentUserUid,_diaryId);
-    }
-
-    const delLikeyFuc = async (_diaryId, _currentUserUid) => {
-        await removeLikey(_diaryId, _currentUserUid);
-        await removeUserLikey(_diaryId, _currentUserUid);
-    }
-
-    const wrtieLikeyEventFuc = async (_madeUserId, _diaryId ,_data) => {
-        if(currentUser.uid !== _madeUserId){
-            await writeLikeyEvent(_madeUserId, _diaryId, _data);
-        }else{
-            return;
-        }
-    }
-
-    const delLikeyEventFuc = async (_madeUser, _diaryId) => {
-        if(currentUser.uid !== _madeUser){
-            await removeLikeyEvent(_madeUser, _diaryId);
-        }else{
-            return;
         }
     }
 

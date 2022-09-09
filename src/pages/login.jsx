@@ -1,30 +1,35 @@
 import React, { useState } from 'react';
 import styles from '../pages/styles/login.module.css';
 import { useForm } from "react-hook-form";
-import { useHistory } from 'react-router';
-import { logIn } from '../service/firebase/emailLogin';
+import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { userLogIn } from '../redux/actions/user_action';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../lib/service/firebase/emailLogin';
+import { user_login } from '../store/userSlice';
+import { swalAlert } from '../lib/service/sweetAlert/alert';
+import { loginErrorCode } from '../lib/service/sweetAlert/loginErrorCode';
 
 const Login = () => {
     const [loading,setLoading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const onSubmit = async (data) => { 
-        try{
+        signInWithEmailAndPassword(auth,data.email,data.password)
+        .then((userCredential)=>{
             setLoading(true);
-            const user = await logIn(data.email, data.password);
-            dispatch(userLogIn(user));
-            history.push('/')
-        }catch(err){
-            console.log('err',err);
-        }finally{
+            dispatch(user_login(userCredential.user));
+            navigate('/');
             setLoading(false);
-        }
+        }).catch((e)=>{
+            setLoading(true);
+            const msg = loginErrorCode(e.code);
+            swalAlert('warning','로그인 일치 안함',msg)
+            setLoading(false);
+        })
     }
 
     return (
@@ -53,7 +58,7 @@ const Login = () => {
                         로그인
                     </button>
                 </form>
-                <Link to="/signUp">
+                <Link to="/signup">
                     <p className={styles.signUp}>
                         아이디가 없다면...
                     </p>

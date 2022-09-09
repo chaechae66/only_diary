@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getValues, removeLikeyEvent } from '../../service/firebase/database';
 import moment from 'moment';
 import styles from './alertMenuLi.module.css';
 import { Link } from 'react-router-dom';
+import { getValues, removeDB } from '../../lib/service/firebase/database';
 
 const AlertMenuLi = React.memo(() => {
     const currentUser = useSelector(state => state.user.currentUser);
@@ -21,7 +21,7 @@ const AlertMenuLi = React.memo(() => {
 
     const removeEvent = async (e,_event) => {
         e.preventDefault();
-        await removeLikeyEvent(currentUser.uid,_event.diaryId);
+        await removeDB(`event/${currentUser.uid}/${_event.diaryId}`)
         const event = await getValues('event',currentUser.uid);
         setEvents(event);
     }
@@ -37,7 +37,7 @@ const AlertMenuLi = React.memo(() => {
                             onClick={(e)=>{removeEvent(e,event)}}
                         >
                             <Link 
-                                to={{ pathname : `/publicCardPage/${event.diaryId}`}}>
+                                to={{ pathname : `/public/${event.diaryId}`}}>
                                 <div>
                                     {event.likeyUser.name}님이 회원님의 다이어리에 좋아요를 눌렀습니다!<br />
                                     <span className={styles.timeStamp}>{moment(event.timeStamp).fromNow()}</span>

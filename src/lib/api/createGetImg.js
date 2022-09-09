@@ -4,9 +4,9 @@ import { v4 } from 'uuid';
 export default function createGetImg(_isprivate, _fileInfo, _baseUrl){    
     const getPath = () => {
         if (_isprivate) {
-          return `/diary/private`;
+            return `/diary/private`;
         } else {
-          return `/diary/public`;
+            return `/diary/public`;
         }
     };
     

@@ -1,113 +1,62 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useSelector , shallowEqual } from 'react-redux';
-import { useHistory } from 'react-router';
-import default_01 from '../../src/images/diary_default_01.jpg';
-import default_02 from '../../src/images/diary_default_02.jpg';
-import default_03 from '../../src/images/diary_default_03.jpg';
-import default_04 from '../../src/images/diary_default_04.jpg';
+import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import default_01 from '../../src/asset/images/diary_default_01.jpg';
+import default_02 from '../../src/asset/images/diary_default_02.jpg';
+import default_03 from '../../src/asset/images/diary_default_03.jpg';
+import default_04 from '../../src/asset/images/diary_default_04.jpg';
 import DiaryTextarea from '../components/diaryTextarea/diaryTextarea';
 import Img from '../components/img/img';
 import ShowDate from '../components/showDate/showDate';
-import { userLogIn } from '../redux/actions/user_action';
-import { auth } from '../service/firebase/emailLogin';
 import styles from './styles/createDiary.module.css';
-import { onAuthStateChanged } from "firebase/auth";
-import { useDispatch } from 'react-redux';
-import createGetImg from '../hooks/createGetImg';
-import { getDate, submitDiary } from '../hooks/submitDiary';
+import createGetImg from '../lib/api/createGetImg';
+import { getDate, submitDiary } from '../lib/api/submitDiary';
+import ImgBox from '../components/imgBox/imgBox';
 
 const CreateDiary = () => {
-    const currentUser = useSelector(state => state.user.currentUser, shallowEqual);
-    const dispatch = useDispatch();
-    const history = useHistory();
+    const currentUser = useSelector(state => state.user.currentUser );
+    const navigate = useNavigate();
     
     const [baseUrl, setBaseUrl] = useState(default_01);
     const [isprivate,setIsprivate] = useState(false);
     const [fileInfo , setFileInfo] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const inputFileRef = useRef(null);
     const txtRef = useRef(null);
-
+    
     useEffect(()=>{
-        if(!currentUser){
-            onAuthStateChanged(auth, (onlyUser) => {
-                if (onlyUser) {
-                  dispatch(userLogIn(onlyUser));
-                } else {
-                  history.push('/login');
-                }
-            });
-        }    
-    },[currentUser,dispatch,history]);
-
-    const handleImg = (e) => {
-        e.preventDefault();
-        setBaseUrl(e.target.getAttribute("src"));
-    }
-
-    const previewImg = (e) => {
-        e.preventDefault();
-        inputFileRef.current.click();
-    }
-
-    const changeImg = (e) => {
-        e.preventDefault();
-        const fileReader = new FileReader();
-        setFileInfo(e.target.files[0]);
-        fileReader.readAsDataURL(e.target.files[0]);
-        fileReader.onload = function(e) { 
-            setBaseUrl(e.target.result);
-          }
-    }
+        return ()=>{
+            setLoading(false);
+        }
+    },[])
 
     const changePrivate = (e) => {
         e.preventDefault();
-        setIsprivate(!isprivate)
+        setIsprivate(prev => !prev);
     }
 
     const submit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         let img = await createGetImg(isprivate, fileInfo, baseUrl);
-        await submitDiary(setLoading,isprivate,img,txtRef,currentUser,history);
+        await submitDiary(isprivate,img,txtRef,currentUser,navigate);
     }
-
-    const handleResizeHeight = useCallback(() => {
-        if (txtRef === null || txtRef.current === null) {
-          return;
-        }
-        txtRef.current.style.height = '64px';
-        txtRef.current.style.height = txtRef.current.scrollHeight + 'px';
-      }, [txtRef]);
-
-    useEffect(()=>{
-        handleResizeHeight();
-    },[handleResizeHeight]);
 
     const changeTxt = (_changingTxt) => {
         txtRef.current.value = _changingTxt;   
     }
 
+    const getImg = (img) =>{
+        setBaseUrl(img);
+    }
+
+    const getFile = (file) =>{
+        setFileInfo(file);
+    }
+
     return(
         <section className={styles.wrap}>
-            <div className={styles.imgBox}>
-                <div className={styles.defaultImgBox}>
-                    <img onClick={handleImg} className={styles.defaultImg} src={default_01} alt="기본제공이미지01" />
-                    <img onClick={handleImg} className={styles.defaultImg} src={default_02} alt="기본제공이미지02" />
-                    <img onClick={handleImg} className={styles.defaultImg} src={default_03} alt="기본제공이미지03" />
-                    <img onClick={handleImg} className={styles.defaultImg} src={default_04} alt="기본제공이미지04" />
-                </div>
-                <button className={styles.ImgBtn} onClick={previewImg}>
-                    이미지업로드
-                </button>
-                <input 
-                ref={inputFileRef} 
-                type="file" 
-                accept="image/*" 
-                style={{display:'none'}}
-                onChange={changeImg}
-                />
-            </div>   
+            <ImgBox getImg={getImg} getFile={getFile} />   
             <Img baseUrl={baseUrl} />
             <div className={styles.option}>
                 <ShowDate date={getDate()} />
@@ -122,14 +71,11 @@ const CreateDiary = () => {
                 </div>
             </div>
             <form onSubmit={submit}>
-                <div className={styles.txt}>
-                    <DiaryTextarea 
-                        defaultValue={null} 
-                        changeTxt={changeTxt}
-                        handleResizeHeight={handleResizeHeight}
-                        ref={txtRef}
-                    />
-                </div>
+                <DiaryTextarea 
+                    defaultValue={null} 
+                    changeTxt={changeTxt}
+                    ref={txtRef}
+                />
                 {
                     !loading ?
                     <button className={styles.upload} type="submit">일기업로드</button>

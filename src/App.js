@@ -1,15 +1,34 @@
-import { BrowserRouter } from 'react-router-dom';
-import Footer from './components/shared/footer/footer';
-import Top from './components/shared/top/top';
-import Routes from './routes';
+import { Route, Routes } from 'react-router-dom';
+import CreateDiary from './pages/createDiary';
+import Intro from './pages/intro';
+import Login from './pages/login';
+import MyDiary from './pages/myDiary';
+import DiaryCardPage from './pages/diaryCardPage';
+import SignUp from './pages/signUp';
+import PublicCardPage from './pages/publicCardPage';
+import Page404 from './pages/page404';
+import Layout from './components/layout/Layout';
+import UpdateDiary from './pages/updateDiary';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Top/>
-        <Routes />
-      <Footer />
-    </BrowserRouter>
+    <Routes>
+      <Route element={<Layout />}>
+          <Route path="/" element={<Intro />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<SignUp />} />
+          <Route path='/create' element={<CreateDiary />} />
+          <Route path='/:uid' element={<MyDiary />} /> 
+          <Route path='/:uid/:id' element={<DiaryCardPage />} />
+          <Route path='/public'>
+            <Route path=':id'  element={<PublicCardPage />} />
+          </Route>
+          <Route path='/update'>
+            <Route path=':id' element={<UpdateDiary />} />
+          </Route>
+        <Route path='*' element={<Page404 />} />
+      </Route>
+    </Routes>
   );
 }
 

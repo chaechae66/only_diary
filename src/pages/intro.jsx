@@ -1,37 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SlideBanner from '../components/slideBanner/slideBanner';
-import { getValues } from '../service/firebase/database';
 import styles from './styles/intro.module.css'
 import DiaryList from '../components/diaryList/diaryList'
+import useFetch from '../lib/hooks/useFetch';
 
 const Intro = () => {
-    const [diaryList, setDiaryList] = useState(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(()=>{
-      onhandlePublicDiary();
-      return ()=>{
-        setLoading(false);
-      }
-    },[])
-  
-    const onhandlePublicDiary = async () => {
-      try{
-        setLoading(true);
-        const diary = await getValues("public");
-        setDiaryList(diary);
-      }catch(e){
-          alert(e);
-      }finally{
-          setLoading(false);
-      }
-    }
+    const diaryList = useFetch("public");
 
     return (
         <div className={styles.wrap}>
             <SlideBanner />
             {
-              loading? (
+              !diaryList ? (
                 <section className={styles.diaryWrap}>로딩중...</section>
               ) : (
                 <section className={styles.diaryWrap}>

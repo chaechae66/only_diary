@@ -25,6 +25,9 @@ const Likey = ({ diaryId, madeUserID }) => {
         }else{
             setIsLikey(false);
         }
+        return () => {
+            setIsLikey(false);
+        }
     },[currentUser,diaryId,handleLikey]);
 
     const isLikeyBtn = async (e) => {
@@ -57,7 +60,7 @@ const Likey = ({ diaryId, madeUserID }) => {
                 let IDdata = {
                     diaryId,
                 }
-                await saveDB(`likey/${diaryId}/${madeUserID}`,likeyData);
+                await saveDB(`likey/${diaryId}/${currentUser.uid}`,likeyData);
                 await saveDB(`users/${currentUser.uid}/likeyDiary/${diaryId}`,IDdata);
                 if(currentUser.uid !== madeUserID){
                     await saveDB(`event/${madeUserID}/${diaryId}`,likeyEventData)

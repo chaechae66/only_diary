@@ -33,9 +33,7 @@ const Diary = ({ diary }) => {
 
     const alertBtn = async (e) => {
         e.preventDefault();
-        console.log('isPrivate',diary.isprivate);
         if(diary.isPrivate) {
-            console.log('bol',diary.isPrivate);
             await removeDB(`diary/${currentUser.uid}/${diary.id}`);
             navigate('/myDiary');
         }else{ 

@@ -18,15 +18,11 @@ export const getDate = () => {
 
 export const submitDiary = async (_isprivate,_img,_txtRef,_currentUser,_navigate, ..._diaryID) => {
 
-    console.log('diary_id',_diaryID[0]);
-
     const isUpdate = () => {
         const isprivate = _isprivate? 'diary' : 'public'
         return !_diaryID[0]? getKey(isprivate) : _diaryID[0];
     } 
-
-    console.log("key",isUpdate());
-
+    
     let diary = {
         isprivate : _isprivate,
         date : getDate(),

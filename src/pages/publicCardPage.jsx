@@ -22,9 +22,7 @@ const PublicCardPage = () => {
     useEffect(()=>{
         handlePrivateDiary();
     },[id,handlePrivateDiary])
-
-    console.log('diary',diary);
-
+    
     return (
         <>
             {

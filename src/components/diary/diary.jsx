@@ -35,7 +35,7 @@ const Diary = ({ diary }) => {
         e.preventDefault();
         if(diary.isPrivate) {
             await removeDB(`diary/${currentUser.uid}/${diary.id}`);
-            navigate('/myDiary');
+            navigate(`/${currentUser.uid}`);
         }else{ 
             await removeDB(`diary/${currentUser.uid}/${diary.id}`);
             await removeDB(`public/${diary.id}`);

@@ -3,9 +3,11 @@ import styles from './menu.module.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from 'react-redux';
 
 const Menu = () => {
     const [diaryShow, setDiaryShow] = useState("none");
+    const currentUser = useSelector(state => state.user.currentUser);
 
     return (
         <div 
@@ -17,10 +19,10 @@ const Menu = () => {
             <FontAwesomeIcon icon={faBars} size="2x" color="#fc8b79"/>
             </div>
             <ul className={styles.diarymenu} style={{display:diaryShow}}>
-                <Link to="/mydiary">
+                <Link to={`/${currentUser.uid}`}>
                 <li>나의 일기</li>
                 </Link>
-                <Link to="/creatediary">
+                <Link to="/create">
                 <li>일기 추가</li>
                 </Link>
             </ul>

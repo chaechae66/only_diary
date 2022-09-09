@@ -7,7 +7,7 @@ const NoDiary = () => {
     
     const goToCreateDiary = (e) => {
         e.preventDefault();
-        navigate('/creatediary');
+        navigate('/create');
     }
     return (
         <div className={styles.wrap}>

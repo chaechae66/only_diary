@@ -1,11 +1,15 @@
 import React from 'react';
 import styles from './diaryCard.module.css';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const DiaryCard = ({myDiary, diary}) => {    
+    
+    const { currentUser } = useSelector(state => state.user);
+    
     const url = () => {
         if(myDiary){
-            return `/diarycardpage/${diary.id}` 
+            return `/${currentUser.uid}/${diary.id}` 
         }else{
             return `/public/${diary.id}`
         }

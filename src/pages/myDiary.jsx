@@ -7,22 +7,33 @@ import styles from './styles/myDiary.module.css';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../lib/service/firebase/emailLogin';
 import useFetch from '../lib/hooks/useFetch';
+import { swalAlert } from '../lib/service/sweetAlert/alert';
+import { useParams } from 'react-router-dom';
 
 const MyDiary = () => {
     const user = useSelector(state => state.user.currentUser,shallowEqual);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const {uid} = useParams();
+
+    useEffect(()=>{
+        if(uid !== user.uid){
+            swalAlert('warning','잘못된 접근','올바른 접근이 아닙니다.');
+            navigate('/');
+        }
+        return () => {
+            setLoading(true);
+        } 
+    },[uid,navigate,user.uid]);
 
     useEffect(() => {
-        if(!user){
-            onAuthStateChanged(auth, (onlyUser) => {
-                if (!onlyUser) {
-                    navigate('/login');
-                }
-                });
-        }else{
-            return;
-        }
+        onAuthStateChanged(auth, (onlyUser) => {
+            if (!onlyUser) {
+                navigate('/login');
+            }else{
+                return;
+            }
+            });
     }, [user,navigate]);
 
     const diary = useFetch("diary",user.uid);

@@ -48,7 +48,7 @@ export const submitDiary = async (_isprivate,_img,_txtRef,_currentUser,_navigate
             _navigate('/');
         }else{
             await saveDB(`${keyLink}/${diary.id}`,diary);
-            _navigate('/myDiary');
+            _navigate(`/${_currentUser.uid}`);
         }
     }catch(err){
         console.log('err',err);

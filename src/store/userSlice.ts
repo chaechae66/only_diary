@@ -1,6 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction  } from '@reduxjs/toolkit'
 
-const initialState = {
+export interface User {
+    currentUser: null | {
+        uid : string,
+        email : string,
+        emailVerified: boolean,
+        displayName : string,
+        isAnonymous : boolean,
+        photoURL : StaticRange,
+    },
+    isLoading : boolean,
+    }
+
+const initialState : User = {
     currentUser: null,
     isLoading : false,
 }
@@ -9,7 +21,7 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        user_login: (state, action) => {
+        user_login: (state, action : PayloadAction<User>) => {
         state.currentUser = action.payload;
         state.isLoading = true;
     },

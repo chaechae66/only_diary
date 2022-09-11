@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type CurrentUser = {
+interface CurrentUser {
     uid : string,
     email : string,
     emailVerified: boolean,
@@ -24,7 +24,7 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        user_login: (state, action) => {
+        user_login: (state : User, action : PayloadAction<CurrentUser>) => {
         state.currentUser = action.payload;
         state.isLoading = true;
     },
@@ -32,7 +32,7 @@ export const userSlice = createSlice({
         state.currentUser = null;
         state.isLoading = true;
     },
-        update_photo: (state,action) => {
+        update_photo: (state : User ,action : PayloadAction<string>) => {
         state.currentUser.photoURL = action.payload;
         state.isLoading = true;
         }

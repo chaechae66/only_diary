@@ -3,6 +3,7 @@ import userReducer from './userSlice';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
+import { useDispatch } from 'react-redux'
 
 const reducers = combineReducers({
     user: userReducer,
@@ -24,4 +25,6 @@ export const store = configureStore({
 })
 
 export type RootState = ReturnType<typeof store.getState>
+
 export type AppDispatch = typeof store.dispatch
+export const useAppDispatch = () => useDispatch<AppDispatch>()

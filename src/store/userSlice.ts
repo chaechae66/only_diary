@@ -10,7 +10,7 @@ interface CurrentUser {
 }
 
 export interface User {
-    currentUser: CurrentUser,
+    currentUser?: CurrentUser,
     isLoading : boolean,
 }
 

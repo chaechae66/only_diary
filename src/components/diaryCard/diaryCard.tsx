@@ -2,9 +2,13 @@ import React from 'react';
 import styles from './diaryCard.module.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Diary } from '../../types/types';
 
-const DiaryCard = ({myDiary, diary}) => {    
+
+
+const DiaryCard = ({myDiary, diary} : ) => {    
     
+
     const { currentUser } = useSelector(state => state.user);
     
     const url = () => {

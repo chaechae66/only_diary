@@ -9,8 +9,9 @@ import PublicCardPage from './pages/publicCardPage';
 import Page404 from './pages/page404';
 import Layout from './components/layout/Layout';
 import UpdateDiary from './pages/updateDiary';
+import React from 'react';
 
-function App() {
+function App():JSX.Element {
   return (
     <Routes>
       <Route element={<Layout />}>

@@ -3,13 +3,12 @@ import styles from './diaryCard.module.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Diary } from '../../types/types';
+import { RootState } from '../../store/index';
 
-
-
-const DiaryCard = ({myDiary, diary} : ) => {    
+const DiaryCard = ({myDiary, diary} :{myDiary : boolean, diary: Diary}) => {    
     
 
-    const { currentUser } = useSelector(state => state.user);
+    const { currentUser } = useSelector((state : RootState) => state.user);
     
     const url = () => {
         if(myDiary){

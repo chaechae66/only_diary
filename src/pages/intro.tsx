@@ -6,7 +6,7 @@ import useFetch from '../lib/hooks/useFetch';
 import { FetchData } from '../types/types';
 
 const Intro = () => {
-    const diaryList:FetchData = useFetch("public");
+    const diaryList:FetchData | null = useFetch("public");
 
     console.log('타입체크',diaryList);
 

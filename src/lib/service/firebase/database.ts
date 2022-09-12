@@ -1,16 +1,17 @@
+import { FetchData } from './../../../types/types.d';
 import app from "./firebaseApp";
-import { getDatabase, ref, set, onValue, push , child, get, remove, serverTimestamp } from "firebase/database";
+import { getDatabase, ref, set, onValue, push , child, get, remove, serverTimestamp, Database } from "firebase/database";
 
-export const db = getDatabase(app);
+export const db : Database = getDatabase(app);
 
 export {
   set,
   ref,
 }
 
-export const getValues = (_ref, ..._uid) => {
+export const getValues = (_ref:string, ..._uid:string[]) => {
   return new Promise ((res, rej) => {onValue(ref(db, "/" + _ref + "/" + _uid), (snapshot) => {
-      let valuesAry = [];
+      let valuesAry : FetchData = [];
       snapshot.forEach((childSnapshot) => {
         valuesAry.push(childSnapshot.val());
       });
@@ -20,7 +21,7 @@ export const getValues = (_ref, ..._uid) => {
   })
 };
 
-export const getOneVal = (_refURL) => {
+export const getOneVal = (_refURL:string) => {
   return new Promise((res,rej)=>{
     const dbRef = ref(db);
     get(child(dbRef, _refURL)).then((snapshot) => {
@@ -33,20 +34,20 @@ export const getOneVal = (_refURL) => {
   })
 }
 
-export function getKey(_ref) {
+export function getKey(_ref:string) {
   return push(child(ref(db), _ref)).key
 }
 
-export function saveDB(_ref,_data){
+export function saveDB(_ref:string,_data:object){
   return set(ref(db, _ref), _data);
 }
 
-export function removeDB(_ref){
+export function removeDB(_ref:string){
   const currentRef = ref(db,_ref);
   return remove(currentRef);
 }
 
-export const getLikeyValues = (_userUid) => {
+export const getLikeyValues = (_userUid:string) => {
   return new Promise((resolve, reject) => {
     onValue(ref(db, "/users/" + _userUid + "/likeyDiary"), (snapshot) => {
       const data = snapshot.val();
@@ -57,7 +58,7 @@ export const getLikeyValues = (_userUid) => {
   });
 };
 
-export const getLikeyLength = (_diaryId) => {
+export const getLikeyLength = (_diaryId:string) => {
   return new Promise((resolve, reject) => {
     onValue(ref(db, "/likey/" +_diaryId), (snapshot) => {
       resolve(snapshot.size);
@@ -65,4 +66,4 @@ export const getLikeyLength = (_diaryId) => {
   });
 }
 
-export const timeStamp = serverTimestamp(db);
+export const timeStamp = serverTimestamp();

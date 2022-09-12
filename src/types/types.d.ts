@@ -13,12 +13,18 @@ export interface Diary {
     txt :string,
 }
 
-export type FetchData = [
-    Diary,
-]
+export interface FetchData extends Array<Diary>{}
 
-export interface Diarys {
-    myDiary : boolean,
-    diaryList : Diary
+interface CurrentUser {
+    uid : string,
+    email : string,
+    emailVerified: boolean,
+    displayName : string,
+    isAnonymous : boolean,
+    photoURL : string,
 }
 
+export interface User {
+    currentUser?: CurrentUser,
+    isLoading : boolean,
+}

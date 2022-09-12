@@ -1,19 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-interface CurrentUser {
-    uid : string,
-    email : string,
-    emailVerified: boolean,
-    displayName : string,
-    isAnonymous : boolean,
-    photoURL : string,
-}
-
-export interface User {
-    currentUser?: CurrentUser,
-    isLoading : boolean,
-}
-
+import { CurrentUser, User } from '../types/types';
 
 const initialState = {
     currentUser : null,

@@ -8,19 +8,21 @@ import { useNavigate } from 'react-router';
 import Likey from '../likey/likey';
 import { swalAlert } from '../../lib/service/sweetAlert/alert';
 import { removeDB } from '../../lib/service/firebase/database';
+import { DiaryElem } from '../../types/types';
+import { RootState } from '../../store';
 
-const Diary = ({ diary }) => {
-    const currentUser = useSelector(state => state.user.currentUser);
+const Diary = ({ diary } : { diary : DiaryElem }) => {
+    const currentUser = useSelector((state : RootState ) => state.user.currentUser);
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
 
-    const goToBack = (e) => {
+    const goToBack = (e : React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         navigate(-1);
     }
 
-    const goToUpdate = (e) => {
+    const goToUpdate = (e : React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         navigate(`/update/${diary.id}`,  
             {
@@ -31,9 +33,9 @@ const Diary = ({ diary }) => {
         )
     }
 
-    const alertBtn = async (e) => {
+    const alertBtn = async (e : React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
-        if(diary.isPrivate) {
+        if(diary.isprivate) {
             await removeDB(`diary/${currentUser.uid}/${diary.id}`);
             navigate(`/${currentUser.uid}`);
         }else{ 

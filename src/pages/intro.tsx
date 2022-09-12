@@ -3,13 +3,11 @@ import SlideBanner from '../components/slideBanner/slideBanner';
 import styles from './styles/intro.module.css'
 import DiaryList from '../components/diaryList/diaryList'
 import useFetch from '../lib/hooks/useFetch';
-import { FetchData } from '../types/types';
+import { DiaryElem } from '../types/types';
 
 const Intro = () => {
-    const diaryList:FetchData | null = useFetch("public");
-
-    console.log('타입체크',diaryList);
-
+    const diaryList: DiaryElem[] = useFetch("public");
+    
     return (
         <div className={styles.wrap}>
             <SlideBanner />

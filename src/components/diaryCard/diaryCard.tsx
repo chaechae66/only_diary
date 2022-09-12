@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './diaryCard.module.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Diary } from '../../types/types';
+import { DiaryElem } from '../../types/types';
 import { RootState } from '../../store/index';
 
-const DiaryCard = ({myDiary, diary} :{myDiary : boolean, diary: Diary}) => {    
+const DiaryCard = ({myDiary, diary} :{myDiary : boolean, diary: DiaryElem}) => {    
     
 
     const { currentUser } = useSelector((state : RootState) => state.user);

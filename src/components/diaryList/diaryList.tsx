@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './diaryList.module.css';
 import DiaryCard from '../diaryCard/diaryCard';
-import { FetchData } from '../../types/types';
+import { DiaryElem } from '../../types/types';
 
-const DiaryList = ({myDiary , diaryList} : { myDiary : boolean, diaryList : FetchData }) => {
+const DiaryList = ({myDiary , diaryList} : { myDiary : boolean, diaryList : DiaryElem[] }) => {
     return (
         <ul className={styles.diaryList}>
             {diaryList?.map(diary =>{

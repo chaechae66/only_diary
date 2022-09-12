@@ -4,7 +4,7 @@ export interface User {
     uid : string,
 }
 
-export interface Diary {
+export interface DiaryElem {
     createUser : User,
     date : string,
     id :string,
@@ -13,9 +13,7 @@ export interface Diary {
     txt :string,
 }
 
-export interface FetchData extends Array<Diary>{}
-
-interface CurrentUser {
+export interface CurrentUser {
     uid : string,
     email : string,
     emailVerified: boolean,

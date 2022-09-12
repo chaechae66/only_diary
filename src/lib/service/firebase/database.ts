@@ -1,4 +1,4 @@
-import { FetchData } from './../../../types/types.d';
+import { DiaryElem } from './../../../types/types.d';
 import app from "./firebaseApp";
 import { getDatabase, ref, set, onValue, push , child, get, remove, serverTimestamp, Database } from "firebase/database";
 
@@ -9,9 +9,9 @@ export {
   ref,
 }
 
-export const getValues = (_ref:string, ..._uid:string[]) => {
-  return new Promise ((res, rej) => {onValue(ref(db, "/" + _ref + "/" + _uid), (snapshot) => {
-      let valuesAry : FetchData = [];
+export const getValues = (_ref:string, ..._uid:string[] | undefined) => {
+  return new Promise<DiaryElem[]> ((res, rej) => {onValue(ref(db, "/" + _ref + "/" + _uid), (snapshot) => {
+      let valuesAry: DiaryElem[] = [];
       snapshot.forEach((childSnapshot) => {
         valuesAry.push(childSnapshot.val());
       });

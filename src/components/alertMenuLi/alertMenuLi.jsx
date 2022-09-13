@@ -10,6 +10,8 @@ const AlertMenuLi = React.memo(() => {
 
     const [events, setEvents] = useState(null);
 
+    console.log('events',events);
+
     const handleEvent = useCallback(async () => {
         const event = await getValues('event',currentUser.uid);
         setEvents(event);

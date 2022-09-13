@@ -1,14 +1,14 @@
-import { DiaryElem } from './../../types/types.d';
+import { DiaryElem, EventType } from './../../types/types.d';
 import { useCallback, useEffect, useState } from 'react'
 import { getValues } from '../service/firebase/database';
     
-function useFetch(_ref : string, ..._id:string[]) {
-    const [diary, setDiary] = useState< DiaryElem[] | null>(null);
+function useFetch<D>(_ref : string, ..._id: string[]) : D {
+    const [diary, setDiary] = useState<D>(null);
     const [ _uid ] = _id
 
     const fetchDiarys = useCallback(async () => {
         try{
-            let diaryData = await getValues(_ref, _uid);
+            let diaryData: D = await getValues(_ref, _uid);
             setDiary(diaryData);
         }catch(e){
             console.log(e);

@@ -6,7 +6,7 @@ import useFetch from '../lib/hooks/useFetch';
 import { DiaryElem } from '../types/types';
 
 const Intro = () => {
-    const diaryList: DiaryElem[] = useFetch("public");
+    const diaryList = useFetch<DiaryElem[]>("public");
     
     return (
         <div className={styles.wrap}>

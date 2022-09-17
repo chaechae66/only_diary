@@ -6,8 +6,6 @@ import { DiaryElem } from '../types/types';
 import { getValues } from '../lib/service/firebase/database';
 
 const Intro = () => {
-    // const diaryList = useFetch<DiaryElem[]>("public");
-
     const [diaryList, setDiaryList] = useState<DiaryElem[] | null>(null);
 
     const fetchDiarys = useCallback(async () : Promise<void> => {
@@ -17,7 +15,7 @@ const Intro = () => {
         }catch(e){
             console.log(e);
         }
-    },[diaryList])
+    },[])
 
     useEffect(()=>{
         !diaryList && fetchDiarys();

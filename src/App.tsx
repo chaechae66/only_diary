@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import CreateDiary from './pages/createDiary';
 import Intro from './pages/intro';
 import Login from './pages/login';
-import MyDiary from './pages/myDiary.jsx';
+import MyDiary from './pages/myDiary';
 import DiaryCardPage from './pages/diaryCardPage';
 import SignUp from './pages/signUp';
 import PublicCardPage from './pages/publicCardPage';

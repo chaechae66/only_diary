@@ -1,10 +1,8 @@
-export interface User {
+export interface DiaryUser {
     name : string,
     photoURL : string,
     uid : string,
 }
-
-
 
 export interface CurrentUser {
     uid : string,
@@ -31,7 +29,7 @@ export interface EventType {
 }
 
 export interface DiaryElem {
-    createUser : User,
+    createUser : DiaryUser,
     date : string,
     id :string,
     img :string,

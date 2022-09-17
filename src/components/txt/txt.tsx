@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './txt.module.css';
 
-const Txt = ({defaultValue}) => {
+const Txt = ({defaultValue}:{defaultValue : string}) => {
     return (
         <pre
             className={styles.inputTxt}>

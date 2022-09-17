@@ -1,4 +1,3 @@
-import { DiaryElem, EventType } from './../../../types/types.d';
 import app from "./firebaseApp";
 import { getDatabase, ref, set, onValue, push , child, get, remove, serverTimestamp, Database } from "firebase/database";
 
@@ -9,16 +8,16 @@ export {
   ref,
 }
 
-export const getValues = (_ref:string, ..._uid:string[] | undefined) : Promise<T> => {
-  return new Promise((res, rej) => {
+export const getValues = <R>(_ref:string, ..._uid:string[]) : Promise<R[]> => {
+  return new Promise((res : (value : R[]) => void, rej) => {
     onValue(ref(db, "/" + _ref + "/" + _uid), (snapshot) => {
-      let valuesAry : T = [];
+      let valuesAry : Array<R>  = [];
       snapshot.forEach((childSnapshot) => {
         valuesAry.push(childSnapshot.val());
       });
       const reverse = [...valuesAry].reverse();
       res(reverse);
-  });
+    });
   })
 };
 

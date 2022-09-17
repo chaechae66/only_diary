@@ -15,7 +15,7 @@ const MyDiary = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const {uid} = useParams();
-
+    
     useEffect(()=>{
         if(uid !== user.uid){
             swalAlert('warning','잘못된 접근','올바른 접근이 아닙니다.');

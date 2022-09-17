@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import SlideBanner from '../components/slideBanner/slideBanner';
 import styles from './styles/intro.module.css'
 import DiaryList from '../components/diaryList/diaryList'
-import useFetch from '../lib/hooks/useFetch';
 import { DiaryElem } from '../types/types';
+import { getValues } from '../lib/service/firebase/database';
 
 const Intro = () => {
-    const diaryList = useFetch<DiaryElem[]>("public");
-    
+    // const diaryList = useFetch<DiaryElem[]>("public");
+
+    const [diaryList, setDiaryList] = useState<DiaryElem[] | null>(null);
+
+    const fetchDiarys = useCallback(async () : Promise<void> => {
+        try{
+            let diaryData: DiaryElem[] | [] = await getValues<DiaryElem>("public");
+            setDiaryList(diaryData);
+        }catch(e){
+            console.log(e);
+        }
+    },[diaryList])
+
+    useEffect(()=>{
+        !diaryList && fetchDiarys();
+    },[diaryList,fetchDiarys])
+
     return (
         <div className={styles.wrap}>
             <SlideBanner />

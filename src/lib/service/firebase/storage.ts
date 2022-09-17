@@ -8,13 +8,13 @@ export {
   ref,
 }
 
-export const getImgURL = (_link) => {
+export const getImgURL = (_link : string):Promise<string> => {
   return new Promise((res,rej) => {
     res(getDownloadURL(ref(storage,_link)))
   })
 }
 
-export const getOtherImgUrl = (_link,_file) => {
+export const getOtherImgUrl = (_link:string,_file:File):Promise<string> => {
   return new Promise((res,rej)=> {
     const storageRef = ref(storage, _link);
     const uploadTask = uploadBytesResumable(storageRef, _file);

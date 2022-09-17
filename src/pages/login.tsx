@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from '../pages/styles/login.module.css';
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -11,13 +11,17 @@ import { swalAlert } from '../lib/service/sweetAlert/alert';
 import { loginErrorCode } from '../lib/service/sweetAlert/loginErrorCode';
 
 const Login = () => {
+    interface FormData {
+        email : string,
+        password: string,
+    }
     const [loading,setLoading] = useState(false);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const onSubmit = async (data) => { 
+    const onSubmit : SubmitHandler<FormData> = async (data) => { 
         signInWithEmailAndPassword(auth,data.email,data.password)
         .then((userCredential)=>{
             setLoading(true);
@@ -37,7 +41,7 @@ const Login = () => {
             <div className={styles.login}>
                 <h2 className={styles.title}>로그인</h2>
                 <form onSubmit={handleSubmit(onSubmit)}>    
-                    <input {...register("email", { required: true , pattern:{value:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i}})} 
+                    <input {...register("email", { required: true , pattern:/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i})} 
                         name="email"
                         placeholder="이메일"
                         className={styles.input}
@@ -45,7 +49,7 @@ const Login = () => {
                     {errors.email && errors.email.type === "required" && <span className={styles.error}>기재해주세요</span>}
                     {errors.email && errors.email.type === "pattern" && <span className={styles.error}>이메일 양식에 맞게 작성해주세요</span>}
 
-                    <input {...register("password", { required: true ,minLength:6,pattern:{value: /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+])/}})} 
+                    <input {...register("password", { required: true ,minLength:6,pattern:/^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+])/})} 
                         name="password"
                         type="password"
                         placeholder="비밀번호"

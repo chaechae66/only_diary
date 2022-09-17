@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import styles from '../pages/styles/signUp.module.css'
@@ -10,6 +10,12 @@ import { swalAlert } from '../lib/service/sweetAlert/alert';
 import { signUpErrorCode } from '../lib/service/sweetAlert/signUpErrorCode';
 
 const SignUp = () => {
+    interface UserForm {
+        email : string,
+        name : string,
+        password: string,
+        password_confirm : string,
+    }
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
@@ -19,11 +25,11 @@ const SignUp = () => {
         handleSubmit,
         watch,
         formState: { errors },
-    } = useForm();
+    } = useForm<UserForm>();
 
     const passwordValue = watch("password");
 
-    const onSubmit = async (data) => {
+    const onSubmit : SubmitHandler<UserForm> = async (data) => {
         try {
             setLoading(true)
             const { user } = await createUserWithEmailAndPassword(auth, data.email, data.password);
@@ -38,7 +44,7 @@ const SignUp = () => {
             });
             swalAlert('success','회원가입 완료','Only Diary의 가족이 된 걸 환영합니다. 로그인을 해주세요.');
             navigate('/');
-        } catch (err) {
+        } catch (err: any) {
             const msg = signUpErrorCode(err.code);
             swalAlert('warning','이미 존재함',msg);
         } finally {
@@ -54,10 +60,8 @@ const SignUp = () => {
                 <input
                     {...register("email", {
                     required: true,
-                    pattern: {
-                        value:
+                    pattern: 
                         /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i,
-                    },
                     })}
                     type="text"
                     className={styles.input}
@@ -75,7 +79,7 @@ const SignUp = () => {
                     {...register("name", {
                     required: true,
                     maxLength: 5,
-                    pattern: { value: /^[가-힣]+$/ },
+                    pattern: /^[가-힣]+$/ 
                     })}
                     type="text"
                     className={styles.input}
@@ -96,10 +100,8 @@ const SignUp = () => {
                     {...register("password", {
                     required: true,
                     minLength: 6,
-                    pattern: {
-                        value:
+                    pattern: 
                         /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+])(?!.*[^a-zA-z0-9$`~!@$!%*#^?&\\(\\)\-_=+])/,
-                    },
                     })}
                     type="password"
                     className={`${styles.input}`}

@@ -1,19 +1,19 @@
 import React from 'react';
 import styles from './styles/page404.module.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from 'react-router';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Page404 = () => {
 
     const navigate = useNavigate();
 
-    const goToHome = (e) => {
+    const goToHome = (e:React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         navigate('/');
     }
 
-    const goToBack = (e) => {
+    const goToBack = (e:React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         navigate(-1);
     }

@@ -4,13 +4,13 @@ import moment from 'moment';
 import styles from './alertMenuLi.module.css';
 import { Link } from 'react-router-dom';
 import { getValues, removeDB } from '../../lib/service/firebase/database';
+import { RootState } from '../../store';
+import { EventType } from '../../types/types';
 
 const AlertMenuLi = React.memo(() => {
-    const currentUser = useSelector(state => state.user.currentUser);
+    const currentUser = useSelector((state : RootState) => state.user.currentUser);
 
     const [events, setEvents] = useState(null);
-
-    console.log('events',events);
 
     const handleEvent = useCallback(async () => {
         const event = await getValues('event',currentUser.uid);
@@ -21,7 +21,7 @@ const AlertMenuLi = React.memo(() => {
         currentUser && handleEvent();
     }, [currentUser,handleEvent]);
 
-    const removeEvent = async (e,_event) => {
+    const removeEvent = async (e : React.MouseEvent<HTMLElement>, _event: EventType) => {
         e.preventDefault();
         await removeDB(`event/${currentUser.uid}/${_event.diaryId}`)
         const event = await getValues('event',currentUser.uid);
@@ -31,7 +31,7 @@ const AlertMenuLi = React.memo(() => {
     return (
         <>
             {
-                events?.map((event)=>{
+                events?.map((event : EventType)=>{
                     return(
                         <li 
                             className={styles.eventLi} 

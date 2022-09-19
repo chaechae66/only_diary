@@ -10,17 +10,18 @@ import { update_photo, user_logout } from '../../store/userSlice';
 import { v4 } from 'uuid';
 import { getOtherImgUrl } from '../../lib/service/firebase/storage';
 import { saveDB } from '../../lib/service/firebase/database';
+import { RootState } from '../../store';
 
 const UserMenu = () => {
 
-    const currentUser = useSelector(state => state.user.currentUser);
+    const currentUser = useSelector((state : RootState) => state.user.currentUser);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const inputFileRef = useRef(null);
 
     const [isShow, setIsShow] = useState("none");
 
-    const logOut = (e) => {
+    const logOut = (e : React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         swalAlert('success','로그아웃 완료','로그아웃 되었습니다. 다음에 또 뵙겠습니다.');
         auth.signOut();
@@ -28,20 +29,20 @@ const UserMenu = () => {
         navigate('/');
     }
 
-    const userInfo = (e) => {
+    const userInfo = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         inputFileRef.current.click();
     }
 
-    const updateImg = async (_file,_type) => {
+    const updateImg = async (_file:File,_type:string) => {
         let filePath = `photoURL/${currentUser.uid}/${v4()}.${_type}`
         const url = await getOtherImgUrl(filePath,_file);
         return url
     }
 
-    const changeImg = async (e) => {
+    const changeImg = async (e: React.ChangeEvent<HTMLElement>) => {
         e.preventDefault();
-        const file = e.target.files[0];
+        const file = (e.target as HTMLInputElement).files[0];
         let fileType = file.type.slice(6);
         const url = await updateImg(file,fileType);
         await updateProfile(auth.currentUser, {

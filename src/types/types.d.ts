@@ -36,3 +36,10 @@ export interface DiaryElem {
     isprivate :boolean,
     txt :string,
 }
+
+export interface EventType {
+    diaryId : string,
+    likeyUser : DiaryUser
+    uid : string,
+    timeStamp : number
+}

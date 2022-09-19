@@ -30,7 +30,7 @@ const SlideBanner = () => {
       };
     }, [index, isActive]);
 
-    const handleBanner = (e) => {
+    const handleBanner = (e : React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         if (isActive) {
           resetTimeout();
@@ -44,12 +44,12 @@ const SlideBanner = () => {
         }
       };
     
-      const handlePrev = (e) => {
+      const handlePrev = (e : React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         setIndex((prevIndex) => (prevIndex === 0 ? 2 : prevIndex - 1));
       };
     
-      const handleNext = (e) => {
+      const handleNext = (e : React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         setIndex((index) => (index === 2 ? 0 : index + 1));
       };
@@ -57,7 +57,7 @@ const SlideBanner = () => {
 
     return (
         <section className={styles.bannerWrap}>
-             <div className={styles.bannerDots}>
+            <div className={styles.bannerDots}>
                 <div className={styles.prev} onClick={handlePrev}></div>
                 {slideIndexAry.map((elem, idx) => (
                     <div

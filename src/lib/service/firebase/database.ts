@@ -38,7 +38,7 @@ export function getKey(_ref:string) {
   return push(child(ref(db), _ref)).key
 }
 
-export function saveDB(_ref:string,_data:object){
+export function saveDB(_ref:string,_data:object|string){
   return set(ref(db, _ref), _data);
 }
 

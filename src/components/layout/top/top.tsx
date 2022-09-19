@@ -6,9 +6,10 @@ import { Link } from "react-router-dom";
 import LoginBefore from '../../loginBefore/loginBefore';
 import LoginAfter from '../../loginAfter/loginAfter';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../../store';
 
 const Top = () => {
-  const currentUser = useSelector(state => state.user.currentUser);
+  const currentUser = useSelector((state : RootState ) => state.user.currentUser);
 
   return (
       <div className={styles.wrap}>

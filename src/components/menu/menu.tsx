@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 const Menu = () => {
     const [diaryShow, setDiaryShow] = useState("none");
-    const currentUser = useSelector(state => state.user.currentUser);
+    const currentUser = useSelector((state : RootState) => state.user.currentUser);
 
     return (
         <div 

@@ -1,4 +1,4 @@
-export const loginErrorCode = (_errorCode) => {
+export const loginErrorCode = (_errorCode : string) => {
     switch (_errorCode) {
         case 'auth/user-not-found':
             return '이메일 또는 비밀번호 정보가 일치하지 않습니다.';

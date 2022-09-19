@@ -5,13 +5,14 @@ import { useNavigate, useParams } from 'react-router';
 import Diary from '../components/diary/diary';
 import { getOneVal } from '../lib/service/firebase/database';
 import { swalAlert } from '../lib/service/sweetAlert/alert';
+import { RootState } from '../store';
 import Page404 from './page404';
 
 const DiaryCardPage = () => {
     const {uid, id} = useParams();
     const [diary, setDiary] = useState(null);
     const [error, setError ] = useState(false);
-    const currentUser = useSelector(state => state.user.currentUser);
+    const currentUser = useSelector((state : RootState) => state.user.currentUser);
     const navigate = useNavigate();
 
     useEffect(()=>{

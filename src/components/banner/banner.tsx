@@ -1,7 +1,16 @@
 import React from 'react';
 import styles from './banner.module.css';
 
-const Banner = ({ color, title1, title2, des1, des2, bannerImg }) => {
+interface BannerProps {
+    color : string,
+    title1 : string,
+    title2 :string,
+    des1 : string, 
+    des2 : string, 
+    bannerImg : string,
+}
+
+const Banner: React.FC<BannerProps>  = ({ color, title1, title2, des1, des2, bannerImg } ) => {
     return (
         <div style={{backgroundColor : color}} className={styles.banner}>
             <div className={styles.wrap}>

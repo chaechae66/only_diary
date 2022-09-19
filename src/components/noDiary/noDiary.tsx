@@ -5,7 +5,7 @@ import styles from './noDiary.module.css'
 const NoDiary = () => {
     const navigate = useNavigate();
     
-    const goToCreateDiary = (e) => {
+    const goToCreateDiary = (e:React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         navigate('/create');
     }

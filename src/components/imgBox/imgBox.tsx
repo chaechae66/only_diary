@@ -5,20 +5,25 @@ import default_03 from '../../asset/images/diary_default_03.jpg';
 import default_04 from '../../asset/images/diary_default_04.jpg';
 import styles from './imgBox.module.css'
 
-function ImgBox({getImg, getFile}) {
-    const imgRef = useRef();
-    const sendImg = (img, e) => {
+interface ImgBoxProps{
+    getImg : Function,
+    getFile : Function,
+}
+
+const ImgBox:React.FC<ImgBoxProps> = ({getImg, getFile}) => {
+    const imgRef = useRef<HTMLInputElement>();
+    const sendImg = (img:string, e:React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         getImg(img);
     }
-    const previewImg = (e) => {
+    const previewImg = (e :React.MouseEvent<HTMLElement> ) => {
         e.preventDefault();
         imgRef.current.click();
     }
-    const changeImg = (e) => {
+    const changeImg = (e :React.ChangeEvent ) => {
         const fileReader = new FileReader();
-        getFile(e.target.files[0]);
-        fileReader.readAsDataURL(e.target.files[0]);
+        getFile((e.target as HTMLInputElement).files[0]);
+        fileReader.readAsDataURL((e.target as HTMLInputElement).files[0]);
         fileReader.onload = function(e) { 
             getImg(e.target.result);
         }

@@ -1,7 +1,7 @@
 import { getImgURL, getOtherImgUrl } from "../service/firebase/storage";
 import { v4 } from 'uuid';
 
-export default function createGetImg(_isprivate, _fileInfo, _baseUrl){    
+export default function createGetImg(_isprivate:boolean, _fileInfo:File, _baseUrl:string){    
     const getPath = () => {
         if (_isprivate) {
             return `/diary/private`;
@@ -17,7 +17,7 @@ export default function createGetImg(_isprivate, _fileInfo, _baseUrl){
         return url;
     }
     
-    const baseGetImg = async (_url) => {
+    const baseGetImg = async (_url:string) => {
         const url = await getImgURL(`/initUrl/${_url}`);
         return url;
     }
@@ -25,7 +25,7 @@ export default function createGetImg(_isprivate, _fileInfo, _baseUrl){
     const getImg = async () => {
         try{
             const initNum = [1,2,3,4];
-            let initUrlArr = [];
+            let initUrlArr: string[] = [];
             initNum.forEach((num)=>{
                 let initStr = `default_0${num}`
                 initUrlArr.push(initStr); 

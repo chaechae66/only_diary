@@ -1,11 +1,11 @@
 import React, { forwardRef, useCallback } from 'react';
 import styles from './diaryTextarea.module.css';
 
-const DiaryTextarea = ({defaultValue,changeTxt}, txtRef) => {
+const DiaryTextarea = ({defaultValue,changeTxt} :{defaultValue: string, changeTxt: Function}, txtRef:any) => {
 
-    const handleTxt = (e) => {
+    const handleTxt = (e:React.ChangeEvent) => {
         e.preventDefault();
-        let currentTxt = e.target.value; 
+        let currentTxt = (e.target as HTMLInputElement).value; 
         changeTxt(currentTxt);
     }
 

@@ -1,3 +1,4 @@
+import { CurrentUser } from '../../types/types';
 import { getKey, saveDB } from "../service/firebase/database";
 import { swalAlert } from "../service/sweetAlert/alert";
 
@@ -16,7 +17,7 @@ export const getDate = () => {
     return dateString
 }
 
-export const submitDiary = async (_isprivate,_img,_txtRef,_currentUser,_navigate, ..._diaryID) => {
+export const submitDiary = async (_isprivate:boolean,_img:string,_txt:string,_currentUser:CurrentUser,_navigate:Function, ..._diaryID:string[]) => {
 
     const isUpdate = () => {
         const isprivate = _isprivate? 'diary' : 'public'
@@ -27,7 +28,7 @@ export const submitDiary = async (_isprivate,_img,_txtRef,_currentUser,_navigate
         isprivate : _isprivate,
         date : getDate(),
         img : _img,
-        txt : _txtRef.current.value,
+        txt : _txt,
         id : isUpdate(),
         createUser : {
             uid : _currentUser.uid,
@@ -37,7 +38,7 @@ export const submitDiary = async (_isprivate,_img,_txtRef,_currentUser,_navigate
     }
 
     try{
-        if(!_txtRef.current.value){
+        if(!_txt){
             swalAlert('error','일기전송 오류','일기 본문을 채워주세요.');
             throw new Error();
         }

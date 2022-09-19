@@ -12,9 +12,10 @@ import styles from './styles/createDiary.module.css';
 import createGetImg from '../lib/api/createGetImg';
 import { getDate, submitDiary } from '../lib/api/submitDiary';
 import ImgBox from '../components/imgBox/imgBox';
+import { RootState } from '../store';
 
 const CreateDiary = () => {
-    const currentUser = useSelector(state => state.user.currentUser );
+    const currentUser = useSelector((state:RootState) => state.user.currentUser );
     const navigate = useNavigate();
     
     const [baseUrl, setBaseUrl] = useState(default_01);
@@ -22,7 +23,7 @@ const CreateDiary = () => {
     const [fileInfo , setFileInfo] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const txtRef = useRef(null);
+    const txtRef = useRef<HTMLInputElement | null>(null);
     
     useEffect(()=>{
         return ()=>{
@@ -30,27 +31,27 @@ const CreateDiary = () => {
         }
     },[])
 
-    const changePrivate = (e) => {
+    const changePrivate = (e : React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         setIsprivate(prev => !prev);
     }
 
-    const submit = async (e) => {
+    const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
         let img = await createGetImg(isprivate, fileInfo, baseUrl);
-        await submitDiary(isprivate,img,txtRef,currentUser,navigate);
+        await submitDiary(isprivate,img,txtRef.current.value,currentUser,navigate);
     }
 
-    const changeTxt = (_changingTxt) => {
+    const changeTxt = (_changingTxt : string) => {
         txtRef.current.value = _changingTxt;   
     }
 
-    const getImg = (img) =>{
+    const getImg = (img:string) =>{
         setBaseUrl(img);
     }
 
-    const getFile = (file) =>{
+    const getFile = (file:File) =>{
         setFileInfo(file);
     }
 

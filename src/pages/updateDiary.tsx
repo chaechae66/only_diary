@@ -13,42 +13,50 @@ import { swalAlert } from '../lib/service/sweetAlert/alert';
 import DiaryTextarea from '../components/diaryTextarea/diaryTextarea';
 import createGetImg from '../lib/api/createGetImg';
 import { useSelector } from 'react-redux';
+import { RootState } from '../store';
+import { DiaryElem } from '../types/types';
+
+interface CustomizedState {
+    diary: DiaryElem
+}
 
 function UpdateDiary() {
-    const { state } = useLocation();
+    const location = useLocation();
+    const state = location.state as CustomizedState
     const { diary } = state;
-    const currentUser = useSelector(state => state.user.currentUser );
+    const currentUser = useSelector((state: RootState) => state.user.currentUser );
     const navigate = useNavigate();
 
     const [imgURL, setImgURL] = useState(diary.img);
-    const [file, setFile] = useState(diary.img);
+    const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const txtRef = useRef(null);
+    console.log('diary',diary);
 
-    const changeTxt = (_changingTxt) => {
+    const changeTxt = (_changingTxt:React.ChangeEvent) => {
         txtRef.current.value = _changingTxt;   
     }
 
-    const getImg = (img) => {
+    const getImg = (img:string) => {
         setImgURL(img);
     }
 
-    const getFile = (file) => {
+    const getFile = (file:File) => {
         setFile(file);
     }
 
-    const showModal = (e) =>{
+    const showModal = (e:React.MouseEvent<HTMLElement>) =>{
         e.preventDefault();
         swalAlert('warning', '수정 불가능', '모드는 수정이 불가능합니다.')
     }
 
-    const submit = async (e) => {
+    const submit = async (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
         const isGet = imgURL.includes('https://firebasestorage.googleapis.com');
         let img = !isGet? await createGetImg(diary.isprivate, file, imgURL) : imgURL;
-        await submitDiary(diary.isprivate,img,txtRef,currentUser,navigate,diary.id);
+        await submitDiary(diary.isprivate,img,txtRef.current.value,currentUser,navigate,diary.id);
     }
 
     return (

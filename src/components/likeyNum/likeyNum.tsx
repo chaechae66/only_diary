@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { getLikeyLength } from '../../lib/service/firebase/database';
 
-const LikeyNum = ({ diaryId, isLikey }) => {
+interface PropsType {
+    diaryId : string,
+    isLikey : boolean,
+}
+
+
+const LikeyNum = ({ diaryId, isLikey }:PropsType) => {
     const [likeyNum, setLikeyNum] = useState(0);
 
     useEffect(()=>{
         handleLikeyNum(diaryId);
     },[diaryId,isLikey])
 
-    const handleLikeyNum = async(_diaryId) => {
-        const likeyLength = await getLikeyLength(_diaryId);
+    const handleLikeyNum = async(_diaryId : string) => {
+        const likeyLength : number = await getLikeyLength(_diaryId);
         setLikeyNum(likeyLength);
     }
 

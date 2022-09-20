@@ -7,15 +7,21 @@ import { getLikeyValues, removeDB, saveDB, timeStamp } from '../../lib/service/f
 import { useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 import LikeyNum from '../likeyNum/likeyNum';
+import { RootState } from '../../store';
 
-const Likey = ({ diaryId, madeUserID }) => {
+interface PropsType {
+    diaryId : string,
+    madeUserID : string,
+}
+
+const Likey = ({ diaryId, madeUserID } : PropsType) => {
     const [isLikey, setIsLikey] = useState(false);
 
     const navigate = useNavigate();
-    const currentUser = useSelector(state => state.user.currentUser);
+    const currentUser = useSelector((state : RootState) => state.user.currentUser);
 
-    const handleLikey = useCallback(async (_userUid) => {
-        let likey = await getLikeyValues(_userUid);
+    const handleLikey = useCallback(async (_userUid:string) => {
+        let likey : string[] = await getLikeyValues(_userUid);
         likey.some((idElem) => idElem === diaryId ) && setIsLikey(true);
     },[diaryId]);
 
@@ -30,7 +36,7 @@ const Likey = ({ diaryId, madeUserID }) => {
         }
     },[currentUser,diaryId,handleLikey]);
 
-    const isLikeyBtn = async (e) => {
+    const isLikeyBtn = async (e : React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         if(!currentUser){
             swalAlert('warning','로그인 필요','좋아요 기능은 로그인 후 이용 바랍니다.');

@@ -47,7 +47,7 @@ export function removeDB(_ref:string){
   return remove(currentRef);
 }
 
-export const getLikeyValues = (_userUid:string) => {
+export const getLikeyValues  = (_userUid:string): Promise<string[]> => {
   return new Promise((resolve, reject) => {
     onValue(ref(db, "/users/" + _userUid + "/likeyDiary"), (snapshot) => {
       const data = snapshot.val();
@@ -58,7 +58,7 @@ export const getLikeyValues = (_userUid:string) => {
   });
 };
 
-export const getLikeyLength = (_diaryId:string) => {
+export const getLikeyLength = (_diaryId:string) : Promise<number>=> {
   return new Promise((resolve, reject) => {
     onValue(ref(db, "/likey/" +_diaryId), (snapshot) => {
       resolve(snapshot.size);

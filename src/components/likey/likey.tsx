@@ -31,9 +31,6 @@ const Likey = ({ diaryId, madeUserID } : PropsType) => {
         }else{
             setIsLikey(false);
         }
-        return () => {
-            setIsLikey(false);
-        }
     },[currentUser,diaryId,handleLikey]);
 
     const isLikeyBtn = async (e : React.MouseEvent<HTMLElement>) => {
@@ -72,7 +69,7 @@ const Likey = ({ diaryId, madeUserID } : PropsType) => {
                     await saveDB(`event/${madeUserID}/${diaryId}`,likeyEventData)
                 }
             }else{
-                await removeDB(`likey/${diaryId}/${madeUserID}`)
+                await removeDB(`likey/${diaryId}/${currentUser.uid}`)
                 await removeDB(`users/${currentUser.uid}/likeyDiary/${diaryId}`)
                 if(currentUser.uid !== madeUserID){
                     await removeDB(`event/${madeUserID}/${diaryId}`)

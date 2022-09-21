@@ -32,7 +32,6 @@ function UpdateDiary() {
     const [loading, setLoading] = useState(false);
 
     const txtRef = useRef(null);
-    console.log('diary',diary);
 
     const changeTxt = (_changingTxt:React.ChangeEvent) => {
         txtRef.current.value = _changingTxt;   

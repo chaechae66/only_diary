@@ -20,7 +20,7 @@
     "@types/redux-persist": "^4.3.1",
     "@types/sweetalert": "^2.0.4",
     "firebase": "^9.1.1",
-    "firebase-tools": "^9.23.0",
+    "firebase-tools": "^11.9.0",
     "moment": "^2.29.1",
     "postcss-typescript-css": "^0.2.1",
     "react": "^18.2.0",
@@ -37,7 +37,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "tsc -w",
+    "build": "tsc --skipLibCheck",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

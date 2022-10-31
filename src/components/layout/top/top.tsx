@@ -13,7 +13,7 @@ const Top = () => {
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
 
   return (
-    <div className={styles.wrap}>
+    <header className={styles.wrap}>
       <div className={styles.header}>
         <Link to={`${PATH.BASE}`}>
           <h1 className={styles.logo}>
@@ -23,7 +23,7 @@ const Top = () => {
         </Link>
         {currentUser ? <LoginAfter /> : <LoginBefore />}
       </div>
-    </div>
+    </header>
   );
 };
 

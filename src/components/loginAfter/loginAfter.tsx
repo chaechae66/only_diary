@@ -1,17 +1,17 @@
-import React from 'react';
-import styles from './loginAfter.module.css'
-import Menu from '../menu/menu';
-import UserMenu from '../userMenu/userMenu';
-import AlertMenu from '../alertMenu/alertMenu';
+import React from "react";
+import styles from "./loginAfter.module.css";
+import UserMenu from "../userMenu/userMenu";
+import AlertMenu from "../alertMenu/alertMenu";
+import DiaryMenu from "../diaryMenu/diaryMenu";
 
 const LoginAfter = () => {
-    return (
-        <div className={styles.loginUser}>
-          <AlertMenu />
-          <UserMenu />
-          <Menu />
-        </div>
-    )
-}
+  return (
+    <div className={styles.loginUser}>
+      <AlertMenu />
+      <UserMenu />
+      <DiaryMenu />
+    </div>
+  );
+};
 
-export default LoginAfter
+export default LoginAfter;

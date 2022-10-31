@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./alertMenu.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
-import AlertMenuItem from "../alertMenuItem/alertMenuLi";
+import AlertMenuItem from "../alertMenuItem/alertMenuItem";
 
 const AlertMenu = () => {
   const [alertShow, setAlertShow] = useState("none");

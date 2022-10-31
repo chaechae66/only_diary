@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
-import styles from "./alertMenuLi.module.css";
+import styles from "./alertMenuItem.module.css";
 import { Link } from "react-router-dom";
 import { getValues, removeDB } from "../../lib/service/firebase/database";
 import { RootState } from "../../store";

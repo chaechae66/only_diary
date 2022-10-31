@@ -8,7 +8,7 @@ import { RootState } from "../../store";
 import { EventType } from "../../types/types";
 import { PATH } from "../../Routes/path";
 
-const AlertMenuLi = React.memo(() => {
+const AlertMenuItem = React.memo(() => {
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
 
   const [events, setEvents] = useState(null);
@@ -60,4 +60,4 @@ const AlertMenuLi = React.memo(() => {
   );
 });
 
-export default AlertMenuLi;
+export default AlertMenuItem;

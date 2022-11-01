@@ -60,7 +60,8 @@ const SignUp = () => {
       );
       navigate(`${PATH.BASE}`);
     } catch (err) {
-      const msg = signUpErrorCode(err.code);
+      const result = (err as Error).message;
+      const msg = signUpErrorCode(result);
       swalAlert("warning", "이미 존재함", msg);
     } finally {
       setLoading(false);

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import styles from "./alertMenuItem.module.css";
@@ -8,19 +8,19 @@ import { RootState } from "../../store";
 import { EventType } from "../../types/types";
 import { PATH } from "../../Routes/path";
 
-const AlertMenuItem = React.memo(() => {
+const AlertMenuItem = () => {
   const currentUser = useSelector((state: RootState) => state.user.currentUser);
 
-  const [events, setEvents] = useState(null);
+  const [events, setEvents] = useState<EventType[] | null>(null)
 
-  const handleEvent = useCallback(async () => {
-    const event = await getValues("event", currentUser.uid);
-    setEvents(event);
-  }, [currentUser]);
+  useEffect(()=>{
+    const fetch = async () => {
+      const fetchEvent : EventType[] = await getValues("event", currentUser.uid);
+      setEvents(fetchEvent);
+    }
 
-  useEffect(() => {
-    currentUser && handleEvent();
-  }, [currentUser, handleEvent]);
+    fetch();
+  },[currentUser.uid])
 
   const removeEvent = async (
     e: React.MouseEvent<HTMLElement>,
@@ -28,8 +28,8 @@ const AlertMenuItem = React.memo(() => {
   ) => {
     e.preventDefault();
     await removeDB(`event/${currentUser.uid}/${_event.diaryId}`);
-    const event = await getValues("event", currentUser.uid);
-    setEvents(event);
+    const updateEvent : EventType[] = await getValues("event", currentUser.uid);
+    setEvents(updateEvent);
   };
 
   return (
@@ -58,6 +58,6 @@ const AlertMenuItem = React.memo(() => {
       })}
     </>
   );
-});
+};
 
 export default AlertMenuItem;

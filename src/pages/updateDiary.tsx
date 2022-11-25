@@ -1,17 +1,17 @@
 import React, { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Img from '../components/img/img';
-import ImgBox from '../components/imgBox/imgBox';
+import ShowImage from '../components/createDiary/ShowImage/ShowImage';
+import ImgBox from '../components/createDiary/ImgBox/ImgBox';
 import styles from './styles/createDiary.module.css';
 import default_01 from '../../src/asset/images/diary_default_01.jpg';
 import default_02 from '../../src/asset/images/diary_default_02.jpg';
 import default_03 from '../../src/asset/images/diary_default_03.jpg';
 import default_04 from '../../src/asset/images/diary_default_04.jpg';
-import { getDate, submitDiary } from '../lib/api/submitDiary';
-import ShowDate from '../components/showDate/showDate';
-import { swalAlert } from '../lib/service/sweetAlert/alert';
-import DiaryTextarea from '../components/diaryTextarea/diaryTextarea';
-import createGetImg from '../lib/api/createGetImg';
+import { getDate, submitDiary } from '../util/submitDiary';
+import ShowDate from '../components/createDiary/ShowDate/ShowDate';
+import { swalAlert } from '../service/sweetAlert/alert';
+import DiaryTextarea from '../components/createDiary/DiaryTextarea/DiaryTextarea';
+import createGetImg from '../util/createGetImg';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { DiaryElem } from '../types/types';
@@ -61,7 +61,7 @@ function UpdateDiary() {
     return (
         <section className={styles.wrap}>
             <ImgBox getImg={getImg} getFile={getFile}/>
-            <Img baseUrl={imgURL}/>
+            <ShowImage baseUrl={imgURL}/>
             <div className={styles.option}>
                 <ShowDate date={getDate()} />
                 <div className={styles.publicOption} onClick={showModal}>

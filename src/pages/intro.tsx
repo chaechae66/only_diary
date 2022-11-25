@@ -1,7 +1,7 @@
 import React from "react";
-import SlideBanner from "../components/slideBanner/slideBanner";
+import SlideBanner from "../components/intro/SlideBanner/SlideBanner";
 import styles from "./styles/intro.module.css";
-import DiaryList from "../components/diaryList/diaryList";
+import DiaryList from "../components/diaryPage/DiaryList/DiaryList";
 import { DiaryElem } from "../types/types";
 import { useGetValues } from "../hook/useGetValues";
 

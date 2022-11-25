@@ -1,6 +1,6 @@
 import React from "react";
-import Top from "../layout/top/top";
-import Footer from "../layout/footer/footer";
+import Top from "./Top/Top";
+import Footer from "./Footer/Footer";
 import { Outlet } from "react-router-dom";
 
 function Layout() {

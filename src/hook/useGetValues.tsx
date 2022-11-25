@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getValues } from "../lib/service/firebase/database";
-import { swalAlert } from "../lib/service/sweetAlert/alert";
+import { getValues } from "../service/firebase/database";
+import { swalAlert } from "../service/sweetAlert/alert";
 
 export const useGetValues = <T,>(_path: string, ..._option: string[]): T[] => {
   const [data, setData] = useState<T[] | null>(null);

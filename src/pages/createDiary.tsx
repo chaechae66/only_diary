@@ -5,13 +5,13 @@ import default_01 from '../../src/asset/images/diary_default_01.jpg';
 import default_02 from '../../src/asset/images/diary_default_02.jpg';
 import default_03 from '../../src/asset/images/diary_default_03.jpg';
 import default_04 from '../../src/asset/images/diary_default_04.jpg';
-import DiaryTextarea from '../components/diaryTextarea/diaryTextarea';
-import Img from '../components/img/img';
-import ShowDate from '../components/showDate/showDate';
+import DiaryTextarea from '../components/createDiary/DiaryTextarea/DiaryTextarea';
+import ShowImage from '../components/createDiary/ShowImage/ShowImage';
+import ShowDate from '../components/createDiary/ShowDate/ShowDate';
 import styles from './styles/createDiary.module.css';
-import createGetImg from '../lib/api/createGetImg';
-import { getDate, submitDiary } from '../lib/api/submitDiary';
-import ImgBox from '../components/imgBox/imgBox';
+import createGetImg from '../util/createGetImg';
+import { getDate, submitDiary } from '../util/submitDiary';
+import ImgBox from '../components/createDiary/ImgBox/ImgBox';
 import { RootState } from '../store';
 
 const CreateDiary = () => {
@@ -58,7 +58,7 @@ const CreateDiary = () => {
     return(
         <section className={styles.wrap}>
             <ImgBox getImg={getImg} getFile={getFile} />   
-            <Img baseUrl={baseUrl} />
+            <ShowImage baseUrl={baseUrl} />
             <div className={styles.option}>
                 <ShowDate date={getDate()} />
                 <div onClick={changePrivate} className={styles.publicOption}>

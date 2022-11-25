@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./top.module.css";
+import styles from "./Top.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaintBrush } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import LoginBefore from "../../loginBefore/loginBefore";
-import LoginAfter from "../../loginAfter/loginAfter";
+import LoginBefore from "../../intro/menu/loginBefore/loginBefore";
+import LoginAfter from "../../intro/menu/loginAfter/loginAfter";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { PATH } from "../../../Routes/path";

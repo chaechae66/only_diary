@@ -1,45 +1,25 @@
 import { getImgURL, getOtherImgUrl } from "../service/firebase/storage";
 import { v4 } from 'uuid';
+import { swalAlert } from "../service/sweetAlert/alert";
 
 export default function createGetImg(_isprivate:boolean, _fileInfo:File, _baseUrl:string){    
     const getPath = () => {
-        if (_isprivate) {
-            return `/diary/private`;
-        } else {
-            return `/diary/public`;
-        }
+        return _isprivate ? `/diary/private` : `/diary/public`
     };
-    
-    const otherGetImg = async () => {
-        let fileType = _fileInfo.type.slice(6);
-        let filePath = `${getPath()}/${v4()}.${fileType}`
-        const url = await getOtherImgUrl(filePath,_fileInfo);
-        return url;
-    }
-    
-    const baseGetImg = async (_url:string) => {
-        const url = await getImgURL(`/initUrl/${_url}`);
-        return url;
-    }
 
     const getImg = async () => {
         try{
-            const initNum = [1,2,3,4];
-            let initUrlArr: string[] = [];
-            initNum.forEach((num)=>{
-                let initStr = `default_0${num}`
-                initUrlArr.push(initStr); 
-            })
-            let sliceBaseUrl = _baseUrl.slice(20,30);
-            if(initUrlArr.includes(sliceBaseUrl)){
-                let serverUrl = `diary_${sliceBaseUrl}.jpg`;
-                let result = await baseGetImg(serverUrl);
-                return result;
+            if(_baseUrl.includes("diary_default")){
+                const serverUrl = `${_baseUrl.slice(14,30)}.jpg`;
+                return await getImgURL(`/initUrl/${serverUrl}`);
             }else{
-                return otherGetImg();
+                let fileType = _fileInfo.type.slice(6);
+                let filePath = `${getPath()}/${v4()}.${fileType}`
+                return await getOtherImgUrl(filePath,_fileInfo);
             }
-        }catch(e){
-            console.error(e);
+        }catch(e){  
+            const result = (e as Error).message;
+            swalAlert("warning", "서버 오류", result);
         }
     }
 

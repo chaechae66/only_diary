@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import Diary from '../components/createDiary/Diary/Diary';
+import Diary from '../components/writeDairy/Diary/Diary';
 import { getOneVal } from '../service/firebase/database';
 import Page404 from './Page404';
 

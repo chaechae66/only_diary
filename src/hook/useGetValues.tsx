@@ -12,7 +12,7 @@ export const useGetValues = <T,>(_path: string, ..._option: string[]): T[] => {
         setData(fetchData);
       } catch (e) {
         const result = (e as Error).message;
-        swalAlert("warnig", "서버 오류", result);
+        swalAlert("warning", "서버 오류", result);
       }
     };
 

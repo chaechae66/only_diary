@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
-import Diary from "../components/createDiary/Diary/Diary";
+import Diary from "../components/writeDairy/Diary/Diary";
 import { getOneVal } from "../service/firebase/database";
 import { swalAlert } from "../service/sweetAlert/alert";
 import { PATH } from "../Routes/path";

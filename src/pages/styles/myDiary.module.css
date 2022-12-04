@@ -22,6 +22,12 @@
     margin: 10rem -2.5rem 3rem;
 }
 
+.diaryList{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
 /*반응형*/
 @media (max-width:918px) {
     .diarys{
@@ -34,5 +40,11 @@
 @media (max-width:618px) {
     .diarys{
         width: 100%;
+    }
+}
+
+@media (max-width:618px) {
+    .diaryList{
+        justify-content: center;
     }
 }

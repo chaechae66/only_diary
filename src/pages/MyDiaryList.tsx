@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, shallowEqual } from "react-redux";
 import { useNavigate } from "react-router";
-import DiaryList from "../components/diaryPage/DiaryList/DiaryList";
 import NoDiary from "../components/diaryPage/NoDiary/NoDiary";
 import styles from "./styles/myDiary.module.css";
 import { onAuthStateChanged } from "firebase/auth";
@@ -12,6 +11,7 @@ import { RootState } from "../store";
 import { DiaryElem } from "../types/types";
 import { PATH } from "../Routes/path";
 import { useGetValues } from "../hook/useGetValues";
+import DiaryCard from "../components/diaryPage/DiaryCard/DiaryCard";
 
 const MyDiaryList = () => {
   const user = useSelector(
@@ -22,7 +22,7 @@ const MyDiaryList = () => {
   const [loading, setLoading] = useState(false);
   const { uid } = useParams();
 
-  const diary = useGetValues<DiaryElem>("diary", user.uid);
+  const diaryList = useGetValues<DiaryElem>("diary", user.uid);
 
   useEffect(() => {
     if (uid !== user.uid) {
@@ -46,7 +46,7 @@ const MyDiaryList = () => {
 
   useEffect(() => {
     setLoading(true);
-  }, [diary, loading]);
+  }, [diaryList, loading]);
 
   return (
     <section className='bodyWrap'>
@@ -65,10 +65,14 @@ const MyDiaryList = () => {
             </h2>
           </div>
           <div className={styles.diarys}>
-            {diary?.length === 0 ? (
+            {diaryList?.length === 0 ? (
               <NoDiary />
             ) : (
-              <DiaryList myDiary={true} diaryList={diary} />
+              <ul className={styles.diaryList}>
+              {diaryList?.map(diary =>{
+                    return <DiaryCard isPrivateDiary={false} key={diary.id} diary={diary} />
+                })}
+            </ul>
             )}
           </div>
         </>

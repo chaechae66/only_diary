@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux';
 import { DiaryElem } from '../../../types/types';
 import { RootState } from '../../../store/index';
 
-const DiaryCard = ({myDiary, diary} :{myDiary : boolean, diary: DiaryElem}) => {    
+const DiaryCard = ({isPrivateDiary, diary} :{isPrivateDiary : boolean, diary: DiaryElem}) => {    
     const { currentUser } = useSelector((state : RootState) => state.user);
     
     const url = () => {
-        if(myDiary){
+        if(isPrivateDiary){
             return `/${currentUser.uid}/${diary.id}` 
         }else{
             return `/public/${diary.id}`

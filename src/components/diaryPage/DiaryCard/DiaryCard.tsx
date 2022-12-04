@@ -6,8 +6,6 @@ import { DiaryElem } from '../../../types/types';
 import { RootState } from '../../../store/index';
 
 const DiaryCard = ({myDiary, diary} :{myDiary : boolean, diary: DiaryElem}) => {    
-    
-
     const { currentUser } = useSelector((state : RootState) => state.user);
     
     const url = () => {

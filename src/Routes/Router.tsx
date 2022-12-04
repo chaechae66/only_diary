@@ -18,11 +18,11 @@ function Router() {
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.SIGNUP} element={<SignUp />} />
         <Route path={PATH.CREATE} element={<WriteDiary />} />
-        <Route path='/:uid' element={<MyDiaryList />} />
-        <Route path='/:uid/:id' element={<ShowDiary />} />
         <Route path={PATH.PUBLIC}>
           <Route path=':id' element={<ShowDiary />} />
         </Route>
+        <Route path='/:uid' element={<MyDiaryList />} />
+        <Route path='/:uid/:id' element={<ShowDiary />} />
         <Route path={PATH.UPDATE}>
           <Route path=':id' element={<WriteDiary />} />
         </Route>

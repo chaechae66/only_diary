@@ -9,29 +9,28 @@ import { RootState } from '../store';
 import Page404 from './Page404';
 
 const ShowDiary = () => {
-    const { uid, id } = useParams();
+    const params = useParams();
     const [diary, setDiary] = useState(null);
     const [error,setError] = useState(false);
     const currentUser = useSelector((state: RootState) => state.user.currentUser);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(!uid){
+        if (!params.uid){
             return;
         }
-        if (uid !== currentUser.uid) {
+        if (params.uid !== currentUser?.uid) {
             swalAlert("warning", "잘못된 접근", "올바른 접근이 아닙니다.");
             navigate(`${PATH.BASE}`);
         }
-    }, [uid, currentUser.uid, navigate]);
+    }, [params, currentUser?.uid, navigate]);
 
     useEffect(()=>{
         const handlePrivateDiary = async () => {
             try{
-                const diaryPath = !uid ? `public/${id}` : `diary/${currentUser?.uid}/${id}`;
+                const diaryPath = !params.uid ? `public/${params.id}` : `diary/${currentUser?.uid}/${params.id}`;
                 const diaryData = await getOneVal(diaryPath);
-                    setDiary(diaryData);
-                
+                setDiary(diaryData);
             }catch(err){
                 console.log('err',err);
                 err && setError(true);
@@ -39,7 +38,7 @@ const ShowDiary = () => {
         }
 
         handlePrivateDiary();
-    },[id,currentUser?.uid,uid])
+    },[params,currentUser?.uid])
     
     return (
         <>

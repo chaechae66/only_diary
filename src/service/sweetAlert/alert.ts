@@ -1,6 +1,7 @@
 import Swal, { SweetAlertOptions } from 'sweetalert2'
+type iconType = 'success' | 'error' | 'warning' | 'info' | 'question';
 
-export const swalAlert = (_icon:string,_tit:string,_des:string)=> {
+export const swalAlert = (_icon:iconType,_tit:string,_des:string)=> {
     Swal.fire({
         icon: _icon,
         title: _tit,

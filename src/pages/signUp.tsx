@@ -3,16 +3,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import styles from "../pages/styles/signUp.module.css";
-import { set, ref, db } from "../service/firebase/database";
-import {
-  auth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "../service/firebase/emailLogin";
-import { getImgURL } from "../service/firebase/storage";
 import { swalAlert } from "../service/sweetAlert/alert";
-import { signUpErrorCode } from "../service/sweetAlert/signUpErrorCode";
 import { PATH } from "../Routes/path";
+import axios from "axios";
 
 const SignUp = () => {
   interface UserForm {
@@ -34,36 +27,17 @@ const SignUp = () => {
 
   const passwordValue = watch("password");
 
-  const onSubmit: SubmitHandler<UserForm> = async (data) => {
-    try {
-      setLoading(true);
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        data.email,
-        data.password
-      );
-      const defaultUrl = await getImgURL(
-        "defaultImg/diary_default_baseURL.png"
-      );
-      await updateProfile(auth.currentUser, {
-        displayName: data.name,
-        photoURL: defaultUrl,
-      });
-      await set(ref(db, "users/" + user.uid), {
-        name: data.name,
-        photoURL: defaultUrl,
-      });
-      swalAlert(
-        "success",
-        "회원가입 완료",
-        "Only Diary의 가족이 된 걸 환영합니다. 로그인을 해주세요."
-      );
-      navigate(`${PATH.BASE}`);
-    } catch (err) {
-      const result = (err as Error).message;
-      const msg = signUpErrorCode(result);
-      swalAlert("warning", "이미 존재함", msg);
-    } finally {
+  const onSubmit: SubmitHandler<UserForm> = async (data : UserForm) => {
+    try{
+      const userFetchData = await axios.post('http://localhost/api/user.php/insert_user_info', data)
+      userFetchData.data.status && swalAlert('success','회원가입성공','Only Diray 가족이 되어주어 감사합니다. 로그인해주세요');
+      navigate('/');
+    }catch(e){
+      if (axios.isAxiosError(e) && e.response) {
+        const message = e.response.data.message;
+        swalAlert('error',"문제 발생",message);
+      } 
+    }finally{
       setLoading(false);
     }
   };

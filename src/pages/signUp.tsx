@@ -29,13 +29,13 @@ const SignUp = () => {
 
   const onSubmit: SubmitHandler<UserForm> = async (data : UserForm) => {
     try{
-      const userFetchData = await axios.post('http://localhost/api/user.php/insert_user_info', data)
+      const userFetchData = await axios.post('http://ec2-13-124-30-250.ap-northeast-2.compute.amazonaws.com/podcommon/signup/signup.php', data)
       userFetchData.data.status && swalAlert('success','회원가입성공','Only Diray 가족이 되어주어 감사합니다. 로그인해주세요');
       navigate('/');
     }catch(e){
       if (axios.isAxiosError(e) && e.response) {
         const message = e.response.data.message;
-        swalAlert('error',"문제 발생",message);
+        swalAlert('error','문제 발생',message);
       } 
     }finally{
       setLoading(false);

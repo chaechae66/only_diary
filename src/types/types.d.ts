@@ -5,12 +5,10 @@ export interface DiaryUser {
 }
 
 export interface CurrentUser {
-    uid : string,
-    email : string,
-    emailVerified: boolean,
-    displayName : string,
-    isAnonymous : boolean,
-    photoURL : string,
+   user_seqno : string,
+   email : string,
+   name : string,
+   photoURL? : string
 }
 
 export interface User {

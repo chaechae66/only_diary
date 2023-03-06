@@ -17,7 +17,7 @@ function Router() {
         <Route path={PATH.BASE} element={<Intro />} />
         <Route path={PATH.LOGIN} element={<Login />} />
         <Route path={PATH.SIGNUP} element={<SignUp />} />
-        <Route path={PATH.CREATE} element={<WriteDiary />} />
+        {/* <Route path={PATH.CREATE} element={<WriteDiary />} />
         <Route path={PATH.PUBLIC}>
           <Route path=':id' element={<ShowDiary />} />
         </Route>
@@ -25,7 +25,7 @@ function Router() {
         <Route path='/:uid/:id' element={<ShowDiary />} />
         <Route path={PATH.UPDATE}>
           <Route path=':id' element={<WriteDiary />} />
-        </Route>
+        </Route> */}
         <Route path={PATH.NOTFOUND} element={<Page404 />} />
       </Route>
     </Routes>

@@ -32,18 +32,18 @@ const Diary = ({ diary }: { diary: DiaryElem }) => {
     });
   };
 
-  const alertBtn = async (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    if (diary.isprivate) {
-      await removeDB(`diary/${currentUser.uid}/${diary.id}`);
-      navigate(`/${currentUser.uid}`);
-    } else {
-      await removeDB(`diary/${currentUser.uid}/${diary.id}`);
-      await removeDB(`public/${diary.id}`);
-      navigate("/");
-    }
-    swalAlert("success", "삭제완료", "다이어리 삭제가 완료되었습니다.");
-  };
+  // const alertBtn = async (e: React.MouseEvent<HTMLElement>) => {
+  //   e.preventDefault();
+  //   if (diary.isprivate) {
+  //     await removeDB(`diary/${currentUser.uid}/${diary.id}`);
+  //     navigate(`/${currentUser.uid}`);
+  //   } else {
+  //     await removeDB(`diary/${currentUser.uid}/${diary.id}`);
+  //     await removeDB(`public/${diary.id}`);
+  //     navigate("/");
+  //   }
+  //   swalAlert("success", "삭제완료", "다이어리 삭제가 완료되었습니다.");
+  // };
 
   useEffect(() => {
     diary && setLoading(true);
@@ -58,12 +58,15 @@ const Diary = ({ diary }: { diary: DiaryElem }) => {
               {diary?.createUser.name}님의 일기
             </span>
             {currentUser ? (
-              currentUser.uid === diary?.createUser.uid ? (
+              currentUser.user_seqno === diary?.createUser.uid ? (
                 <div className={styles.btnGroup}>
                   <button className={styles.editBtn} onClick={goToUpdate}>
                     수정
                   </button>
-                  <button className={styles.delBtn} onClick={alertBtn}>
+                  <button 
+                    className={styles.delBtn} 
+                    // onClick={alertBtn}
+                  >
                     삭제
                   </button>
                 </div>

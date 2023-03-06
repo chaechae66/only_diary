@@ -32,8 +32,8 @@ export const submitDiary = async ({
     txt,
     id: isUpdate(),
     createUser: {
-      uid: currentUser.uid,
-      name: currentUser.displayName,
+      uid: currentUser.user_seqno,
+      name: currentUser.name,
       photoURL: currentUser.photoURL,
     },
   };
@@ -43,14 +43,14 @@ export const submitDiary = async ({
       swalAlert("error", "일기전송 오류", "일기 본문을 채워주세요.");
       throw new Error();
     }
-    let keyLink = `diary/${currentUser.uid}`;
+    let keyLink = `diary/${currentUser.user_seqno}`;
     if (!isprivate) {
       await saveDB(`public/${diary.id}`, diary);
       await saveDB(`${keyLink}/${diary.id}/`, diary);
       navigate(`${PATH.BASE}`);
     } else {
       await saveDB(`${keyLink}/${diary.id}`, diary);
-      navigate(`/${currentUser.uid}`);
+      navigate(`/${currentUser.user_seqno}`);
     }
   } catch (e) {
     const result = (e as Error).message;

@@ -36,7 +36,7 @@ const Likey = ({ diaryId, madeUserID }: PropsType) => {
 
   useEffect(() => {
     if (currentUser && diaryId) {
-      handleLikey(currentUser.uid);
+      handleLikey(currentUser.user_seqno);
     } else {
       setIsLikey(false);
     }
@@ -55,9 +55,9 @@ const Likey = ({ diaryId, madeUserID }: PropsType) => {
       setIsLikey(!isLikey);
       let likeyData = {
         likeyUser: {
-          uid: currentUser.uid,
-          name: currentUser.displayName,
-          photoURL: currentUser.photoURL,
+          uid: currentUser.user_seqno,
+          name: currentUser.name,
+          // photoURL: currentUser.photoURL,
         },
         madeUser: {
           uid: madeUserID,
@@ -66,8 +66,8 @@ const Likey = ({ diaryId, madeUserID }: PropsType) => {
       let likeyEventData = {
         diaryId: diaryId,
         likeyUser: {
-          uid: currentUser.uid,
-          name: currentUser.displayName,
+          uid: currentUser.user_seqno,
+          name: currentUser.name,
           photoURL: currentUser.photoURL,
         },
         timeStamp: timeStamp,
@@ -76,15 +76,15 @@ const Likey = ({ diaryId, madeUserID }: PropsType) => {
         let IDdata = {
           diaryId,
         };
-        await saveDB(`likey/${diaryId}/${currentUser.uid}`, likeyData);
-        await saveDB(`users/${currentUser.uid}/likeyDiary/${diaryId}`, IDdata);
-        if (currentUser.uid !== madeUserID) {
+        await saveDB(`likey/${diaryId}/${currentUser.user_seqno}`, likeyData);
+        await saveDB(`users/${currentUser.user_seqno}/likeyDiary/${diaryId}`, IDdata);
+        if (currentUser.user_seqno !== madeUserID) {
           await saveDB(`event/${madeUserID}/${diaryId}`, likeyEventData);
         }
       } else {
-        await removeDB(`likey/${diaryId}/${currentUser.uid}`);
-        await removeDB(`users/${currentUser.uid}/likeyDiary/${diaryId}`);
-        if (currentUser.uid !== madeUserID) {
+        await removeDB(`likey/${diaryId}/${currentUser.user_seqno}`);
+        await removeDB(`users/${currentUser.user_seqno}/likeyDiary/${diaryId}`);
+        if (currentUser.user_seqno !== madeUserID) {
           await removeDB(`event/${madeUserID}/${diaryId}`);
         }
       }

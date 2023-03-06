@@ -38,23 +38,23 @@ const UserMenu = () => {
     inputFileRef.current.click();
   };
 
-  const updateImg = async (_file: File, _type: string) => {
-    let filePath = `photoURL/${currentUser.uid}/${v4()}.${_type}`;
-    const url = await getOtherImgUrl(filePath, _file);
-    return url;
-  };
+  // const updateImg = async (_file: File, _type: string) => {
+  //   let filePath = `photoURL/${currentUser.uid}/${v4()}.${_type}`;
+  //   const url = await getOtherImgUrl(filePath, _file);
+  //   return url;
+  // };
 
-  const changeImg = async (e: React.ChangeEvent<HTMLElement>) => {
-    e.preventDefault();
-    const file = (e.target as HTMLInputElement).files[0];
-    let fileType = file.type.slice(6);
-    const url = await updateImg(file, fileType);
-    await updateProfile(auth.currentUser, {
-      photoURL: url,
-    });
-    dispatch(update_photo(url));
-    await saveDB(`users/${currentUser.uid}/photoURL`, url);
-  };
+  // const changeImg = async (e: React.ChangeEvent<HTMLElement>) => {
+  //   e.preventDefault();
+  //   const file = (e.target as HTMLInputElement).files[0];
+  //   let fileType = file.type.slice(6);
+  //   const url = await updateImg(file, fileType);
+  //   await updateProfile(auth.currentUser, {
+  //     photoURL: url,
+  //   });
+  //   dispatch(update_photo(url));
+  //   await saveDB(`users/${currentUser.uid}/photoURL`, url);
+  // };
 
   return (
     <div
@@ -71,22 +71,22 @@ const UserMenu = () => {
         src={currentUser.photoURL || basephotoURL}
         alt='프로필사진'
       />
-      <input
+      {/* <input
         ref={inputFileRef}
         type='file'
         accept='image/jpeg, image/png'
         style={{ display: "none" }}
         onChange={changeImg}
-      />
+      /> */}
       <ul className={styles.submenu} style={{ display: isShow }}>
         <li className={styles.profileList}>
           <div className={styles.profile}>
-            <img
+            {/* <img
               src={currentUser.photoURL || basephotoURL}
-              alt={currentUser.displayName}
-            />
+              alt={currentUser.name}
+            /> */}
             <div>
-              <span className={styles.name}>{currentUser.displayName}님</span>
+              <span className={styles.name}>{currentUser.name}님</span>
               <p>{currentUser.email}</p>
             </div>
           </div>

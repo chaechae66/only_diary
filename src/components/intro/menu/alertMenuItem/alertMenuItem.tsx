@@ -13,24 +13,24 @@ const AlertMenuItem = () => {
 
   const [events, setEvents] = useState<EventType[] | null>(null)
 
-  useEffect(()=>{
-    const fetch = async () => {
-      const fetchEvent : EventType[] = await getValues("event", currentUser.uid);
-      setEvents(fetchEvent);
-    }
+  // useEffect(()=>{
+  //   const fetch = async () => {
+  //     const fetchEvent : EventType[] = await getValues("event", currentUser.uid);
+  //     setEvents(fetchEvent);
+  //   }
 
-    fetch();
-  },[currentUser.uid])
+  //   fetch();
+  // },[currentUser.uid])
 
-  const removeEvent = async (
-    e: React.MouseEvent<HTMLElement>,
-    _event: EventType
-  ) => {
-    e.preventDefault();
-    await removeDB(`event/${currentUser.uid}/${_event.diaryId}`);
-    const updateEvent : EventType[] = await getValues("event", currentUser.uid);
-    setEvents(updateEvent);
-  };
+  // const removeEvent = async (
+  //   e: React.MouseEvent<HTMLElement>,
+  //   _event: EventType
+  // ) => {
+  //   e.preventDefault();
+  //   await removeDB(`event/${currentUser.uid}/${_event.diaryId}`);
+  //   const updateEvent : EventType[] = await getValues("event", currentUser.uid);
+  //   setEvents(updateEvent);
+  // };
 
   return (
     <>
@@ -39,9 +39,9 @@ const AlertMenuItem = () => {
           <li
             className={styles.eventLi}
             key={event.diaryId + event.likeyUser.uid}
-            onClick={(e) => {
-              removeEvent(e, event);
-            }}
+            // onClick={(e) => {
+            //   removeEvent(e, event);
+            // }}
           >
             <Link to={{ pathname: `${PATH.PUBLIC}/${event.diaryId}` }}>
               <div>

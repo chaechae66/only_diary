@@ -19,16 +19,16 @@ const ShowDiary = () => {
         if (!params.uid){
             return;
         }
-        if (params.uid !== currentUser?.uid) {
+        if (params.uid !== currentUser?.user_seqno) {
             swalAlert("warning", "잘못된 접근", "올바른 접근이 아닙니다.");
             navigate(`${PATH.BASE}`);
         }
-    }, [params, currentUser?.uid, navigate]);
+    }, [params, currentUser?.user_seqno, navigate]);
 
     useEffect(()=>{
         const handlePrivateDiary = async () => {
             try{
-                const diaryPath = !params.uid ? `public/${params.id}` : `diary/${currentUser?.uid}/${params.id}`;
+                const diaryPath = !params.uid ? `public/${params.id}` : `diary/${currentUser?.user_seqno}/${params.id}`;
                 const diaryData = await getOneVal(diaryPath);
                 setDiary(diaryData);
             }catch(err){
@@ -38,7 +38,7 @@ const ShowDiary = () => {
         }
 
         handlePrivateDiary();
-    },[params,currentUser?.uid])
+    },[params,currentUser?.user_seqno])
     
     return (
         <>

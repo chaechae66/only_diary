@@ -9,7 +9,7 @@ const DiaryCard = ({isPrivateDiary, diary} :{isPrivateDiary : boolean, diary: Di
     const { currentUser } = useSelector((state : RootState) => state.user);
     
     const url = () => {
-        return isPrivateDiary ? `/${currentUser.uid}/${diary.id}` : `/public/${diary.id}`
+        return isPrivateDiary ? `/${currentUser.user_seqno}/${diary.id}` : `/public/${diary.id}`
     }
 
     return (

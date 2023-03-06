@@ -22,17 +22,17 @@ const MyDiaryList = () => {
   const [loading, setLoading] = useState(false);
   const { uid } = useParams();
 
-  const diaryList = useGetValues<DiaryElem>("diary", user.uid);
+  const diaryList = useGetValues<DiaryElem>("diary", user.user_seqno);
 
   useEffect(() => {
-    if (uid !== user.uid) {
+    if (uid !== user.user_seqno) {
       swalAlert("warning", "잘못된 접근", "올바른 접근이 아닙니다.");
       navigate(`${PATH.BASE}`);
     }
     return () => {
       setLoading(true);
     };
-  }, [uid, navigate, user.uid]);
+  }, [uid, navigate, user.user_seqno]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (onlyUser) => {
@@ -55,11 +55,11 @@ const MyDiaryList = () => {
           <div className={styles.userInfo}>
             <img
               src={user?.photoURL}
-              alt={user?.displayName}
+              alt={user?.name}
               className={styles.userURL}
             />
             <h2 className={styles.nameGroup}>
-              <span>{user?.displayName}님</span>
+              <span>{user?.name}님</span>
               <br />
               일기장
             </h2>

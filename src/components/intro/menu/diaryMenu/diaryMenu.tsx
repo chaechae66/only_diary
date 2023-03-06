@@ -25,7 +25,7 @@ const DiaryMenu = () => {
         <FontAwesomeIcon icon={faBars} size='2x' color='#fc8b79' />
       </div>
       <ul className={styles.diarymenu} style={{ display: diaryShow }}>
-        <Link to={`/${currentUser.uid}`}>
+        <Link to={`/${currentUser.user_seqno}`}>
           <li>나의 일기</li>
         </Link>
         <Link to={`${PATH.CREATE}`}>

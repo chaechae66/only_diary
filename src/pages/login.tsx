@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import styles from "../pages/styles/login.module.css";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../service/firebase/emailLogin";
-import { user_login } from "../store/userSlice";
-import { swalAlert } from "../service/sweetAlert/alert";
-import { loginErrorCode } from "../service/sweetAlert/loginErrorCode";
+import { Link, useNavigate } from "react-router-dom";
 import { PATH } from "../Routes/path";
+import axios from "axios";
+import { swalAlert } from "../service/sweetAlert/alert";
+import { useDispatch } from "react-redux";
+import { user_login } from "../store/userSlice";
 
 const Login = () => {
   interface FormData {
@@ -22,24 +19,26 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        setLoading(true);
-        dispatch(user_login(userCredential.user));
-        navigate(`${PATH.BASE}`);
-        setLoading(false);
-      })
-      .catch((e) => {
-        setLoading(true);
-        const msg = loginErrorCode(e.code);
-        swalAlert("warning", "로그인 일치 안함", msg);
-        setLoading(false);
-      });
+    try{
+      const userFetchData = await axios.post('http://ec2-13-124-30-250.ap-northeast-2.compute.amazonaws.com/podcommon/login/login.php', data)
+      const isFetched = userFetchData.data.status;
+      const resultMsg = userFetchData.data.message;
+      const userInfo = userFetchData.data.userInfo;
+      isFetched && swalAlert('success','로그인 성공', resultMsg);
+      dispatch(user_login(userInfo));
+      navigate('/');
+    }catch(e){
+      if (axios.isAxiosError(e) && e.response) {
+        const message = e.response.data.message;
+        swalAlert('error','문제 발생',message);
+      } 
+    }finally{
+      setLoading(false);
+    }
   };
 
   return (
